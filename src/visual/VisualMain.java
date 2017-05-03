@@ -10,14 +10,20 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+
+
 import java.awt.Font;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VisualMain extends JFrame {
 
@@ -93,8 +99,31 @@ public class VisualMain extends JFrame {
 		JMenu mnProductos = new JMenu("Productos");
 		menuBar.add(mnProductos);
 		
-		JMenuItem mntmAgregarProducto = new JMenuItem("A\u00F1adir");
+		JMenuItem mntmAgregarProducto = new JMenuItem("A\u00F1adir producto");
+		mntmAgregarProducto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NuevoProducto nu = new NuevoProducto();
+				nu.setModal(true);
+				nu.setLocationRelativeTo(null);
+				nu.setResizable(false);
+				nu.setVisible(true);
+
+			}
+		});
 		mnProductos.add(mntmAgregarProducto);
+		
+		JMenuItem mntmListaDeProductos = new JMenuItem("Lista de productos");
+		mntmListaDeProductos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Oferta o = new Oferta();
+				o.setModal(true);
+				o.setLocationRelativeTo(null);
+				o.setResizable(false);
+				o.setVisible(true);
+
+			}
+		});
+		mnProductos.add(mntmListaDeProductos);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

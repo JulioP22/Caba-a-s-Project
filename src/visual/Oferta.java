@@ -1,0 +1,211 @@
+package visual;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+
+
+
+
+
+import javax.swing.table.TableColumnModel;
+
+
+import javax.swing.UIManager;
+
+import logical.Cabaña809;
+import logical.Producto;
+
+
+
+
+public class Oferta extends JDialog{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -616154394206540662L;
+	private final JPanel contentPanel = new JPanel();
+	private static JTable table;
+	private static Object[] fila;
+	private static DefaultTableModel tableModel;
+	private int code;
+	private static Cabaña809 cab;
+	private String nombre;
+	JButton btnEliminar;
+	private Producto prod;
+	JButton btnModificar;
+	public static ArrayList<Producto>producsAux;
+	
+
+	
+	public Oferta() {
+		setTitle("Listado de Productos\r\n");
+		setBounds(100, 100, 462, 468);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		producsAux = new ArrayList<>();
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBounds(10, 11, 426, 377);
+		contentPanel.add(panel);
+		panel.setLayout(null);
+		
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 21, 408, 341);
+		panel.add(scrollPane);
+		
+		
+		table = new JTable();
+		
+		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			/*String country;
+				int delivery;*/
+				if(table.getSelectedRow()>=0){
+					btnModificar.setEnabled(true);
+					btnEliminar.setEnabled(true);
+					int index = table.getSelectedRow();
+					Cabaña809.nombre = (String)table.getModel().getValueAt(index, 0);
+					
+					/*country = (String)tableSupply.getModel().getValueAt(index, 1);
+					delivery = (Integer)tableSupply.getModel().getValueAt(index, 2);
+					textFldSupplyName.setText(name);
+					spnDelivery.getModel().setValue(Integer.valueOf(delivery));
+					cbCountry.getModel().setSelectedItem(new String(country));*/
+				}
+			}
+		});
+		
+		tableModel = new DefaultTableModel();
+		String[] columnNames = {"Nombre","Precio"};
+		tableModel.setColumnIdentifiers(columnNames);
+		loadProductList();
+		scrollPane.setViewportView(table);
+		
+		
+		
+		
+		
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setBounds(0, 387, 438, 33);
+			contentPanel.add(buttonPane);
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			{
+				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setEnabled(false);
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Producto aux = Cabaña809.getInstance().buscarProductoporNombre(Cabaña809.nombre);
+						  int delete = JOptionPane.showConfirmDialog(null, "Realmente desea eliminar el producto: " + aux.getNombre(), null, JOptionPane.YES_NO_OPTION);
+							    if (delete == JOptionPane.YES_OPTION)
+							    {
+							       
+							    	Cabaña809.getInstance().borrarProducto(Cabaña809.nombre);
+									//loadProductList();
+							    }
+							
+					}
+				});
+				
+				btnModificar = new JButton("Modificar");
+				btnModificar.setEnabled(false);
+				btnModificar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ModProduct mod = new ModProduct();
+						mod.setModal(true);
+						mod.setLocationRelativeTo(null);
+						mod.setResizable(false);
+						mod.setVisible(true);
+						dispose();
+						
+						
+						
+					}
+				});
+				
+				buttonPane.add(btnModificar);
+				btnEliminar.setActionCommand("OK");
+				buttonPane.add(btnEliminar);
+				getRootPane().setDefaultButton(btnEliminar);
+			}
+			{
+				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+			}}
+		}
+		
+
+		
+		public static void loadProductList() {
+			
+			for (Producto produc : Cabaña809.getInstance().getMisProduc()) {
+				producsAux.add(produc);
+			}
+			Collections.sort(producsAux, new Comparator<Producto>() {
+				@Override
+				public int compare(Producto p1, Producto p2) {
+
+					return new String( p1.getNombre()).compareTo(new String( p2.getNombre()));
+				}
+
+
+			});
+
+			
+			
+			tableModel.setRowCount(0);
+			fila = new Object[tableModel.getColumnCount()];
+			for (Producto aux : producsAux) 	
+			{
+
+				fila[0] = aux.getNombre();
+				fila[1] = aux.getPrecio();
+				tableModel.addRow(fila);
+		
+
+	}	
+		
+	
+			table.setModel(tableModel);
+			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			table.getTableHeader().setReorderingAllowed(false);
+			
+			TableColumnModel columnModel = table.getColumnModel();
+			columnModel.getColumn(0).setPreferredWidth(281);
+			columnModel.getColumn(1).setPreferredWidth(124);
+			
+		}
+}

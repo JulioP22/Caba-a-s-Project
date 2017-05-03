@@ -3,6 +3,8 @@ package logical;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
+
 public class Cabaña809 implements Serializable {
 
 	/**
@@ -15,6 +17,7 @@ public class Cabaña809 implements Serializable {
 	private ArrayList<Producto>misProduc;
 	private static int simpleRoomPrice = 500;
 	private static int ejecutiveRoomPrice = 500;
+	public static String nombre;
 
 	
 	
@@ -30,6 +33,10 @@ public class Cabaña809 implements Serializable {
 		if (cab == null){
 			cab = new Cabaña809();}
 		return cab;
+	}
+
+	public void agregarProduc(Producto a){
+		misProduc.add(a);
 	}
 
 	
@@ -55,7 +62,38 @@ public class Cabaña809 implements Serializable {
 	
 	
 	
+	public Producto buscarProductoporNombre(String nombre) {
+		Producto aux = null;
+		boolean buscar = false;
+		int i = 0;
+		while(i<misProduc.size() && !buscar){
+			if(misProduc.get(i).getNombre().equalsIgnoreCase(nombre)){
+				aux = misProduc.get(i);
+				buscar = true;
+			}i++;
+
+		}
+		return aux;
+	}
 	
+public void borrarProducto(String nombre){
+		
+		int  i = 0;
+		boolean found = false;
+		
+		while(i<misProduc.size() && !found)
+		{
+			if (misProduc.get(i).getNombre().equalsIgnoreCase(nombre))
+			{
+				misProduc.remove(misProduc.get(i));
+				found = true;
+				
+			}
+			else {
+				i++;
+			}
+		}
+	}
 	
 
 	
