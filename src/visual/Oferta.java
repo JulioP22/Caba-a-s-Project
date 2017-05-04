@@ -32,8 +32,10 @@ import javax.swing.table.TableColumnModel;
 
 
 
+
 import logical.Cabaña809;
 import logical.Producto;
+
 import javax.swing.border.LineBorder;
 
 
@@ -137,10 +139,16 @@ public class Oferta extends JDialog{
 				btnModificar.setEnabled(false);
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (table.getSelectedRow()>=0) {
+						LoginMod o = new LoginMod();
+						o.setModal(true);
+						o.setLocationRelativeTo(null);
+						o.setResizable(false);
+						o.setVisible(true);
+						
+						/*if (table.getSelectedRow()>=0) {
 							NuevoProducto modify = new NuevoProducto(true, table.getSelectedRow());
 							modify.setVisible(true);
-						}
+						}*/
 					}
 				});
 				

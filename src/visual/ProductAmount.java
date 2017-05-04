@@ -34,7 +34,7 @@ public class ProductAmount extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ProductAmount(Producto product) {
+	public ProductAmount(final Producto product) {
 		setTitle("Cantidad de productos");
 		setBounds(100, 100, 396, 209);
 		setModal(true);

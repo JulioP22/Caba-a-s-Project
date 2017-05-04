@@ -41,7 +41,7 @@ public class NuevoProducto extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NuevoProducto(boolean modify, final int index) {
+	public NuevoProducto(final boolean modify, final int index) {
 		setTitle("A\u00F1adir nuevo producto\r\n\r\n");
 		setBounds(100, 100, 340, 239);
 		setModal(true);
@@ -104,6 +104,8 @@ public class NuevoProducto extends JDialog {
 				addBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(!modify) {
+							
+							
 							if(!txtNombre.getText().equalsIgnoreCase("")&& !txtPrecio.getText().equalsIgnoreCase("")){
 								if (!existingProduct(txtNombre.getText())) {
 									Producto aux = null;

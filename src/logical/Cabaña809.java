@@ -15,10 +15,10 @@ public class Cabaña809 implements Serializable {
 	private static Cabaña809 cab = null;
 	private ArrayList<Habitacion>misHabs;
 	private ArrayList<Producto>misProduc;
-	public static int simpleFastRoomPrice = 500;
-	public static int ejecutiveFastRoomPrice = 500;
-	public static int simpleCompleteRoomPrice = 500;
-	public static int ejecutiveCompleteRoomPrice = 500;
+	public static float simpleFastRoomPrice = 500;
+	public static float ejecutiveFastRoomPrice = 1500;
+	public static float simpleCompleteRoomPrice = 950;
+	public static float ejecutiveCompleteRoomPrice = 3000;
 	public static String nombre;
 
 	

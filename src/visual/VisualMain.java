@@ -21,12 +21,20 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 
+
+
+
+
 import java.awt.Font;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class VisualMain extends JFrame implements Runnable{
 
@@ -143,6 +151,7 @@ public class VisualMain extends JFrame implements Runnable{
 	private static JLabel lblC_20;
 	private Color c2 = Color.GREEN;
 	private Color c3 = Color.red;
+	
 	
 	//private Thread t;
 
@@ -1835,6 +1844,8 @@ public class VisualMain extends JFrame implements Runnable{
 		lblC_34.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
 		lblC_34.setBounds(10, 56, 79, 20);
 		panel_35.add(lblC_34);
+		
+		
 	}
 	private void setOriginalColor() {
 		Color c1 = panel_1.getBackground();
@@ -2238,4 +2249,5 @@ public class VisualMain extends JFrame implements Runnable{
 	public static JLabel getLblC_20() {
 		return lblC_20;
 	}
+	
 }

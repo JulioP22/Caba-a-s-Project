@@ -328,6 +328,7 @@ public class RentRoom extends JDialog implements Runnable {
 						VisualMain.getPanel(roomName).add(label1);
 						
 						t.start();
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
