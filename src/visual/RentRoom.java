@@ -31,6 +31,9 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.MouseMotionAdapter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class RentRoom extends JDialog implements Runnable {
 
@@ -71,7 +74,8 @@ public class RentRoom extends JDialog implements Runnable {
 	private JLabel label1;
 	private Thread t;
 	private String roomName;
-
+	private FileWriter writer;
+	public static int code;
 	/**
 	 * Launch the application.
 	 */
@@ -372,7 +376,7 @@ public class RentRoom extends JDialog implements Runnable {
     public static void addSelected(Producto product) {
     	selected.add(product);
     }
-    private void setTotalAmount() {
+    private float setTotalAmount() {
     	float aux = 0f;
     	if (ejecutiva.isSelected() && dePaso.isSelected())
     		aux += Cabaña809.ejecutiveFastRoomPrice;
@@ -387,6 +391,7 @@ public class RentRoom extends JDialog implements Runnable {
     		aux += i.getPrecio()*i.getCantidad();
     	}
     	priceLabel.setText(String.valueOf(aux));
+    	return aux;
     }
     private boolean isAdded(String name) {
     	boolean aux = false;
@@ -565,6 +570,32 @@ public class RentRoom extends JDialog implements Runnable {
 				}
 				break;
 			}
+		}
+		
+	}
+	public void writeTicket(String room, String entryDate, String finalDate, String roomType) throws IOException {
+		writer = new FileWriter(new File("ticket.txt"));
+		writer.write("CABAÑA 809...\n");
+		writer.write("RNC-05800189218 TU MEJOR ELECCION \n");
+		writer.write("C / Milagro Sánchez, Cotuí, R.D.\n");
+		writer.write("809-240-0768\n");
+		writer.write("----------------------------------\n");
+		writer.write("Atendió: CABAÑA 809\n\n");
+		writer.write("Hab.: "+room+"\n\n");
+		writer.write("                    Orden No: "+String.valueOf(code++));
+		writer.write("Entrada: "+entryDate+"\n");
+		writer.write("Salida: "+finalDate+"\n");
+		writer.write("----------------------------------\n");
+		if (roomType.equals("fastRoom"))
+			writer.write("1.00 HABITACION PASO       "+String.format("%.2f", Cabaña809.simpleFastRoomPrice));
+		else if (roomType.equals("fastEjecutive"))
+			writer.write("1.00 EJECUTIVA PASO       "+String.format("%.2f", Cabaña809.ejecutiveFastRoomPrice));
+		else if (roomType.equals("simpleComplete"))
+			writer.write("1.00 SIMPLE AMANECIDA       "+String.format("%.2f", Cabaña809.simpleCompleteRoomPrice));
+		else if (roomType.equals("ejecutiveComplete"))
+			writer.write("1.00 EJECUTIVA COMPLETA   "+String.format("%.2f", Cabaña809.ejecutiveCompleteRoomPrice));
+		for (Producto i: selected) {
+			
 		}
 		
 	}
