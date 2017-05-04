@@ -70,6 +70,7 @@ public class RentRoom extends JDialog implements Runnable {
 	private JLabel label;
 	private JLabel label1;
 	private Thread t;
+	private String roomName;
 
 	/**
 	 * Launch the application.
@@ -80,6 +81,7 @@ public class RentRoom extends JDialog implements Runnable {
 	 * Create the dialog.
 	 */
 	public RentRoom(final String roomName) {
+		this.roomName = roomName;
 		setTitle("Alquiler de caba\u00F1a");
 		setBounds(100, 100, 530, 378);
 		setModal(true);
@@ -303,7 +305,7 @@ public class RentRoom extends JDialog implements Runnable {
 				okButton = new JButton("Reservar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						VisualMain.getPanel(roomName).setBackground(new Color(0,255,0));
+						VisualMain.getPanel(roomName).setBackground(Color.GREEN);
 						for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
 							VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
 						}
@@ -403,15 +405,165 @@ public class RentRoom extends JDialog implements Runnable {
 	@Override
 	public void run() {
 		Thread currentThread = Thread.currentThread();
-		long seconds = 14400;
+		String aux_1 = roomName;
+		long seconds = 3605;
+		Color red = Color.red;
 		while(currentThread == t) {
 			String aux = RentRoom.giveTime(seconds);
 			label1.setText(aux);
+			if (seconds<3600)
+				VisualMain.getPanel(aux_1).setBackground(red);
 			seconds--;
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+			}
+			if (seconds==0) {
+				label1.setVisible(false);
+				label.setVisible(false);
+				VisualMain.getPanel(aux_1).setBackground(new Color (240,240,240));
+				if (aux_1.equals("panel_1")) {
+					VisualMain.getLabel1().setVisible(true);
+					VisualMain.getLblC().setVisible(true);
+				}
+				else if (aux_1.equals("panel_2")) {
+					VisualMain.getLabel2().setVisible(true);
+					VisualMain.getLblC_1().setVisible(true);
+				}
+				else if (aux_1.equals("panel_3")) {
+					VisualMain.getLabel3().setVisible(true);
+					VisualMain.getLblC_2().setVisible(true);
+				}
+				else if (aux_1.equals("panel_4")) {
+					VisualMain.getLabel4().setVisible(true);
+					VisualMain.getLblC_3().setVisible(true);
+				}
+				else if (aux_1.equals("panel_5")) {
+					VisualMain.getLabel5().setVisible(true);
+					VisualMain.getLblC_4().setVisible(true);
+				}
+				else if (aux_1.equals("panel_6")) {
+					VisualMain.getLabel6().setVisible(true);
+					VisualMain.getLblC_5().setVisible(true);
+				}
+				else if (aux_1.equals("panel_7")) {
+					VisualMain.getLabel7().setVisible(true);
+					VisualMain.getLblC_6().setVisible(true);
+				}
+				else if (aux_1.equals("panel_8")) {
+					VisualMain.getLabel8().setVisible(true);
+					VisualMain.getLblC_7().setVisible(true);
+				}
+				else if (aux_1.equals("panel_9")) {
+					VisualMain.getLabel9().setVisible(true);
+					VisualMain.getLblC_8().setVisible(true);
+				}
+				else if (aux_1.equals("panel_10")) {
+					VisualMain.getLabel10().setVisible(true);
+					VisualMain.getLblC_9().setVisible(true);
+				}
+				else if (aux_1.equals("panel_11")) {
+					VisualMain.getLabel11().setVisible(true);
+					VisualMain.getLblC_10().setVisible(true);
+				}
+				else if (aux_1.equals("panel_12")) {
+					VisualMain.getLabel12().setVisible(true);
+					VisualMain.getLblC_11().setVisible(true);
+				}
+				else if (aux_1.equals("panel_13")) {
+					VisualMain.getLabel13().setVisible(true);
+					VisualMain.getLblC_12().setVisible(true);
+				}
+				else if (aux_1.equals("panel_14")) {
+					VisualMain.getLabel14().setVisible(true);
+					VisualMain.getLblC_13().setVisible(true);
+				}
+				else if (aux_1.equals("panel_15")) {
+					VisualMain.getLabel15().setVisible(true);
+					VisualMain.getLblC_14().setVisible(true);
+				}
+				else if (aux_1.equals("panel_16")) {
+					VisualMain.getLabel16().setVisible(true);
+					VisualMain.getLblC_15().setVisible(true);
+				}
+				else if (aux_1.equals("panel_17")) {
+					VisualMain.getLabel17().setVisible(true);
+					VisualMain.getLblC_16().setVisible(true);
+				}
+				else if (aux_1.equals("panel_18")) {
+					VisualMain.getLabel18().setVisible(true);
+					VisualMain.getLblC_17().setVisible(true);
+				}
+				else if (aux_1.equals("panel_19")) {
+					VisualMain.getLabel19().setVisible(true);
+					VisualMain.getLblC_18().setVisible(true);
+				}
+				else if (aux_1.equals("panel_20")) {
+					VisualMain.getLabel20().setVisible(true);
+					VisualMain.getLblC_19().setVisible(true);
+				}
+				else if (aux_1.equals("panel_21")) {
+					VisualMain.getLabel21().setVisible(true);
+					VisualMain.getLblC_20().setVisible(true);
+				}
+				else if (aux_1.equals("panel_22")) {
+					VisualMain.getLabel22().setVisible(true);
+					VisualMain.getLblC_21().setVisible(true);
+				}
+				else if (aux_1.equals("panel_23")) {
+					VisualMain.getLabel23().setVisible(true);
+					VisualMain.getLblC_22().setVisible(true);
+				}
+				else if (aux_1.equals("panel_24")) {
+					VisualMain.getLabel24().setVisible(true);
+					VisualMain.getLblC_23().setVisible(true);
+				}
+				else if (aux_1.equals("panel_25")) {
+					VisualMain.getLabel25().setVisible(true);
+					VisualMain.getLblC_24().setVisible(true);
+				}
+				else if (aux_1.equals("panel_26")) {
+					VisualMain.getLabel26().setVisible(true);
+					VisualMain.getLblC_25().setVisible(true);
+				}
+				else if (aux_1.equals("panel_27")) {
+					VisualMain.getLabel27().setVisible(true);
+					VisualMain.getLblC_26().setVisible(true);
+				}
+				else if (aux_1.equals("panel_28")) {
+					VisualMain.getLabel28().setVisible(true);
+					VisualMain.getLblC_27().setVisible(true);
+				}
+				else if (aux_1.equals("panel_29")) {
+					VisualMain.getLabel29().setVisible(true);
+					VisualMain.getLblC_28().setVisible(true);
+				}
+				else if (aux_1.equals("panel_30")) {
+					VisualMain.getLabel30().setVisible(true);
+					VisualMain.getLblC_29().setVisible(true);
+				}
+				else if (aux_1.equals("panel_31")) {
+					VisualMain.getLabel31().setVisible(true);
+					VisualMain.getLblC_30().setVisible(true);
+				}
+				else if (aux_1.equals("panel_32")) {
+					VisualMain.getLabel32().setVisible(true);
+					VisualMain.getLblC_31().setVisible(true);
+				}
+				else if (aux_1.equals("panel_33")) {
+					VisualMain.getLabel33().setVisible(true);
+					VisualMain.getLblC_32().setVisible(true);
+				}
+				else if (aux_1.equals("panel_34")) {
+					VisualMain.getLabel34().setVisible(true);
+					VisualMain.getLblC_33().setVisible(true);
+				}
+				else if (aux_1.equals("panel_35")) {
+					VisualMain.getLabel35().setVisible(true);
+					VisualMain.getLblC_34().setVisible(true);
+				}
+				break;
 			}
 		}
 		
