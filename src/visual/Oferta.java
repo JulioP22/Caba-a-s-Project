@@ -17,8 +17,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -29,10 +31,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 
-import javax.swing.UIManager;
 
 import logical.Cabaña809;
 import logical.Producto;
+import javax.swing.border.LineBorder;
 
 
 
@@ -47,19 +49,16 @@ public class Oferta extends JDialog{
 	private static JTable table;
 	private static Object[] fila;
 	private static DefaultTableModel tableModel;
-	private int code;
-	private static Cabaña809 cab;
-	private String nombre;
-	JButton btnEliminar;
-	private Producto prod;
-	JButton btnModificar;
+	public static int code;
+	private JButton btnEliminar;
+	private JButton btnModificar;
 	public static ArrayList<Producto>producsAux;
 	
 
 	
 	public Oferta() {
 		setTitle("Listado de Productos\r\n");
-		setBounds(100, 100, 462, 468);
+		setBounds(100, 100, 462, 400);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -67,14 +66,14 @@ public class Oferta extends JDialog{
 		producsAux = new ArrayList<>();
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 11, 426, 377);
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Lista", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBounds(10, 11, 436, 306);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 21, 408, 341);
+		scrollPane.setBounds(10, 21, 416, 274);
 		panel.add(scrollPane);
 		
 		
@@ -114,7 +113,7 @@ public class Oferta extends JDialog{
 		
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBounds(0, 387, 438, 33);
+			buttonPane.setBounds(0, 328, 446, 33);
 			contentPanel.add(buttonPane);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
@@ -126,10 +125,10 @@ public class Oferta extends JDialog{
 						  int delete = JOptionPane.showConfirmDialog(null, "Realmente desea eliminar el producto: " + aux.getNombre(), null, JOptionPane.YES_NO_OPTION);
 							    if (delete == JOptionPane.YES_OPTION)
 							    {
-							       
 							    	Cabaña809.getInstance().borrarProducto(Cabaña809.nombre);
-									//loadProductList();
+							    	loadProductList();
 							    }
+							    
 							
 					}
 				});
@@ -138,15 +137,10 @@ public class Oferta extends JDialog{
 				btnModificar.setEnabled(false);
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						ModProduct mod = new ModProduct();
-						mod.setModal(true);
-						mod.setLocationRelativeTo(null);
-						mod.setResizable(false);
-						mod.setVisible(true);
-						dispose();
-						
-						
-						
+						if (table.getSelectedRow()>=0) {
+							NuevoProducto modify = new NuevoProducto(true, table.getSelectedRow());
+							modify.setVisible(true);
+						}
 					}
 				});
 				
@@ -171,32 +165,24 @@ public class Oferta extends JDialog{
 		
 		public static void loadProductList() {
 			
-			for (Producto produc : Cabaña809.getInstance().getMisProduc()) {
-				producsAux.add(produc);
-			}
-			Collections.sort(producsAux, new Comparator<Producto>() {
+			Collections.sort(Cabaña809.getInstance().getMisProduc(), new Comparator<Producto>() {
 				@Override
 				public int compare(Producto p1, Producto p2) {
 
 					return new String( p1.getNombre()).compareTo(new String( p2.getNombre()));
 				}
-
-
 			});
-
-			
 			
 			tableModel.setRowCount(0);
+			DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+		   	tcr.setHorizontalAlignment(SwingConstants.CENTER);
 			fila = new Object[tableModel.getColumnCount()];
-			for (Producto aux : producsAux) 	
+			for (Producto aux : Cabaña809.getInstance().getMisProduc()) 	
 			{
-
 				fila[0] = aux.getNombre();
 				fila[1] = aux.getPrecio();
 				tableModel.addRow(fila);
-		
-
-	}	
+			}	
 		
 	
 			table.setModel(tableModel);
@@ -204,8 +190,10 @@ public class Oferta extends JDialog{
 			table.getTableHeader().setReorderingAllowed(false);
 			
 			TableColumnModel columnModel = table.getColumnModel();
-			columnModel.getColumn(0).setPreferredWidth(281);
-			columnModel.getColumn(1).setPreferredWidth(124);
+			columnModel.getColumn(0).setPreferredWidth(250);
+			columnModel.getColumn(1).setPreferredWidth(163);
+		   	table.getColumnModel().getColumn(0).setCellRenderer(tcr);
+		   	table.getColumnModel().getColumn(1).setCellRenderer(tcr);
 			
 		}
 }
