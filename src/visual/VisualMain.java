@@ -31,10 +31,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class VisualMain extends JFrame implements Runnable{
 
@@ -181,9 +177,6 @@ public class VisualMain extends JFrame implements Runnable{
 		setBounds(100, 100, 785, 573);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		
-		//t = new Thread(this);
-		//t.start();
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

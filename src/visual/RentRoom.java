@@ -21,6 +21,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -34,6 +37,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class RentRoom extends JDialog implements Runnable {
 
@@ -72,6 +76,7 @@ public class RentRoom extends JDialog implements Runnable {
 	
 	private JLabel label;
 	private JLabel label1;
+	private JLabel label2;
 	private Thread t;
 	private String roomName;
 	private FileWriter writer;
@@ -312,23 +317,71 @@ public class RentRoom extends JDialog implements Runnable {
 						VisualMain.getPanel(roomName).setBackground(Color.GREEN);
 						for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
 							VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
+						}if (dePaso.isSelected()) {
+							label = new JLabel("En uso");
+							label.setName("enUso");
+							label.setHorizontalAlignment(SwingConstants.CENTER);
+							label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+							label.setBounds(3, 20, 93, 14);
+							VisualMain.getPanel(roomName).add(label);
+							
+							label1 = new JLabel(giveTime(14400));
+							label1.setName("time");
+							label1.setHorizontalAlignment(SwingConstants.CENTER);
+							label1.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+							label1.setBounds(3, 55, 93, 14);
+							VisualMain.getPanel(roomName).add(label1);
+							String aux = null;
+							if (sencilla.isSelected())
+								aux = "fastRoom";
+							else
+								aux="fastEjecutive";
+							
+							try {
+								writeTicket(getRoomName(roomName), getEntryDate(), getFinalDate(), aux);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							t.start();
+							dispose();
+						}else if (amanecida.isSelected()) {
+							label = new JLabel("En uso");
+							label.setName("enUso");
+							label.setHorizontalAlignment(SwingConstants.CENTER);
+							label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+							label.setBounds(3, 10, 93, 14);
+							VisualMain.getPanel(roomName).add(label);
+							
+							label1 = new JLabel(getDate());
+							label1.setName("time");
+							label1.setHorizontalAlignment(SwingConstants.CENTER);
+							label1.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+							label1.setBounds(0, 35, 100, 14);
+							VisualMain.getPanel(roomName).add(label1);
+							
+							label2 = new JLabel("10:00 AM");
+							label2.setName("time2");
+							label2.setHorizontalAlignment(SwingConstants.CENTER);
+							label2.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+							label2.setBounds(-2, 60, 100, 14);
+							VisualMain.getPanel(roomName).add(label2);
+							String aux = null;
+							if (sencilla.isSelected())
+								aux = "simpleComplete";
+							else
+								aux="ejecutiveComplete";
+							
+							try {
+								writeTicket(getRoomName(roomName), getEntryDate(), getDate()+" 10:00:00", aux);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
+							t.start();
+							dispose();
 						}
-						label = new JLabel("En uso");
-						label.setName("enUso");
-						label.setHorizontalAlignment(SwingConstants.CENTER);
-						label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
-						label.setBounds(3, 20, 93, 14);
-						VisualMain.getPanel(roomName).add(label);
-						
-						label1 = new JLabel(giveTime(14400));
-						label1.setName("time");
-						label1.setHorizontalAlignment(SwingConstants.CENTER);
-						label1.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
-						label1.setBounds(3, 55, 93, 14);
-						VisualMain.getPanel(roomName).add(label1);
-						
-						t.start();
-						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -386,7 +439,7 @@ public class RentRoom extends JDialog implements Runnable {
     	else if (sencilla.isSelected() && dePaso.isSelected())
     		aux += Cabaña809.simpleFastRoomPrice;
     	else
-    		aux += Cabaña809.simpleFastRoomPrice;
+    		aux += Cabaña809.simpleCompleteRoomPrice;
     	
     	for (Producto i: selected) {
     		aux += i.getPrecio()*i.getCantidad();
@@ -412,167 +465,190 @@ public class RentRoom extends JDialog implements Runnable {
 	public void run() {
 		Thread currentThread = Thread.currentThread();
 		String aux_1 = roomName;
-		long seconds = 3605;
+		boolean completeNight = amanecida.isSelected();
 		Color red = Color.red;
-		while(currentThread == t) {
-			String aux = RentRoom.giveTime(seconds);
-			label1.setText(aux);
-			if (seconds<3600)
-				VisualMain.getPanel(aux_1).setBackground(red);
-			seconds--;
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		if (dePaso.isSelected()) {
+			long seconds = 14400;
+			while(currentThread == t) {
+				String aux = RentRoom.giveTime(seconds);
+				label1.setText(aux);
+				if (seconds<3600)
+					VisualMain.getPanel(aux_1).setBackground(red);
+				seconds--;
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				if (seconds==0) {
+					label1.setVisible(false);
+					label.setVisible(false);
+					if (completeNight)
+						label2.setVisible(false);
+					break;
+				}
 			}
-			if (seconds==0) {
-				label1.setVisible(false);
-				label.setVisible(false);
-				VisualMain.getPanel(aux_1).setBackground(new Color (240,240,240));
-				if (aux_1.equals("panel_1")) {
-					VisualMain.getLabel1().setVisible(true);
-					VisualMain.getLblC().setVisible(true);
+		}else {
+			while (true) {
+				long time = getTime();
+				if (time<3600000)
+					VisualMain.getPanel(aux_1).setBackground(red);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-				else if (aux_1.equals("panel_2")) {
-					VisualMain.getLabel2().setVisible(true);
-					VisualMain.getLblC_1().setVisible(true);
+				System.out.println(time);
+				if (time<=1000) {
+					label1.setVisible(false);
+					label.setVisible(false);
+					if (completeNight)
+						label2.setVisible(false);
+					break;
 				}
-				else if (aux_1.equals("panel_3")) {
-					VisualMain.getLabel3().setVisible(true);
-					VisualMain.getLblC_2().setVisible(true);
-				}
-				else if (aux_1.equals("panel_4")) {
-					VisualMain.getLabel4().setVisible(true);
-					VisualMain.getLblC_3().setVisible(true);
-				}
-				else if (aux_1.equals("panel_5")) {
-					VisualMain.getLabel5().setVisible(true);
-					VisualMain.getLblC_4().setVisible(true);
-				}
-				else if (aux_1.equals("panel_6")) {
-					VisualMain.getLabel6().setVisible(true);
-					VisualMain.getLblC_5().setVisible(true);
-				}
-				else if (aux_1.equals("panel_7")) {
-					VisualMain.getLabel7().setVisible(true);
-					VisualMain.getLblC_6().setVisible(true);
-				}
-				else if (aux_1.equals("panel_8")) {
-					VisualMain.getLabel8().setVisible(true);
-					VisualMain.getLblC_7().setVisible(true);
-				}
-				else if (aux_1.equals("panel_9")) {
-					VisualMain.getLabel9().setVisible(true);
-					VisualMain.getLblC_8().setVisible(true);
-				}
-				else if (aux_1.equals("panel_10")) {
-					VisualMain.getLabel10().setVisible(true);
-					VisualMain.getLblC_9().setVisible(true);
-				}
-				else if (aux_1.equals("panel_11")) {
-					VisualMain.getLabel11().setVisible(true);
-					VisualMain.getLblC_10().setVisible(true);
-				}
-				else if (aux_1.equals("panel_12")) {
-					VisualMain.getLabel12().setVisible(true);
-					VisualMain.getLblC_11().setVisible(true);
-				}
-				else if (aux_1.equals("panel_13")) {
-					VisualMain.getLabel13().setVisible(true);
-					VisualMain.getLblC_12().setVisible(true);
-				}
-				else if (aux_1.equals("panel_14")) {
-					VisualMain.getLabel14().setVisible(true);
-					VisualMain.getLblC_13().setVisible(true);
-				}
-				else if (aux_1.equals("panel_15")) {
-					VisualMain.getLabel15().setVisible(true);
-					VisualMain.getLblC_14().setVisible(true);
-				}
-				else if (aux_1.equals("panel_16")) {
-					VisualMain.getLabel16().setVisible(true);
-					VisualMain.getLblC_15().setVisible(true);
-				}
-				else if (aux_1.equals("panel_17")) {
-					VisualMain.getLabel17().setVisible(true);
-					VisualMain.getLblC_16().setVisible(true);
-				}
-				else if (aux_1.equals("panel_18")) {
-					VisualMain.getLabel18().setVisible(true);
-					VisualMain.getLblC_17().setVisible(true);
-				}
-				else if (aux_1.equals("panel_19")) {
-					VisualMain.getLabel19().setVisible(true);
-					VisualMain.getLblC_18().setVisible(true);
-				}
-				else if (aux_1.equals("panel_20")) {
-					VisualMain.getLabel20().setVisible(true);
-					VisualMain.getLblC_19().setVisible(true);
-				}
-				else if (aux_1.equals("panel_21")) {
-					VisualMain.getLabel21().setVisible(true);
-					VisualMain.getLblC_20().setVisible(true);
-				}
-				else if (aux_1.equals("panel_22")) {
-					VisualMain.getLabel22().setVisible(true);
-					VisualMain.getLblC_21().setVisible(true);
-				}
-				else if (aux_1.equals("panel_23")) {
-					VisualMain.getLabel23().setVisible(true);
-					VisualMain.getLblC_22().setVisible(true);
-				}
-				else if (aux_1.equals("panel_24")) {
-					VisualMain.getLabel24().setVisible(true);
-					VisualMain.getLblC_23().setVisible(true);
-				}
-				else if (aux_1.equals("panel_25")) {
-					VisualMain.getLabel25().setVisible(true);
-					VisualMain.getLblC_24().setVisible(true);
-				}
-				else if (aux_1.equals("panel_26")) {
-					VisualMain.getLabel26().setVisible(true);
-					VisualMain.getLblC_25().setVisible(true);
-				}
-				else if (aux_1.equals("panel_27")) {
-					VisualMain.getLabel27().setVisible(true);
-					VisualMain.getLblC_26().setVisible(true);
-				}
-				else if (aux_1.equals("panel_28")) {
-					VisualMain.getLabel28().setVisible(true);
-					VisualMain.getLblC_27().setVisible(true);
-				}
-				else if (aux_1.equals("panel_29")) {
-					VisualMain.getLabel29().setVisible(true);
-					VisualMain.getLblC_28().setVisible(true);
-				}
-				else if (aux_1.equals("panel_30")) {
-					VisualMain.getLabel30().setVisible(true);
-					VisualMain.getLblC_29().setVisible(true);
-				}
-				else if (aux_1.equals("panel_31")) {
-					VisualMain.getLabel31().setVisible(true);
-					VisualMain.getLblC_30().setVisible(true);
-				}
-				else if (aux_1.equals("panel_32")) {
-					VisualMain.getLabel32().setVisible(true);
-					VisualMain.getLblC_31().setVisible(true);
-				}
-				else if (aux_1.equals("panel_33")) {
-					VisualMain.getLabel33().setVisible(true);
-					VisualMain.getLblC_32().setVisible(true);
-				}
-				else if (aux_1.equals("panel_34")) {
-					VisualMain.getLabel34().setVisible(true);
-					VisualMain.getLblC_33().setVisible(true);
-				}
-				else if (aux_1.equals("panel_35")) {
-					VisualMain.getLabel35().setVisible(true);
-					VisualMain.getLblC_34().setVisible(true);
-				}
-				break;
 			}
 		}
-		
+		VisualMain.getPanel(aux_1).setBackground(new Color (240,240,240));
+		if (aux_1.equals("panel_1")) {
+			VisualMain.getLabel1().setVisible(true);
+			VisualMain.getLblC().setVisible(true);
+		}
+		else if (aux_1.equals("panel_2")) {
+			VisualMain.getLabel2().setVisible(true);
+			VisualMain.getLblC_1().setVisible(true);
+		}
+		else if (aux_1.equals("panel_3")) {
+			VisualMain.getLabel3().setVisible(true);
+			VisualMain.getLblC_2().setVisible(true);
+		}
+		else if (aux_1.equals("panel_4")) {
+			VisualMain.getLabel4().setVisible(true);
+			VisualMain.getLblC_3().setVisible(true);
+		}
+		else if (aux_1.equals("panel_5")) {
+			VisualMain.getLabel5().setVisible(true);
+			VisualMain.getLblC_4().setVisible(true);
+		}
+		else if (aux_1.equals("panel_6")) {
+			VisualMain.getLabel6().setVisible(true);
+			VisualMain.getLblC_5().setVisible(true);
+		}
+		else if (aux_1.equals("panel_7")) {
+			VisualMain.getLabel7().setVisible(true);
+			VisualMain.getLblC_6().setVisible(true);
+		}
+		else if (aux_1.equals("panel_8")) {
+			VisualMain.getLabel8().setVisible(true);
+			VisualMain.getLblC_7().setVisible(true);
+		}
+		else if (aux_1.equals("panel_9")) {
+			VisualMain.getLabel9().setVisible(true);
+			VisualMain.getLblC_8().setVisible(true);
+		}
+		else if (aux_1.equals("panel_10")) {
+			VisualMain.getLabel10().setVisible(true);
+			VisualMain.getLblC_9().setVisible(true);
+		}
+		else if (aux_1.equals("panel_11")) {
+			VisualMain.getLabel11().setVisible(true);
+			VisualMain.getLblC_10().setVisible(true);
+		}
+		else if (aux_1.equals("panel_12")) {
+			VisualMain.getLabel12().setVisible(true);
+			VisualMain.getLblC_11().setVisible(true);
+		}
+		else if (aux_1.equals("panel_13")) {
+			VisualMain.getLabel13().setVisible(true);
+			VisualMain.getLblC_12().setVisible(true);
+		}
+		else if (aux_1.equals("panel_14")) {
+			VisualMain.getLabel14().setVisible(true);
+			VisualMain.getLblC_13().setVisible(true);
+		}
+		else if (aux_1.equals("panel_15")) {
+			VisualMain.getLabel15().setVisible(true);
+			VisualMain.getLblC_14().setVisible(true);
+		}
+		else if (aux_1.equals("panel_16")) {
+			VisualMain.getLabel16().setVisible(true);
+			VisualMain.getLblC_15().setVisible(true);
+		}
+		else if (aux_1.equals("panel_17")) {
+			VisualMain.getLabel17().setVisible(true);
+			VisualMain.getLblC_16().setVisible(true);
+		}
+		else if (aux_1.equals("panel_18")) {
+			VisualMain.getLabel18().setVisible(true);
+			VisualMain.getLblC_17().setVisible(true);
+		}
+		else if (aux_1.equals("panel_19")) {
+			VisualMain.getLabel19().setVisible(true);
+			VisualMain.getLblC_18().setVisible(true);
+		}
+		else if (aux_1.equals("panel_20")) {
+			VisualMain.getLabel20().setVisible(true);
+			VisualMain.getLblC_19().setVisible(true);
+		}
+		else if (aux_1.equals("panel_21")) {
+			VisualMain.getLabel21().setVisible(true);
+			VisualMain.getLblC_20().setVisible(true);
+		}
+		else if (aux_1.equals("panel_22")) {
+			VisualMain.getLabel22().setVisible(true);
+			VisualMain.getLblC_21().setVisible(true);
+		}
+		else if (aux_1.equals("panel_23")) {
+			VisualMain.getLabel23().setVisible(true);
+			VisualMain.getLblC_22().setVisible(true);
+		}
+		else if (aux_1.equals("panel_24")) {
+			VisualMain.getLabel24().setVisible(true);
+			VisualMain.getLblC_23().setVisible(true);
+		}
+		else if (aux_1.equals("panel_25")) {
+			VisualMain.getLabel25().setVisible(true);
+			VisualMain.getLblC_24().setVisible(true);
+		}
+		else if (aux_1.equals("panel_26")) {
+			VisualMain.getLabel26().setVisible(true);
+			VisualMain.getLblC_25().setVisible(true);
+		}
+		else if (aux_1.equals("panel_27")) {
+			VisualMain.getLabel27().setVisible(true);
+			VisualMain.getLblC_26().setVisible(true);
+		}
+		else if (aux_1.equals("panel_28")) {
+			VisualMain.getLabel28().setVisible(true);
+			VisualMain.getLblC_27().setVisible(true);
+		}
+		else if (aux_1.equals("panel_29")) {
+			VisualMain.getLabel29().setVisible(true);
+			VisualMain.getLblC_28().setVisible(true);
+		}
+		else if (aux_1.equals("panel_30")) {
+			VisualMain.getLabel30().setVisible(true);
+			VisualMain.getLblC_29().setVisible(true);
+		}
+		else if (aux_1.equals("panel_31")) {
+			VisualMain.getLabel31().setVisible(true);
+			VisualMain.getLblC_30().setVisible(true);
+		}
+		else if (aux_1.equals("panel_32")) {
+			VisualMain.getLabel32().setVisible(true);
+			VisualMain.getLblC_31().setVisible(true);
+		}
+		else if (aux_1.equals("panel_33")) {
+			VisualMain.getLabel33().setVisible(true);
+			VisualMain.getLblC_32().setVisible(true);
+		}
+		else if (aux_1.equals("panel_34")) {
+			VisualMain.getLabel34().setVisible(true);
+			VisualMain.getLblC_33().setVisible(true);
+		}
+		else if (aux_1.equals("panel_35")) {
+			VisualMain.getLabel35().setVisible(true);
+			VisualMain.getLblC_34().setVisible(true);
+		}
 	}
 	public void writeTicket(String room, String entryDate, String finalDate, String roomType) throws IOException {
 		writer = new FileWriter(new File("ticket.txt"));
@@ -583,23 +659,241 @@ public class RentRoom extends JDialog implements Runnable {
 		writer.write("----------------------------------\n");
 		writer.write("Atendió: CABAÑA 809\n\n");
 		writer.write("Hab.: "+room+"\n\n");
-		writer.write("                    Orden No: "+String.valueOf(code++));
+		writer.write("                       Orden No: "+String.valueOf(code++)+"\n");
 		writer.write("Entrada: "+entryDate+"\n");
 		writer.write("Salida: "+finalDate+"\n");
 		writer.write("----------------------------------\n");
 		if (roomType.equals("fastRoom"))
-			writer.write("1.00 HABITACION PASO       "+String.format("%.2f", Cabaña809.simpleFastRoomPrice));
+			writer.write("1.00 HABITACION PASO        "+String.format("%.2f", Cabaña809.simpleFastRoomPrice)+"\n");
 		else if (roomType.equals("fastEjecutive"))
-			writer.write("1.00 EJECUTIVA PASO       "+String.format("%.2f", Cabaña809.ejecutiveFastRoomPrice));
+			writer.write("1.00 EJECUTIVA PASO        "+String.format("%.2f", Cabaña809.ejecutiveFastRoomPrice)+"\n");
 		else if (roomType.equals("simpleComplete"))
-			writer.write("1.00 SIMPLE AMANECIDA       "+String.format("%.2f", Cabaña809.simpleCompleteRoomPrice));
+			writer.write("1.00 SIMPLE AMANECIDA       "+String.format("%.2f", Cabaña809.simpleCompleteRoomPrice)+"\n");
 		else if (roomType.equals("ejecutiveComplete"))
-			writer.write("1.00 EJECUTIVA COMPLETA   "+String.format("%.2f", Cabaña809.ejecutiveCompleteRoomPrice));
+			writer.write("1.00 EJECUTIVA COMPLETA    "+String.format("%.2f", Cabaña809.ejecutiveCompleteRoomPrice)+"\n");
 		for (Producto i: selected) {
-			
+			writer.write(String.format("%.2f",(float)i.getCantidad())+" "+i.getNombre()+"             "+String.format("%.2f", i.getPrecio()*i.getCantidad())+"\n");
 		}
+		writer.write("----------------------------------\n");
+		writer.write("IMPORTE:                   "+String.format("%.2f", setTotalAmount())+"\n");
+		writer.write("DESCUENTO:                    0.00\n");
+		writer.write("                       -----------\n");
+		writer.write("SUB TOTAL:                 "+String.format("%.2f", setTotalAmount())+"\n");
+		writer.write("10 % LEGAL:                   0.00\n");
+		writer.write("ITBIS:                      "+String.format("%.2f", setTotalAmount()*0.1525)+"\n");
+		writer.write("                       -----------\n");
+		writer.write("TOTAL:                     "+String.format("%.2f", setTotalAmount())+"\n");
+		writer.write("                  ================\n\n");
+		writer.write("**********************************\n");
+		writer.write("******GRACIAS POR PREFERIRNOS*****\n");
+		writer.write("**********************************\n");
+		writer.close();
+		
 		
 	}
-
+	private String getDate() {
+		Calendar calendar = new GregorianCalendar();
+		Date date = new Date();
+		calendar.setTime(date);
+		String meridian = calendar.get(Calendar.AM_PM) == Calendar.AM?"AM":"PM";
+		String year = null;
+		String day = null;
+		String aux = null;
+		if (meridian.equals("PM")) {
+			calendar.setTimeInMillis(calendar.getTimeInMillis()+86400000);
+			int m = calendar.get(Calendar.MONTH);
+			year = String.valueOf(calendar.get(Calendar.YEAR));
+			day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+			aux = day+"/"+String.valueOf(m+1)+"/"+year;
+		}
+		else {
+			int m = calendar.get(Calendar.MONTH);
+			year = String.valueOf(calendar.get(Calendar.YEAR));
+			day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+			aux = day+"/"+String.valueOf(m+1)+"/"+year;
+		}
+		return aux;
+	}
+	@SuppressWarnings("deprecation")
+	private long getTime() {
+		String date = getDate1();
+		long aux = 0l;
+		Date date1 = new Date();
+		String[] separate = date.split("/");
+		String realDate = separate[3]+", "+separate[0]+" "+separate[1]+" "+separate[2]+" 10:00:00 GMT";
+		aux = Date.parse(realDate)-date1.getTime()+14400000;
+		return aux;
+	}
+	private String getDate1() {
+		Calendar calendar = new GregorianCalendar();
+		Date date = new Date();
+		calendar.setTime(date);
+		String meridian = calendar.get(Calendar.AM_PM) == Calendar.AM?"AM":"PM";
+		String year = null;
+		String day = null;
+		String aux = null;
+		String weekDay = null;
+		String month = null;
+		if (meridian.equals("PM")||calendar.get(Calendar.HOUR_OF_DAY)>=10) {
+			calendar.setTimeInMillis(calendar.getTimeInMillis()+86400000);
+			int m = calendar.get(Calendar.MONTH);
+			year = String.valueOf(calendar.get(Calendar.YEAR));
+			day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+			month = getMonth(m);
+			int wDay = calendar.get(Calendar.DAY_OF_WEEK);
+			weekDay = getWeekDay(wDay);
+			aux = day+"/"+month+"/"+year+"/"+weekDay;
+		}
+		else {
+			int m = calendar.get(Calendar.MONTH);
+			year = String.valueOf(calendar.get(Calendar.YEAR));
+			day = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+			month = getMonth(m);
+			int wDay = calendar.get(Calendar.DAY_OF_WEEK);
+			weekDay = getWeekDay(wDay);
+			aux = day+"/"+month+"/"+year+"/"+weekDay;
+		}
+		return aux;
+	}
+	private String getWeekDay(int d) {
+		String weekDay = null;
+		if(d == 1)
+        	weekDay = "Sun";
+        else if(d == 2)
+        	weekDay = "Mon";
+        else if(d == 3)
+        	weekDay = "Tue";
+        else if(d == 4)
+        	weekDay = "Wed";
+        else if(d == 5)
+        	weekDay = "Thu";
+        else if(d == 6)
+        	weekDay = "Fri";
+        else if(d == 7)
+        	weekDay = "Sat";
+		
+		return weekDay;
+	}
+	private String getMonth(int m) {
+		String month= null;
+		if(m == 0)
+        	month = "Jan";
+        else if(m == 1)
+        	month = "Feb";
+        else if(m == 2)
+        	month = "Mar";
+        else if(m == 3)
+        	month = "Apr";
+        else if(m == 4)
+        	month = "May";
+        else if(m == 5)
+        	month = "Jun";
+        else if(m == 6)
+        	month = "Jul";
+        else if(m == 7)
+        	month = "Aug";
+        else if(m == 8)
+        	month = "Sep";
+        else if(m == 9)
+        	month = "Oct";
+        else if(m == 10)
+        	month = "Nov";
+        else if(m == 11)
+        	month = "Dec";
+		
+		return month;
+	}
+	private String getRoomName(String panelName) {
+		String aux = null;
+		if (panelName.equals("panel_1"))
+			aux = "C-1";
+		else if (panelName.equals("panel_2"))
+			aux = "C-2";
+		else if (panelName.equals("panel_3"))
+			aux = "C-3";
+		else if (panelName.equals("panel_4"))
+			aux = "C-4";
+		else if (panelName.equals("panel_5"))
+			aux = "C-5";
+		else if (panelName.equals("panel_6"))
+			aux = "C-6";
+		else if (panelName.equals("panel_7"))
+			aux = "C-7";
+		else if (panelName.equals("panel_8"))
+			aux = "C-8";
+		else if (panelName.equals("panel_9"))
+			aux = "C-9";
+		else if (panelName.equals("panel_10"))
+			aux = "C-10";
+		else if (panelName.equals("panel_11"))
+			aux = "C-11";
+		else if (panelName.equals("panel_12"))
+			aux = "C-12";
+		else if (panelName.equals("panel_13"))
+			aux = "C-13";
+		else if (panelName.equals("panel_14"))
+			aux = "C-14";
+		else if (panelName.equals("panel_15"))
+			aux = "C-15";
+		else if (panelName.equals("panel_16"))
+			aux = "C-16";
+		else if (panelName.equals("panel_17"))
+			aux = "C-17";
+		else if (panelName.equals("panel_18"))
+			aux = "C-18";
+		else if (panelName.equals("panel_19"))
+			aux = "C-19";
+		else if (panelName.equals("panel_20"))
+			aux = "C-20";
+		else if (panelName.equals("panel_21"))
+			aux = "C-21";
+		else if (panelName.equals("panel_22"))
+			aux = "C-22";
+		else if (panelName.equals("panel_23"))
+			aux = "C-23";
+		else if (panelName.equals("panel_24"))
+			aux = "C-24";
+		else if (panelName.equals("panel_25"))
+			aux = "C-25";
+		else if (panelName.equals("panel_26"))
+			aux = "C-26";
+		else if (panelName.equals("panel_27"))
+			aux = "C-27";
+		else if (panelName.equals("panel_28"))
+			aux = "C-28";
+		else if (panelName.equals("panel_29"))
+			aux = "C-29";
+		else if (panelName.equals("panel_30"))
+			aux = "C-30";
+		else if (panelName.equals("panel_31"))
+			aux = "C-31";
+		else if (panelName.equals("panel_32"))
+			aux = "C-32";
+		else if (panelName.equals("panel_33"))
+			aux = "C-33";
+		else if (panelName.equals("panel_34"))
+			aux = "C-34";
+		else if (panelName.equals("panel_35"))
+			aux = "C-35";
+		
+		
+		return aux;
+	}
+	private String getEntryDate() {
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		String aux = formatter.format(date);
+		return aux;
+	}
+	private String getFinalDate() {
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		calendar.setTimeInMillis(calendar.getTimeInMillis()+14400000);
+		Date date1 = calendar.getTime();
+		String aux = formatter.format(date1);
+		return aux;
+	}
     
 }

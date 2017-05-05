@@ -78,7 +78,7 @@ public class Cabaña809 implements Serializable {
 		return aux;
 	}
 	
-public void borrarProducto(String nombre){
+	public void borrarProducto(String nombre){
 		
 		int  i = 0;
 		boolean found = false;
