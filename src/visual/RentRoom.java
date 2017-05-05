@@ -112,7 +112,7 @@ public class RentRoom extends JDialog implements Runnable {
 		selected = new ArrayList<>();
 		
 		panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Productos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Productos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_2.setBounds(10, 81, 253, 193);
 		contentPanel.add(panel_2);
 		panel_2.setLayout(null);
@@ -123,7 +123,7 @@ public class RentRoom extends JDialog implements Runnable {
 		
 		{
 			panel = new JPanel();
-			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Tipo de caba\u00F1a", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Tipo de caba\u00F1a", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel.setBounds(10, 11, 253, 59);
 			contentPanel.add(panel);
 			panel.setLayout(null);
@@ -152,7 +152,7 @@ public class RentRoom extends JDialog implements Runnable {
 		sencilla.setSelected(false);
 		
 		panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Seleccionado", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Seleccionado", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_3.setBounds(273, 81, 241, 193);
 		contentPanel.add(panel_3);
 		panel_3.setLayout(null);
@@ -227,7 +227,7 @@ public class RentRoom extends JDialog implements Runnable {
 		////////////////////////////////////////////////Lo que se debe copiar para hacer las tablas/////////////////////////////////////////
 		{
 			panel_1 = new JPanel();
-			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Servicio", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Servicio", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel_1.setBounds(273, 11, 241, 59);
 			contentPanel.add(panel_1);
 			panel_1.setLayout(null);

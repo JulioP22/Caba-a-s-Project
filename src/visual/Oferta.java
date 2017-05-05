@@ -37,6 +37,7 @@ import logical.Cabaña809;
 import logical.Producto;
 
 import javax.swing.border.LineBorder;
+import java.awt.Window.Type;
 
 
 
@@ -59,6 +60,7 @@ public class Oferta extends JDialog{
 
 	
 	public Oferta() {
+		setType(Type.POPUP);
 		setTitle("Listado de Productos\r\n");
 		setBounds(100, 100, 462, 400);
 		getContentPane().setLayout(new BorderLayout());
@@ -68,7 +70,7 @@ public class Oferta extends JDialog{
 		producsAux = new ArrayList<>();
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Lista", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Lista", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 436, 306);
 		contentPanel.add(panel);
 		panel.setLayout(null);
@@ -123,13 +125,20 @@ public class Oferta extends JDialog{
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Producto aux = Cabaña809.getInstance().buscarProductoporNombre(Cabaña809.nombre);
+						BorrarLog o = new BorrarLog();
+						o.setModal(true);
+						o.setLocationRelativeTo(null);
+						o.setResizable(false);
+						o.setVisible(true);
+						
+						
+						/*Producto aux = Cabaña809.getInstance().buscarProductoporNombre(Cabaña809.nombre);
 						  int delete = JOptionPane.showConfirmDialog(null, "Realmente desea eliminar el producto: " + aux.getNombre(), null, JOptionPane.YES_NO_OPTION);
 							    if (delete == JOptionPane.YES_OPTION)
 							    {
 							    	Cabaña809.getInstance().borrarProducto(Cabaña809.nombre);
 							    	loadProductList();
-							    }
+							    }*/
 							    
 							
 					}

@@ -1,5 +1,6 @@
 package visual;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -24,6 +25,10 @@ import javax.swing.SwingConstants;
 
 
 
+
+
+
+import org.jvnet.substance.SubstanceLookAndFeel;
 
 import java.awt.Font;
 import java.awt.event.MouseMotionAdapter;
@@ -158,7 +163,10 @@ public class VisualMain extends JFrame implements Runnable{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.CremeSkin");
+					JFrame.setDefaultLookAndFeelDecorated(true);
+					SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.BusinessBlueSteelSkin");
+					SubstanceLookAndFeel.setCurrentWatermark("org.jvnet.substance.watermark.SubstanceBinaryWatermark");
+					//SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceSteelBlueTheme");
 					VisualMain frame = new VisualMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -179,12 +187,20 @@ public class VisualMain extends JFrame implements Runnable{
 		setResizable(false);
 		
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setFont(new Font("Script MT Bold", Font.PLAIN, 14));
+		menuBar.setForeground(Color.BLACK);
 		setJMenuBar(menuBar);
 		
+		
+		
 		JMenu mnProductos = new JMenu("Productos");
+		mnProductos.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		menuBar.add(mnProductos);
+		menuBar.setPreferredSize(new Dimension(100, 35));
+
 		
 		JMenuItem mntmAgregarProducto = new JMenuItem("A\u00F1adir producto");
+		mntmAgregarProducto.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		mntmAgregarProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NuevoProducto nu = new NuevoProducto(false, -1);
@@ -197,6 +213,7 @@ public class VisualMain extends JFrame implements Runnable{
 		mnProductos.add(mntmAgregarProducto);
 		
 		JMenuItem mntmListaDeProductos = new JMenuItem("Lista de productos");
+		mntmListaDeProductos.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		mntmListaDeProductos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Oferta o = new Oferta();
@@ -222,7 +239,7 @@ public class VisualMain extends JFrame implements Runnable{
 			}
 		});
 		panel.setBackground(Color.WHITE);
-		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Control de Caba\u00F1as", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Control de Caba\u00F1as", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 759, 491);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -2242,5 +2259,4 @@ public class VisualMain extends JFrame implements Runnable{
 	public static JLabel getLblC_20() {
 		return lblC_20;
 	}
-	
 }
