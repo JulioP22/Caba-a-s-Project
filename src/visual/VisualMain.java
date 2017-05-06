@@ -21,13 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
-
-
-
-
-
-
-
 import org.jvnet.substance.SubstanceLookAndFeel;
 
 import java.awt.Font;
@@ -152,6 +145,9 @@ public class VisualMain extends JFrame implements Runnable{
 	private static JLabel lblC_20;
 	private Color c2 = Color.GREEN;
 	private Color c3 = Color.red;
+	private JMenu mnProductos;
+	private JMenuItem mntmAgregarProducto;
+	private JMenuItem mntmListaDeProductos;
 	
 	
 	//private Thread t;
@@ -164,9 +160,9 @@ public class VisualMain extends JFrame implements Runnable{
 			public void run() {
 				try {
 					JFrame.setDefaultLookAndFeelDecorated(true);
-					SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.BusinessBlueSteelSkin");
 					SubstanceLookAndFeel.setCurrentWatermark("org.jvnet.substance.watermark.SubstanceBinaryWatermark");
-					//SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceSteelBlueTheme");
+					SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceSteelBlueTheme");
+					//SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.CremeSkin");
 					VisualMain frame = new VisualMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -193,13 +189,15 @@ public class VisualMain extends JFrame implements Runnable{
 		
 		
 		
-		JMenu mnProductos = new JMenu("Productos");
+		mnProductos = new JMenu("Productos");
+		mnProductos.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/productIcon_opt (2).png")));
 		mnProductos.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		menuBar.add(mnProductos);
 		menuBar.setPreferredSize(new Dimension(100, 35));
 
 		
-		JMenuItem mntmAgregarProducto = new JMenuItem("A\u00F1adir producto");
+		mntmAgregarProducto = new JMenuItem("A\u00F1adir producto");
+		mntmAgregarProducto.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/add_opt.png")));
 		mntmAgregarProducto.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		mntmAgregarProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -212,7 +210,8 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		mnProductos.add(mntmAgregarProducto);
 		
-		JMenuItem mntmListaDeProductos = new JMenuItem("Lista de productos");
+		mntmListaDeProductos = new JMenuItem("Lista de productos");
+		mntmListaDeProductos.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
 		mntmListaDeProductos.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		mntmListaDeProductos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -282,7 +281,7 @@ public class VisualMain extends JFrame implements Runnable{
 		label1.setBounds(14, 5, 79, 51);
 		panel_1.add(label1);
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
-		label1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		
 		lblC = new JLabel("C-1");
 		lblC.setFont(new Font("Trebuchet MS", Font.PLAIN, 14));
@@ -325,7 +324,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_2);
 		
 		label2 = new JLabel("");
-		label2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
 		label2.setBounds(14, 5, 79, 51);
 		panel_2.add(label2);
@@ -371,7 +370,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_3);
 		
 		label3 = new JLabel("");
-		label3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label3.setHorizontalAlignment(SwingConstants.CENTER);
 		label3.setBounds(14, 5, 79, 51);
 		panel_3.add(label3);
@@ -417,7 +416,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_4);
 		
 		label4 = new JLabel("");
-		label4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label4.setHorizontalAlignment(SwingConstants.CENTER);
 		label4.setBounds(14, 5, 79, 51);
 		panel_4.add(label4);
@@ -463,7 +462,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_5);
 		
 		label5 = new JLabel("");
-		label5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label5.setHorizontalAlignment(SwingConstants.CENTER);
 		label5.setBounds(14, 5, 79, 51);
 		panel_5.add(label5);
@@ -509,7 +508,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_6);
 		
 		label6 = new JLabel("");
-		label6.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label6.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label6.setHorizontalAlignment(SwingConstants.CENTER);
 		label6.setBounds(14, 5, 79, 51);
 		panel_6.add(label6);
@@ -555,7 +554,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_7);
 		
 		label7 = new JLabel("");
-		label7.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label7.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label7.setHorizontalAlignment(SwingConstants.CENTER);
 		label7.setBounds(14, 5, 79, 51);
 		panel_7.add(label7);
@@ -601,7 +600,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_8);
 		
 		label8 = new JLabel("");
-		label8.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label8.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label8.setHorizontalAlignment(SwingConstants.CENTER);
 		label8.setBounds(14, 5, 79, 51);
 		panel_8.add(label8);
@@ -647,7 +646,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_9);
 		
 		label9 = new JLabel("");
-		label9.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label9.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label9.setHorizontalAlignment(SwingConstants.CENTER);
 		label9.setBounds(14, 5, 79, 51);
 		panel_9.add(label9);
@@ -693,7 +692,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_10);
 		
 		label10 = new JLabel("");
-		label10.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label10.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label10.setHorizontalAlignment(SwingConstants.CENTER);
 		label10.setBounds(14, 5, 79, 51);
 		panel_10.add(label10);
@@ -739,7 +738,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_11);
 		
 		label11 = new JLabel("");
-		label11.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label11.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label11.setHorizontalAlignment(SwingConstants.CENTER);
 		label11.setBounds(14, 5, 79, 51);
 		panel_11.add(label11);
@@ -785,7 +784,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_12);
 		 
 		label12 = new JLabel("");
-		label12.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label12.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label12.setHorizontalAlignment(SwingConstants.CENTER);
 		label12.setBounds(14, 5, 79, 51);
 		panel_12.add(label12);
@@ -831,7 +830,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_13);
 		
 		label13 = new JLabel("");
-		label13.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label13.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label13.setHorizontalAlignment(SwingConstants.CENTER);
 		label13.setBounds(14, 5, 79, 51);
 		panel_13.add(label13);
@@ -877,7 +876,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_14);
 		
 		label14 = new JLabel("");
-		label14.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label14.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label14.setHorizontalAlignment(SwingConstants.CENTER);
 		label14.setBounds(14, 5, 79, 51);
 		panel_14.add(label14);
@@ -923,7 +922,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_15);
 		
 		label15 = new JLabel("");
-		label15.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label15.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label15.setHorizontalAlignment(SwingConstants.CENTER);
 		label15.setBounds(14, 5, 79, 51);
 		panel_15.add(label15);
@@ -969,7 +968,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_16);
 		
 		label16 = new JLabel("");
-		label16.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label16.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label16.setHorizontalAlignment(SwingConstants.CENTER);
 		label16.setBounds(14, 5, 79, 51);
 		panel_16.add(label16);
@@ -1015,7 +1014,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_17);
 		
 		label17 = new JLabel("");
-		label17.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label17.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label17.setHorizontalAlignment(SwingConstants.CENTER);
 		label17.setBounds(14, 5, 79, 51);
 		panel_17.add(label17);
@@ -1061,7 +1060,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_18);
 		
 		label18 = new JLabel("");
-		label18.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label18.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label18.setHorizontalAlignment(SwingConstants.CENTER);
 		label18.setBounds(14, 5, 79, 51);
 		panel_18.add(label18);
@@ -1107,7 +1106,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_19);
 		
 		label19 = new JLabel("");
-		label19.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label19.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label19.setHorizontalAlignment(SwingConstants.CENTER);
 		label19.setBounds(14, 5, 79, 51);
 		panel_19.add(label19);
@@ -1153,7 +1152,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_20);
 		
 		label20 = new JLabel("");
-		label20.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label20.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label20.setHorizontalAlignment(SwingConstants.CENTER);
 		label20.setBounds(14, 5, 79, 51);
 		panel_20.add(label20);
@@ -1199,7 +1198,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_21);
 		
 		label21 = new JLabel("");
-		label21.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label21.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label21.setHorizontalAlignment(SwingConstants.CENTER);
 		label21.setBounds(14, 5, 79, 51);
 		panel_21.add(label21);
@@ -1245,7 +1244,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_22);
 		
 		label22 = new JLabel("");
-		label22.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label22.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label22.setHorizontalAlignment(SwingConstants.CENTER);
 		label22.setBounds(14, 5, 79, 51);
 		panel_22.add(label22);
@@ -1291,7 +1290,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_23);
 		
 		label23 = new JLabel("");
-		label23.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label23.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label23.setHorizontalAlignment(SwingConstants.CENTER);
 		label23.setBounds(14, 5, 79, 51);
 		panel_23.add(label23);
@@ -1337,7 +1336,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_24);
 		
 		label24 = new JLabel("");
-		label24.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label24.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label24.setHorizontalAlignment(SwingConstants.CENTER);
 		label24.setBounds(14, 5, 79, 51);
 		panel_24.add(label24);
@@ -1383,7 +1382,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_25);
 		
 		label25 = new JLabel("");
-		label25.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label25.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label25.setHorizontalAlignment(SwingConstants.CENTER);
 		label25.setBounds(14, 5, 79, 51);
 		panel_25.add(label25);
@@ -1429,7 +1428,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_26);
 		
 		label26 = new JLabel("");
-		label26.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label26.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label26.setHorizontalAlignment(SwingConstants.CENTER);
 		label26.setBounds(14, 5, 79, 51);
 		panel_26.add(label26);
@@ -1475,7 +1474,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_27);
 		
 		label27 = new JLabel("");
-		label27.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label27.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label27.setHorizontalAlignment(SwingConstants.CENTER);
 		label27.setBounds(14, 5, 79, 51);
 		panel_27.add(label27);
@@ -1521,7 +1520,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_28);
 		
 		label28 = new JLabel("");
-		label28.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label28.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label28.setHorizontalAlignment(SwingConstants.CENTER);
 		label28.setBounds(14, 5, 79, 51);
 		panel_28.add(label28);
@@ -1567,7 +1566,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_29);
 		
 		label29 = new JLabel("");
-		label29.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label29.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label29.setHorizontalAlignment(SwingConstants.CENTER);
 		label29.setBounds(14, 5, 79, 51);
 		panel_29.add(label29);
@@ -1613,7 +1612,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_30);
 		
 		label30 = new JLabel("");
-		label30.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label30.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label30.setHorizontalAlignment(SwingConstants.CENTER);
 		label30.setBounds(14, 5, 79, 51);
 		panel_30.add(label30);
@@ -1659,7 +1658,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_31);
 		
 		label31 = new JLabel("");
-		label31.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label31.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label31.setHorizontalAlignment(SwingConstants.CENTER);
 		label31.setBounds(14, 5, 79, 51);
 		panel_31.add(label31);
@@ -1705,7 +1704,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_32);
 		
 		label32 = new JLabel("");
-		label32.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label32.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label32.setHorizontalAlignment(SwingConstants.CENTER);
 		label32.setBounds(14, 5, 79, 51);
 		panel_32.add(label32);
@@ -1752,7 +1751,7 @@ public class VisualMain extends JFrame implements Runnable{
 		
 		
 		label33 = new JLabel("");
-		label33.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label33.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label33.setHorizontalAlignment(SwingConstants.CENTER);
 		label33.setBounds(14, 5, 79, 51);
 		panel_33.add(label33);
@@ -1798,7 +1797,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_34);
 		
 		label34 = new JLabel("");
-		label34.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label34.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label34.setHorizontalAlignment(SwingConstants.CENTER);
 		label34.setBounds(14, 5, 79, 51);
 		panel_34.add(label34);
@@ -1844,7 +1843,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel.add(panel_35);
 		
 		label35 = new JLabel("");
-		label35.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/bedroom-512_opt.png")));
+		label35.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
 		label35.setHorizontalAlignment(SwingConstants.CENTER);
 		label35.setBounds(14, 5, 79, 51);
 		panel_35.add(label35);

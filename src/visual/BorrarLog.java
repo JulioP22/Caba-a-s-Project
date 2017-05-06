@@ -23,6 +23,10 @@ import java.awt.Toolkit;
 
 public class BorrarLog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9085346579474493397L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUser;
 	private JPasswordField txtPassword;
@@ -76,6 +80,7 @@ public class BorrarLog extends JDialog {
 			{
 				JButton okButton = new JButton("Acceder");
 				okButton.addActionListener(new ActionListener() {
+					@SuppressWarnings("deprecation")
 					public void actionPerformed(ActionEvent e) {
 						if(txtUser.getText().equalsIgnoreCase("Diego") && txtPassword.getText().equalsIgnoreCase("flamenco"))
 						{

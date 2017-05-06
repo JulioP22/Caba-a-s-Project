@@ -13,7 +13,6 @@ import java.util.Comparator;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -37,9 +36,7 @@ import logical.Cabaña809;
 import logical.Producto;
 
 import javax.swing.border.LineBorder;
-import java.awt.Window.Type;
-
-
+import javax.swing.ImageIcon;
 
 
 public class Oferta extends JDialog{
@@ -122,6 +119,7 @@ public class Oferta extends JDialog{
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			{
 				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setIcon(new ImageIcon(Oferta.class.getResource("/icons/deleteIcon_opt.png")));
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -145,6 +143,7 @@ public class Oferta extends JDialog{
 				});
 				
 				btnModificar = new JButton("Modificar");
+				btnModificar.setIcon(new ImageIcon(Oferta.class.getResource("/icons/modifyIcon_opt.png")));
 				btnModificar.setEnabled(false);
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -168,6 +167,7 @@ public class Oferta extends JDialog{
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(Oferta.class.getResource("/icons/cancelar_opt.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();

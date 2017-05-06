@@ -27,14 +27,23 @@ import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -80,7 +89,10 @@ public class RentRoom extends JDialog implements Runnable {
 	private Thread t;
 	private String roomName;
 	private FileWriter writer;
+	private BufferedReader reader;
 	public static int code;
+	
+	private JTextArea txtAreaRecipe = new JTextArea();
 	/**
 	 * Launch the application.
 	 */
@@ -145,7 +157,7 @@ public class RentRoom extends JDialog implements Runnable {
 					ejecutiva.setSelected(false);
 				}
 			});
-			sencilla.setBounds(162, 23, 73, 23);
+			sencilla.setBounds(149, 23, 86, 23);
 			panel.add(sencilla);
 		}
 		ejecutiva.setSelected(true);
@@ -250,7 +262,7 @@ public class RentRoom extends JDialog implements Runnable {
 					amanecida.setSelected(true);
 				}
 			});
-			amanecida.setBounds(145, 23, 90, 23);
+			amanecida.setBounds(129, 23, 106, 23);
 			panel_1.add(amanecida);
 		}
 		dePaso.setSelected(true);
@@ -344,6 +356,13 @@ public class RentRoom extends JDialog implements Runnable {
 								e1.printStackTrace();
 							}
 							t.start();
+							try {
+								readTicket();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							printComponent();
 							dispose();
 						}else if (amanecida.isSelected()) {
 							label = new JLabel("En uso");
@@ -380,6 +399,13 @@ public class RentRoom extends JDialog implements Runnable {
 							}
 							
 							t.start();
+							try {
+								readTicket();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							printComponent();
 							dispose();
 						}
 					}
@@ -498,7 +524,6 @@ public class RentRoom extends JDialog implements Runnable {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				System.out.println(time);
 				if (time<=1000) {
 					label1.setVisible(false);
 					label.setVisible(false);
@@ -699,7 +724,7 @@ public class RentRoom extends JDialog implements Runnable {
 		String year = null;
 		String day = null;
 		String aux = null;
-		if (meridian.equals("PM")) {
+		if (meridian.equals("PM")||calendar.get(Calendar.HOUR_OF_DAY)>=10) {
 			calendar.setTimeInMillis(calendar.getTimeInMillis()+86400000);
 			int m = calendar.get(Calendar.MONTH);
 			year = String.valueOf(calendar.get(Calendar.YEAR));
@@ -883,6 +908,10 @@ public class RentRoom extends JDialog implements Runnable {
 		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		String aux = formatter.format(date);
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		String meridian = calendar.get(Calendar.AM_PM) == Calendar.AM?"AM": "PM";
+		aux = aux +" "+meridian;
 		return aux;
 	}
 	private String getFinalDate() {
@@ -893,7 +922,43 @@ public class RentRoom extends JDialog implements Runnable {
 		calendar.setTimeInMillis(calendar.getTimeInMillis()+14400000);
 		Date date1 = calendar.getTime();
 		String aux = formatter.format(date1);
+		String meridian = calendar.get(Calendar.AM_PM) == Calendar.AM?"AM": "PM";
+		aux = aux +" "+meridian;
 		return aux;
 	}
-    
+	public void printComponent(){
+		PrinterJob pj = PrinterJob.getPrinterJob();
+		pj.setJobName("Recibo");
+		pj.setPrintable (new Printable() {    
+		public int print(Graphics pg, PageFormat pf, int pageNum){
+		    if (pageNum > 0){
+		        return Printable.NO_SUCH_PAGE;
+		    }
+		    Graphics2D g2 = (Graphics2D) pg;
+		    g2.translate(pf.getImageableX(), pf.getImageableY());
+		    txtAreaRecipe.paint(g2);
+		    return Printable.PAGE_EXISTS;
+		}
+	});
+		  if (pj.printDialog() == false)
+			  return;
+		  try {
+		        pj.print();
+		  } catch (PrinterException ex) {
+		        // handle exception
+		  }
+		  
+		}
+	private void readTicket() throws IOException {
+		reader = new BufferedReader(new FileReader(new File("ticket.txt")));
+		String aux = new String();
+		String line=null;
+		while((line = reader.readLine())!=null) {
+			aux += line;
+			aux += "\n";
+		}
+		txtAreaRecipe.setText(aux);
+		reader.close();
+	}
+
 }

@@ -42,7 +42,10 @@ public class NuevoProducto extends JDialog {
 	 * Create the dialog.
 	 */
 	public NuevoProducto(final boolean modify, final int index) {
-		setTitle("A\u00F1adir nuevo producto\r\n\r\n");
+		if (!modify)
+			setTitle("A\u00F1adir nuevo producto\r\n\r\n");
+		else
+			setTitle("Modificar producto\r\n\r\n");
 		setBounds(100, 100, 340, 239);
 		setModal(true);
 		setLocationRelativeTo(null);
@@ -63,7 +66,8 @@ public class NuevoProducto extends JDialog {
 		panel.add(lblNombre);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(91, 37, 185, 21);
+		txtNombre.setBackground(new Color(211, 211, 211));
+		txtNombre.setBounds(91, 37, 185, 23);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 		
@@ -72,6 +76,7 @@ public class NuevoProducto extends JDialog {
 		panel.add(lblPrecio);
 		
 		txtPrecio = new JTextField();
+		txtPrecio.setBackground(new Color(211, 211, 211));
 		txtPrecio.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -84,7 +89,7 @@ public class NuevoProducto extends JDialog {
 					e.consume();
 			}
 		});
-		txtPrecio.setBounds(91, 95, 86, 21);
+		txtPrecio.setBounds(91, 95, 86, 23);
 		panel.add(txtPrecio);
 		txtPrecio.setColumns(10);
 		
@@ -97,10 +102,12 @@ public class NuevoProducto extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				if (!modify)
-					addBtn = new JButton("A\u00F1adir");
-				else
-					addBtn = new JButton("Modificar");
+			
+				addBtn = new JButton("A\u00F1adir");
+				addBtn.setIcon(new ImageIcon(NuevoProducto.class.getResource("/icons/addProductIcon_opt.png")));
+				if (modify) {
+					addBtn.setText("Modificar");
+				}
 				addBtn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(!modify) {
@@ -146,6 +153,7 @@ public class NuevoProducto extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(NuevoProducto.class.getResource("/icons/cancelar_opt.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
