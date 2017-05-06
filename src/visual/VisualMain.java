@@ -5,10 +5,12 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 //import org.jvnet.substance.SubstanceLookAndFeel;
@@ -20,15 +22,21 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import org.jvnet.substance.SubstanceLookAndFeel;
 
+import visual.ClosingDialog;
+import logical.Cabaña809;
+
 import java.awt.Font;
 import java.awt.event.MouseMotionAdapter;
+import java.io.IOException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.Component;
 
 public class VisualMain extends JFrame implements Runnable{
 
@@ -148,6 +156,78 @@ public class VisualMain extends JFrame implements Runnable{
 	private JMenu mnProductos;
 	private JMenuItem mntmAgregarProducto;
 	private JMenuItem mntmListaDeProductos;
+	private JPopupMenu popupMenu;
+	private JMenuItem cancelarReserva;
+	public static boolean cancel = false;
+	public static boolean cancel1 = false;
+	public static boolean cancel2 = false;
+	public static boolean cancel3 = false;
+	public static boolean cancel4 = false;
+	public static boolean cancel5 = false;
+	public static boolean cancel6 = false;
+	public static boolean cancel7 = false;
+	public static boolean cancel8 = false;
+	public static boolean cancel9 = false;
+	public static boolean cancel10 = false;
+	public static boolean cancel11 = false;
+	public static boolean cancel12 = false;
+	public static boolean cancel13 = false;
+	public static boolean cancel14 = false;
+	public static boolean cancel15 = false;
+	public static boolean cancel16 = false;
+	public static boolean cancel17 = false;
+	public static boolean cancel18 = false;
+	public static boolean cancel19 = false;
+	public static boolean cancel20 = false;
+	public static boolean cancel21 = false;
+	public static boolean cancel22 = false;
+	public static boolean cancel23 = false;
+	public static boolean cancel24 = false;
+	public static boolean cancel25 = false;
+	public static boolean cancel26 = false;
+	public static boolean cancel27 = false;
+	public static boolean cancel28 = false;
+	public static boolean cancel29 = false;
+	public static boolean cancel30 = false;
+	public static boolean cancel31 = false;
+	public static boolean cancel32 = false;
+	public static boolean cancel33 = false;
+	public static boolean cancel34 = false;
+	private JMenuItem mntmNewMenuItem;
+	private JMenuItem mntmCancelarReserva;
+	private JMenuItem mntmCancelarReserva_1;
+	private JMenuItem mntmCancelarReserva_2;
+	private JMenuItem mntmCancelarReserva_3;
+	private JMenuItem mntmCancelarReserva_4;
+	private JMenuItem mntmCancelarReserva_5;
+	private JMenuItem mntmCancelarReservacin;
+	private JMenuItem mntmCancelarReservacin_1;
+	private JMenuItem mntmCancelarReservacin_2;
+	private JMenuItem mntmCancelarReservacin_3;
+	private JMenuItem mntmCancelarReservacin_4;
+	private JMenuItem mntmCancelarReservacin_5;
+	private JMenuItem mntmCancelarReservacin_6;
+	private JMenuItem mntmCancelarReservacin_7;
+	private JMenuItem mntmCancelarReservacin_8;
+	private JMenuItem mntmCancelarReservacin_9;
+	private JMenuItem mntmCancelarReservacin_10;
+	private JMenuItem mntmCancelarReservacin_11;
+	private JMenuItem mntmCancelarReservacin_12;
+	private JMenuItem mntmCancelarReservacin_13;
+	private JMenuItem mntmCancelarReservacin_14;
+	private JMenuItem mntmCancelarReservacin_15;
+	private JMenuItem mntmCancelarReservacin_16;
+	private JMenuItem mntmCancelarReservacin_17;
+	private JMenuItem mntmCancelarReservacin_18;
+	private JMenuItem mntmCancelarReservacin_19;
+	private JMenuItem mntmCancelarReservacin_20;
+	private JMenuItem mntmCancelarReservacin_21;
+	private JMenuItem mntmCancelarReservacin_22;
+	private JMenuItem mntmCancelarReservacin_23;
+	private JMenuItem mntmCancelarReservacin_24;
+	private JMenuItem mntmCancelarReservacin_26;
+	private JMenuItem mntmCancelarReservacin_25;
+	 
 	
 	
 	//private Thread t;
@@ -163,6 +243,12 @@ public class VisualMain extends JFrame implements Runnable{
 					SubstanceLookAndFeel.setCurrentWatermark("org.jvnet.substance.watermark.SubstanceBinaryWatermark");
 					SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceSteelBlueTheme");
 					//SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.CremeSkin");
+					try{ 
+						Cabaña809.readAdmin();
+					}catch(IOException e) {
+						JOptionPane.showMessageDialog(null, "Archivos no encontrados, generando nuevos archivos", "Archivos no encontrados", JOptionPane.WARNING_MESSAGE,null);
+						Cabaña809.writeAdmin();
+					}
 					VisualMain frame = new VisualMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -176,6 +262,20 @@ public class VisualMain extends JFrame implements Runnable{
 	 * Create the frame.
 	 */
 	public VisualMain() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				try {
+					Cabaña809.writeAdmin();
+					ClosingDialog closingDialog = new ClosingDialog();
+					closingDialog.setVisible(true);
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(null, "Se ha producido un error al guardar los datos", "Error", JOptionPane.ERROR_MESSAGE, null);
+				}catch(Exception e2) {
+					JOptionPane.showMessageDialog(null, "Se ha producido un error desconocido", "Error", JOptionPane.ERROR_MESSAGE, null);
+				}
+			}
+		});
 		setTitle("Caba\u00F1a809");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 785, 573);
@@ -199,13 +299,15 @@ public class VisualMain extends JFrame implements Runnable{
 		mntmAgregarProducto = new JMenuItem("A\u00F1adir producto");
 		mntmAgregarProducto.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/add_opt.png")));
 		mntmAgregarProducto.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
-		mntmAgregarProducto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NuevoProducto nu = new NuevoProducto(false, -1);
-				nu.setModal(true);
-				nu.setLocationRelativeTo(null);
-				nu.setResizable(false);
-				nu.setVisible(true);
+		mntmAgregarProducto.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)){
+					NuevoProducto nu = new NuevoProducto(false, -1);
+					nu.setModal(true);
+					nu.setLocationRelativeTo(null);
+					nu.setResizable(false);
+					nu.setVisible(true);
+				}
 			}
 		});
 		mnProductos.add(mntmAgregarProducto);
@@ -213,17 +315,36 @@ public class VisualMain extends JFrame implements Runnable{
 		mntmListaDeProductos = new JMenuItem("Lista de productos");
 		mntmListaDeProductos.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
 		mntmListaDeProductos.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
-		mntmListaDeProductos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Oferta o = new Oferta();
-				o.setModal(true);
-				o.setLocationRelativeTo(null);
-				o.setResizable(false);
-				o.setVisible(true);
-
+		mntmListaDeProductos.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Oferta o = new Oferta();
+					o.setModal(true);
+					o.setLocationRelativeTo(null);
+					o.setResizable(false);
+					o.setVisible(true);
+				}
 			}
 		});
 		mnProductos.add(mntmListaDeProductos);
+		
+		JMenu mnConfiguracin = new JMenu("Configuraci\u00F3n");
+		mnConfiguracin.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/modificar_opt.png")));
+		mnConfiguracin.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		menuBar.add(mnConfiguracin);
+		
+		JMenuItem mntmModificarPrecioDe = new JMenuItem("Modificar precio de habitaciones");
+		mntmModificarPrecioDe.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)){
+					ModifyPrices modi = new ModifyPrices();
+					modi.setVisible(true);
+				}
+			}
+		});
+		mntmModificarPrecioDe.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
+		mntmModificarPrecioDe.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/modifyIcon_opt.png")));
+		mnConfiguracin.add(mntmModificarPrecioDe);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -248,17 +369,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_1.getBackground();
-				if (c1.getRGB()!=c2.getRGB() && c1.getRGB()!=c3.getRGB())
-					panel_1.setBackground(new Color (200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_1.getBackground();
+					if (c1.getRGB()!=c2.getRGB() && c1.getRGB()!=c3.getRGB())
+						panel_1.setBackground(new Color (200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_1.getBackground();
-				if (c1.getRGB()!=c2.getRGB() && c1.getRGB()!=c3.getRGB()) {
-					panel_1.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_1");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_1.getBackground();
+					if (c1.getRGB()!=c2.getRGB() && c1.getRGB()!=c3.getRGB()) {
+						panel_1.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_1");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -266,6 +391,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_1.getBackground()==Color.GREEN || panel_1.getBackground()==Color.RED) {
+					cancelarReserva.setVisible(true);
+				}
+				else {
+					cancelarReserva.setVisible(false);
+				}	
 				Color c1 = panel_1.getBackground();
 				if (c1.getRGB()!=c2.getRGB() && c1.getRGB()!=c3.getRGB()) {
 					panel_1.setBackground(new Color (220,220,220));
@@ -276,6 +407,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_1.setBounds(10, 23, 97, 82);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
+		
+		popupMenu = new JPopupMenu();
+		addPopup(panel_1, popupMenu);
+		
+		cancelarReserva = new JMenuItem("Cancelar reservaci\u00F3n");
+		cancelarReserva.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel = true;
+						panel_1.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_1.getComponentCount();i++) {
+							panel_1.getComponent(i).setVisible(false);
+						}
+						label1.setVisible(true);
+						lblC.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		cancelarReserva.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu.add(cancelarReserva);
 		
 		label1 = new JLabel("");
 		label1.setBounds(14, 5, 79, 51);
@@ -294,17 +450,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_2.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_2.setBackground(new Color (200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_2.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_2.setBackground(new Color (200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_2.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_2.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_2");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_2.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_2.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_2");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -312,6 +472,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_2.getBackground()==Color.GREEN || panel_2.getBackground()==Color.RED) {
+					mntmNewMenuItem.setVisible(true);
+				}
+				else {
+					mntmNewMenuItem.setVisible(false);
+				}
 				Color c1 = panel_2.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_2.setBackground(new Color (220,220,220));
@@ -322,6 +488,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_2.setLayout(null);
 		panel_2.setBounds(117, 23, 97, 82);
 		panel.add(panel_2);
+		
+		JPopupMenu popupMenu_1 = new JPopupMenu();
+		addPopup(panel_2, popupMenu_1);
+		
+		mntmNewMenuItem = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmNewMenuItem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel1 = true;
+						panel_2.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_2.getComponentCount();i++) {
+							panel_2.getComponent(i).setVisible(false);
+						}
+						label2.setVisible(true);
+						lblC_1.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmNewMenuItem.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_1.add(mntmNewMenuItem);
 		
 		label2 = new JLabel("");
 		label2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -340,17 +531,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_3.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_3.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_3.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_3.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)){
 				Color c1 = panel_3.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_3.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_3");
-					rent.setVisible(true);
+					if (c1!=c2 && c1!=c3) {
+						panel_3.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_3");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -358,6 +553,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_3.getBackground()==Color.GREEN || panel_3.getBackground()==Color.RED) {
+					mntmCancelarReserva.setVisible(true);
+				}
+				else {
+					mntmCancelarReserva.setVisible(false);
+				}
 				Color c1 = panel_3.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_3.setBackground(new Color (220,220,220));
@@ -368,6 +569,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_3.setLayout(null);
 		panel_3.setBounds(224, 23, 97, 82);
 		panel.add(panel_3);
+		
+		JPopupMenu popupMenu_2 = new JPopupMenu();
+		addPopup(panel_3, popupMenu_2);
+		
+		mntmCancelarReserva = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReserva.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel2 = true;
+						panel_3.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_3.getComponentCount();i++) {
+							panel_3.getComponent(i).setVisible(false);
+						}
+						label3.setVisible(true);
+						lblC_2.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReserva.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_2.add(mntmCancelarReserva);
 		
 		label3 = new JLabel("");
 		label3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -386,17 +612,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_4.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_4.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_4.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_4.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_4.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_4.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_4");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_4.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_4.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_4");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -404,6 +634,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_4.getBackground()==Color.GREEN || panel_4.getBackground()==Color.RED) {
+					mntmCancelarReserva_1.setVisible(true);
+				}
+				else {
+					mntmCancelarReserva_1.setVisible(false);
+				}
 				Color c1 = panel_4.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_4.setBackground(new Color (220,220,220));
@@ -414,6 +650,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_4.setLayout(null);
 		panel_4.setBounds(331, 23, 97, 82);
 		panel.add(panel_4);
+		
+		JPopupMenu popupMenu_3 = new JPopupMenu();
+		addPopup(panel_4, popupMenu_3);
+		
+		mntmCancelarReserva_1 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReserva_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel3 = true;
+						panel_4.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_4.getComponentCount();i++) {
+							panel_4.getComponent(i).setVisible(false);
+						}
+						label4.setVisible(true);
+						lblC_3.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReserva_1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_3.add(mntmCancelarReserva_1);
 		
 		label4 = new JLabel("");
 		label4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -432,17 +693,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_5.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_5.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_5.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_5.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_5.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_5.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_5");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_5.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_5.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_5");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -450,6 +715,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_5.getBackground()==Color.GREEN || panel_5.getBackground()==Color.RED) {
+					mntmCancelarReserva_2.setVisible(true);
+				}
+				else {
+					mntmCancelarReserva_2.setVisible(false);
+				}
 				Color c1 = panel_5.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_5.setBackground(new Color (220,220,220));
@@ -460,6 +731,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_5.setLayout(null);
 		panel_5.setBounds(438, 23, 97, 82);
 		panel.add(panel_5);
+		
+		JPopupMenu popupMenu_4 = new JPopupMenu();
+		addPopup(panel_5, popupMenu_4);
+		
+		mntmCancelarReserva_2 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReserva_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel4 = true;
+						panel_5.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_5.getComponentCount();i++) {
+							panel_5.getComponent(i).setVisible(false);
+						}
+						label5.setVisible(true);
+						lblC_4.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReserva_2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_4.add(mntmCancelarReserva_2);
 		
 		label5 = new JLabel("");
 		label5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -478,17 +774,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_6.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_6.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_6.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_6.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_6.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_6.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_6.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_6");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_6.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_6.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_6");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -496,6 +796,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_6.getBackground()==Color.GREEN || panel_6.getBackground()==Color.RED) {
+					mntmCancelarReserva_3.setVisible(true);
+				}
+				else {
+					mntmCancelarReserva_3.setVisible(false);
+				}
 				Color c1 = panel_6.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_6.setBackground(new Color (220,220,220));
@@ -506,6 +812,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_6.setLayout(null);
 		panel_6.setBounds(545, 23, 97, 82);
 		panel.add(panel_6);
+		
+		JPopupMenu popupMenu_5 = new JPopupMenu();
+		addPopup(panel_6, popupMenu_5);
+		
+		mntmCancelarReserva_3 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReserva_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel5 = true;
+						panel_6.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_6.getComponentCount();i++) {
+							panel_6.getComponent(i).setVisible(false);
+						}
+						label6.setVisible(true);
+						lblC_5.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReserva_3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_5.add(mntmCancelarReserva_3);
 		
 		label6 = new JLabel("");
 		label6.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -524,17 +855,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_7.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_7.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_7.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_7.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_7.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_7.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_7.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_7");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_7.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_7.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_7");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -542,6 +877,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_7.getBackground()==Color.GREEN || panel_7.getBackground()==Color.RED) {
+					mntmCancelarReserva_4.setVisible(true);
+				}
+				else {
+					mntmCancelarReserva_4.setVisible(false);
+				}
 				Color c1 = panel_7.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_7.setBackground(new Color (220,220,220));
@@ -552,6 +893,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_7.setLayout(null);
 		panel_7.setBounds(652, 23, 97, 82);
 		panel.add(panel_7);
+		
+		JPopupMenu popupMenu_6 = new JPopupMenu();
+		addPopup(panel_7, popupMenu_6);
+		
+		mntmCancelarReserva_4 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReserva_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel6 = true;
+						panel_7.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_7.getComponentCount();i++) {
+							panel_7.getComponent(i).setVisible(false);
+						}
+						label7.setVisible(true);
+						lblC_6.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReserva_4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_6.add(mntmCancelarReserva_4);
 		
 		label7 = new JLabel("");
 		label7.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -570,17 +936,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_8.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_8.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_8.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_8.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_8.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_8.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_8.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_8");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_8.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_8.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_8");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -588,6 +958,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_8.getBackground()==Color.GREEN || panel_8.getBackground()==Color.RED) {
+					mntmCancelarReserva_5.setVisible(true);
+				}
+				else {
+					mntmCancelarReserva_5.setVisible(false);
+				}
 				Color c1 = panel_8.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_8.setBackground(new Color (220,220,220));
@@ -598,6 +974,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_8.setLayout(null);
 		panel_8.setBounds(10, 116, 97, 82);
 		panel.add(panel_8);
+		
+		JPopupMenu popupMenu_7 = new JPopupMenu();
+		addPopup(panel_8, popupMenu_7);
+		
+		mntmCancelarReserva_5 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReserva_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel7 = true;
+						panel_8.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_8.getComponentCount();i++) {
+							panel_8.getComponent(i).setVisible(false);
+						}
+						label8.setVisible(true);
+						lblC_7.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReserva_5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_7.add(mntmCancelarReserva_5);
 		
 		label8 = new JLabel("");
 		label8.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -616,17 +1017,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_9.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_9.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_9.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_9.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_9.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_9.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_9.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_9");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_9.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_9.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_9");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -634,6 +1039,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_9.getBackground()==Color.GREEN || panel_9.getBackground()==Color.RED) {
+					mntmCancelarReservacin.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin.setVisible(false);
+				}
 				Color c1 = panel_9.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_9.setBackground(new Color (220,220,220));
@@ -644,6 +1055,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_9.setLayout(null);
 		panel_9.setBounds(117, 116, 97, 82);
 		panel.add(panel_9);
+		
+		JPopupMenu popupMenu_8 = new JPopupMenu();
+		addPopup(panel_9, popupMenu_8);
+		
+		mntmCancelarReservacin = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel8 = true;
+						panel_9.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_9.getComponentCount();i++) {
+							panel_9.getComponent(i).setVisible(false);
+						}
+						label9.setVisible(true);
+						lblC_8.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_8.add(mntmCancelarReservacin);
 		
 		label9 = new JLabel("");
 		label9.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -662,17 +1098,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_10.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_10.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_10.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_10.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_10.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_10.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_10.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_10");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_10.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_10.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_10");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -680,6 +1120,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_10.getBackground()==Color.GREEN || panel_10.getBackground()==Color.RED) {
+					mntmCancelarReservacin_1.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_1.setVisible(false);
+				}
 				Color c1 = panel_10.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_10.setBackground(new Color (220,220,220));
@@ -690,6 +1136,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_10.setLayout(null);
 		panel_10.setBounds(224, 116, 97, 82);
 		panel.add(panel_10);
+		
+		JPopupMenu popupMenu_9 = new JPopupMenu();
+		addPopup(panel_10, popupMenu_9);
+		
+		mntmCancelarReservacin_1 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel9 = true;
+						panel_10.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_10.getComponentCount();i++) {
+							panel_10.getComponent(i).setVisible(false);
+						}
+						label10.setVisible(true);
+						lblC_9.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_9.add(mntmCancelarReservacin_1);
 		
 		label10 = new JLabel("");
 		label10.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -708,17 +1179,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_11.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_11.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_11.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_11.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_11.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_11.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_11.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_11");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_11.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_11.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_11");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -726,6 +1201,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_11.getBackground()==Color.GREEN || panel_11.getBackground()==Color.RED) {
+					mntmCancelarReservacin_2.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_2.setVisible(false);
+				}
 				Color c1 = panel_11.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_11.setBackground(new Color (220,220,220));
@@ -736,6 +1217,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_11.setLayout(null);
 		panel_11.setBounds(331, 116, 97, 82);
 		panel.add(panel_11);
+		
+		JPopupMenu popupMenu_10 = new JPopupMenu();
+		addPopup(panel_11, popupMenu_10);
+		
+		mntmCancelarReservacin_2 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel10 = true;
+						panel_11.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_11.getComponentCount();i++) {
+							panel_11.getComponent(i).setVisible(false);
+						}
+						label11.setVisible(true);
+						lblC_10.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_10.add(mntmCancelarReservacin_2);
 		
 		label11 = new JLabel("");
 		label11.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -754,17 +1260,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_12.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_12.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_12.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_12.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_12.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_12.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_12.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_12");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_12.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_12.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_12");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -772,6 +1282,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_12.getBackground()==Color.GREEN || panel_12.getBackground()==Color.RED) {
+					mntmCancelarReservacin_3.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_3.setVisible(false);
+				}
 				Color c1 = panel_12.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_12.setBackground(new Color (220,220,220));
@@ -782,6 +1298,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_12.setLayout(null);
 		panel_12.setBounds(438, 116, 97, 82);
 		panel.add(panel_12);
+		
+		JPopupMenu popupMenu_11 = new JPopupMenu();
+		addPopup(panel_12, popupMenu_11);
+		
+		mntmCancelarReservacin_3 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel11 = true;
+						panel_12.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_12.getComponentCount();i++) {
+							panel_12.getComponent(i).setVisible(false);
+						}
+						label12.setVisible(true);
+						lblC_11.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_11.add(mntmCancelarReservacin_3);
 		 
 		label12 = new JLabel("");
 		label12.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -800,17 +1341,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_13.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_13.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_13.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_13.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_13.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_13.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_13.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_13");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_13.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_13.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_13");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -818,6 +1363,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_13.getBackground()==Color.GREEN || panel_13.getBackground()==Color.RED) {
+					mntmCancelarReservacin_4.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_4.setVisible(false);
+				}
 				Color c1 = panel_13.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_13.setBackground(new Color (220,220,220));
@@ -828,6 +1379,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_13.setLayout(null);
 		panel_13.setBounds(545, 116, 97, 82);
 		panel.add(panel_13);
+		
+		JPopupMenu popupMenu_12 = new JPopupMenu();
+		addPopup(panel_13, popupMenu_12);
+		
+		mntmCancelarReservacin_4 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel12 = true;
+						panel_13.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_13.getComponentCount();i++) {
+							panel_13.getComponent(i).setVisible(false);
+						}
+						label13.setVisible(true);
+						lblC_12.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_12.add(mntmCancelarReservacin_4);
 		
 		label13 = new JLabel("");
 		label13.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -846,17 +1422,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_14.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_14.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_14.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_14.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_14.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_14.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_14.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_14");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_14.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_14.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_14");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -864,6 +1444,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_14.getBackground()==Color.GREEN || panel_14.getBackground()==Color.RED) {
+					mntmCancelarReservacin_5.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_5.setVisible(false);
+				}
 				Color c1 = panel_14.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_14.setBackground(new Color (220,220,220));
@@ -874,6 +1460,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_14.setLayout(null);
 		panel_14.setBounds(652, 116, 97, 82);
 		panel.add(panel_14);
+		
+		JPopupMenu popupMenu_13 = new JPopupMenu();
+		addPopup(panel_14, popupMenu_13);
+		
+		mntmCancelarReservacin_5 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel13 = true;
+						panel_14.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_14.getComponentCount();i++) {
+							panel_14.getComponent(i).setVisible(false);
+						}
+						label14.setVisible(true);
+						lblC_13.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_13.add(mntmCancelarReservacin_5);
 		
 		label14 = new JLabel("");
 		label14.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -892,17 +1503,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_15.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_15.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_15.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_15.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_15.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_15.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_15.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_15");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_15.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_15.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_15");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -910,6 +1525,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_15.getBackground()==Color.GREEN || panel_15.getBackground()==Color.RED) {
+					mntmCancelarReservacin_6.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_6.setVisible(false);
+				}
 				Color c1 = panel_15.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_15.setBackground(new Color (220,220,220));
@@ -920,6 +1541,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_15.setLayout(null);
 		panel_15.setBounds(10, 209, 97, 82);
 		panel.add(panel_15);
+		
+		JPopupMenu popupMenu_14 = new JPopupMenu();
+		addPopup(panel_15, popupMenu_14);
+		
+		mntmCancelarReservacin_6 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel14 = true;
+						panel_15.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_15.getComponentCount();i++) {
+							panel_15.getComponent(i).setVisible(false);
+						}
+						label15.setVisible(true);
+						lblC_14.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_6.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_14.add(mntmCancelarReservacin_6);
 		
 		label15 = new JLabel("");
 		label15.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -938,17 +1584,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_16.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_16.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_16.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_16.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_16.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)){
 				Color c1 = panel_16.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_16.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_16");
-					rent.setVisible(true);
+					if (c1!=c2 && c1!=c3) {
+						panel_16.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_16");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -956,6 +1606,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_16.getBackground()==Color.GREEN || panel_16.getBackground()==Color.RED) {
+					mntmCancelarReservacin_7.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_7.setVisible(false);
+				}
 				Color c1 = panel_16.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_16.setBackground(new Color (220,220,220));
@@ -966,6 +1622,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_16.setLayout(null);
 		panel_16.setBounds(117, 209, 97, 82);
 		panel.add(panel_16);
+		
+		JPopupMenu popupMenu_15 = new JPopupMenu();
+		addPopup(panel_16, popupMenu_15);
+		
+		mntmCancelarReservacin_7 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel15 = true;
+						panel_16.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_16.getComponentCount();i++) {
+							panel_16.getComponent(i).setVisible(false);
+						}
+						label16.setVisible(true);
+						lblC_15.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_7.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_15.add(mntmCancelarReservacin_7);
 		
 		label16 = new JLabel("");
 		label16.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -984,17 +1665,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_17.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_17.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_17.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_17.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_17.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_17.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_17.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_17");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_17.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_17.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_17");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1002,6 +1687,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_17.getBackground()==Color.GREEN || panel_17.getBackground()==Color.RED) {
+					mntmCancelarReservacin_8.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_8.setVisible(false);
+				}
 				Color c1 = panel_17.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_17.setBackground(new Color (220,220,220));
@@ -1012,6 +1703,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_17.setLayout(null);
 		panel_17.setBounds(224, 209, 97, 82);
 		panel.add(panel_17);
+		
+		JPopupMenu popupMenu_16 = new JPopupMenu();
+		addPopup(panel_17, popupMenu_16);
+		
+		mntmCancelarReservacin_8 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel16 = true;
+						panel_17.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_17.getComponentCount();i++) {
+							panel_17.getComponent(i).setVisible(false);
+						}
+						label17.setVisible(true);
+						lblC_16.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_8.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_16.add(mntmCancelarReservacin_8);
 		
 		label17 = new JLabel("");
 		label17.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1030,17 +1746,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_18.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_18.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_18.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_18.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_18.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_18.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_18.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_18");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_18.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_18.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_18");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1048,6 +1768,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_18.getBackground()==Color.GREEN || panel_18.getBackground()==Color.RED) {
+					mntmCancelarReservacin_9.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_9.setVisible(false);
+				}
 				Color c1 = panel_18.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_18.setBackground(new Color (220,220,220));
@@ -1058,6 +1784,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_18.setLayout(null);
 		panel_18.setBounds(331, 209, 97, 82);
 		panel.add(panel_18);
+		
+		JPopupMenu popupMenu_17 = new JPopupMenu();
+		addPopup(panel_18, popupMenu_17);
+		
+		mntmCancelarReservacin_9 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel17 = true;
+						panel_18.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_18.getComponentCount();i++) {
+							panel_18.getComponent(i).setVisible(false);
+						}
+						label18.setVisible(true);
+						lblC_17.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_9.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_17.add(mntmCancelarReservacin_9);
 		
 		label18 = new JLabel("");
 		label18.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1076,17 +1827,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_19.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_19.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_19.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_19.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_19.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_19.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_19.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_19");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_19.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_19.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_19");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1094,6 +1849,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_19.getBackground()==Color.GREEN || panel_19.getBackground()==Color.RED) {
+					mntmCancelarReservacin_10.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_10.setVisible(false);
+				}
 				Color c1 = panel_19.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_19.setBackground(new Color (220,220,220));
@@ -1104,6 +1865,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_19.setLayout(null);
 		panel_19.setBounds(438, 209, 97, 82);
 		panel.add(panel_19);
+		
+		JPopupMenu popupMenu_18 = new JPopupMenu();
+		addPopup(panel_19, popupMenu_18);
+		
+		mntmCancelarReservacin_10 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_10.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel18 = true;
+						panel_19.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_19.getComponentCount();i++) {
+							panel_19.getComponent(i).setVisible(false);
+						}
+						label19.setVisible(true);
+						lblC_18.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_10.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_18.add(mntmCancelarReservacin_10);
 		
 		label19 = new JLabel("");
 		label19.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1122,17 +1908,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_20.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_20.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_20.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_20.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)){
 				Color c1 = panel_20.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_20.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_20");
-					rent.setVisible(true);
+					if (c1!=c2 && c1!=c3) {
+						panel_20.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_20");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1140,6 +1930,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_20.getBackground()==Color.GREEN || panel_20.getBackground()==Color.RED) {
+					mntmCancelarReservacin_11.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_11.setVisible(false);
+				}
 				Color c1 = panel_20.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_20.setBackground(new Color (220,220,220));
@@ -1150,6 +1946,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_20.setLayout(null);
 		panel_20.setBounds(545, 209, 97, 82);
 		panel.add(panel_20);
+		
+		JPopupMenu popupMenu_19 = new JPopupMenu();
+		addPopup(panel_20, popupMenu_19);
+		
+		mntmCancelarReservacin_11 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_11.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel19 = true;
+						panel_20.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_20.getComponentCount();i++) {
+							panel_20.getComponent(i).setVisible(false);
+						}
+						label20.setVisible(true);
+						lblC_19.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_11.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_19.add(mntmCancelarReservacin_11);
 		
 		label20 = new JLabel("");
 		label20.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1168,17 +1989,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_21.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_21.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_21.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_21.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_21.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_21.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_21.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_21");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_21.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_21.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_21");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1186,6 +2011,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_21.getBackground()==Color.GREEN || panel_21.getBackground()==Color.RED) {
+					mntmCancelarReservacin_12.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_12.setVisible(false);
+				}
 				Color c1 = panel_21.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_21.setBackground(new Color (220,220,220));
@@ -1196,6 +2027,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_21.setLayout(null);
 		panel_21.setBounds(652, 209, 97, 82);
 		panel.add(panel_21);
+		
+		JPopupMenu popupMenu_20 = new JPopupMenu();
+		addPopup(panel_21, popupMenu_20);
+		
+		mntmCancelarReservacin_12 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_12.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel20 = true;
+						panel_21.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_21.getComponentCount();i++) {
+							panel_21.getComponent(i).setVisible(false);
+						}
+						label21.setVisible(true);
+						lblC_20.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_12.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_20.add(mntmCancelarReservacin_12);
 		
 		label21 = new JLabel("");
 		label21.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1214,17 +2070,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_22.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_22.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_22.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_22.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_22.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_22.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_22.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_22");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_22.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_22.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_22");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1232,6 +2092,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_22.getBackground()==Color.GREEN || panel_22.getBackground()==Color.RED) {
+					mntmCancelarReservacin_13.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_13.setVisible(false);
+				}
 				Color c1 = panel_22.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_22.setBackground(new Color (220,220,220));
@@ -1242,6 +2108,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_22.setLayout(null);
 		panel_22.setBounds(10, 302, 97, 82);
 		panel.add(panel_22);
+		
+		JPopupMenu popupMenu_21 = new JPopupMenu();
+		addPopup(panel_22, popupMenu_21);
+		
+		mntmCancelarReservacin_13 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_13.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel21 = true;
+						panel_22.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_22.getComponentCount();i++) {
+							panel_22.getComponent(i).setVisible(false);
+						}
+						label22.setVisible(true);
+						lblC_21.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_13.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_21.add(mntmCancelarReservacin_13);
 		
 		label22 = new JLabel("");
 		label22.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1260,17 +2151,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_23.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_23.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_23.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_23.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_23.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_23.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_23.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_23");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_23.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_23.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_23");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1278,6 +2173,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_23.getBackground()==Color.GREEN || panel_23.getBackground()==Color.RED) {
+					mntmCancelarReservacin_14.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_14.setVisible(false);
+				}
 				Color c1 = panel_23.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_23.setBackground(new Color (220,220,220));
@@ -1288,6 +2189,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_23.setLayout(null);
 		panel_23.setBounds(117, 302, 97, 82);
 		panel.add(panel_23);
+		
+		JPopupMenu popupMenu_22 = new JPopupMenu();
+		addPopup(panel_23, popupMenu_22);
+		
+		mntmCancelarReservacin_14 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_14.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel22 = true;
+						panel_23.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_23.getComponentCount();i++) {
+							panel_23.getComponent(i).setVisible(false);
+						}
+						label23.setVisible(true);
+						lblC_22.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_14.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_22.add(mntmCancelarReservacin_14);
 		
 		label23 = new JLabel("");
 		label23.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1306,17 +2232,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_24.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_24.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_24.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_24.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_24.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_24.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_24.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_24");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_24.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_24.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_24");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1324,6 +2254,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_24.getBackground()==Color.GREEN || panel_24.getBackground()==Color.RED) {
+					mntmCancelarReservacin_15.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_15.setVisible(false);
+				}
 				Color c1 = panel_24.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_24.setBackground(new Color (220,220,220));
@@ -1334,6 +2270,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_24.setLayout(null);
 		panel_24.setBounds(224, 302, 97, 82);
 		panel.add(panel_24);
+		
+		JPopupMenu popupMenu_23 = new JPopupMenu();
+		addPopup(panel_24, popupMenu_23);
+		
+		mntmCancelarReservacin_15 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_15.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel23 = true;
+						panel_24.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_24.getComponentCount();i++) {
+							panel_24.getComponent(i).setVisible(false);
+						}
+						label24.setVisible(true);
+						lblC_23.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_15.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_23.add(mntmCancelarReservacin_15);
 		
 		label24 = new JLabel("");
 		label24.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1352,17 +2313,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_25.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_25.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_25.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_25.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_25.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_25.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_25.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_25");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_25.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_25.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_25");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1370,6 +2335,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_25.getBackground()==Color.GREEN || panel_25.getBackground()==Color.RED) {
+					mntmCancelarReservacin_16.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_16.setVisible(false);
+				}
 				Color c1 = panel_25.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_25.setBackground(new Color (220,220,220));
@@ -1380,6 +2351,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_25.setLayout(null);
 		panel_25.setBounds(331, 302, 97, 82);
 		panel.add(panel_25);
+		
+		JPopupMenu popupMenu_24 = new JPopupMenu();
+		addPopup(panel_25, popupMenu_24);
+		
+		mntmCancelarReservacin_16 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_16.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel24 = true;
+						panel_25.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_25.getComponentCount();i++) {
+							panel_25.getComponent(i).setVisible(false);
+						}
+						label25.setVisible(true);
+						lblC_24.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_16.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_24.add(mntmCancelarReservacin_16);
 		
 		label25 = new JLabel("");
 		label25.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1398,17 +2394,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_26.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_26.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_26.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_26.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_26.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_26.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_26.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_26");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_26.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_26.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_26");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1416,6 +2416,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_26.getBackground()==Color.GREEN || panel_26.getBackground()==Color.RED) {
+					mntmCancelarReservacin_17.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_17.setVisible(false);
+				}
 				Color c1 = panel_26.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_26.setBackground(new Color (220,220,220));
@@ -1426,6 +2432,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_26.setLayout(null);
 		panel_26.setBounds(438, 302, 97, 82);
 		panel.add(panel_26);
+		
+		JPopupMenu popupMenu_25 = new JPopupMenu();
+		addPopup(panel_26, popupMenu_25);
+		
+		mntmCancelarReservacin_17 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_17.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel25 = true;
+						panel_26.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_26.getComponentCount();i++) {
+							panel_26.getComponent(i).setVisible(false);
+						}
+						label26.setVisible(true);
+						lblC_25.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_17.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_25.add(mntmCancelarReservacin_17);
 		
 		label26 = new JLabel("");
 		label26.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1444,17 +2475,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_27.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_27.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_27.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_27.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_27.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_27.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_27.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_27");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_27.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_27.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_27");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1462,6 +2497,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_27.getBackground()==Color.GREEN || panel_27.getBackground()==Color.RED) {
+					mntmCancelarReservacin_18.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_18.setVisible(false);
+				}
 				Color c1 = panel_27.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_27.setBackground(new Color (220,220,220));
@@ -1472,6 +2513,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_27.setLayout(null);
 		panel_27.setBounds(545, 302, 97, 82);
 		panel.add(panel_27);
+		
+		JPopupMenu popupMenu_26 = new JPopupMenu();
+		addPopup(panel_27, popupMenu_26);
+		
+		mntmCancelarReservacin_18 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_18.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel26 = true;
+						panel_27.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_27.getComponentCount();i++) {
+							panel_27.getComponent(i).setVisible(false);
+						}
+						label27.setVisible(true);
+						lblC_26.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_18.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_26.add(mntmCancelarReservacin_18);
 		
 		label27 = new JLabel("");
 		label27.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1490,17 +2556,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_28.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_28.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_28.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_28.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_28.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_28.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_28.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_28");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_28.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_28.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_28");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1508,6 +2578,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_28.getBackground()==Color.GREEN || panel_28.getBackground()==Color.RED) {
+					mntmCancelarReservacin_19.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_19.setVisible(false);
+				}
 				Color c1 = panel_28.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_28.setBackground(new Color (220,220,220));
@@ -1518,6 +2594,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_28.setLayout(null);
 		panel_28.setBounds(652, 302, 97, 82);
 		panel.add(panel_28);
+		
+		JPopupMenu popupMenu_27 = new JPopupMenu();
+		addPopup(panel_28, popupMenu_27);
+		
+		mntmCancelarReservacin_19 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_19.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel27 = true;
+						panel_28.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_28.getComponentCount();i++) {
+							panel_28.getComponent(i).setVisible(false);
+						}
+						label28.setVisible(true);
+						lblC_27.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_19.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_27.add(mntmCancelarReservacin_19);
 		
 		label28 = new JLabel("");
 		label28.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1536,17 +2637,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_29.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_29.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_29.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_29.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_29.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_29.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_29.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_29");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_29.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_29.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_29");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1554,6 +2659,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_29.getBackground()==Color.GREEN || panel_29.getBackground()==Color.RED) {
+					mntmCancelarReservacin_20.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_20.setVisible(false);
+				}
 				Color c1 = panel_29.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_29.setBackground(new Color (220,220,220));
@@ -1564,6 +2675,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_29.setLayout(null);
 		panel_29.setBounds(10, 395, 97, 82);
 		panel.add(panel_29);
+		
+		JPopupMenu popupMenu_28 = new JPopupMenu();
+		addPopup(panel_29, popupMenu_28);
+		
+		mntmCancelarReservacin_20 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_20.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel28 = true;
+						panel_29.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_29.getComponentCount();i++) {
+							panel_29.getComponent(i).setVisible(false);
+						}
+						label29.setVisible(true);
+						lblC_28.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_20.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_28.add(mntmCancelarReservacin_20);
 		
 		label29 = new JLabel("");
 		label29.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1582,17 +2718,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_30.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_30.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_30.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_30.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_30.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_30.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_30.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_30");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_30.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_30.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_30");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1600,6 +2740,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_30.getBackground()==Color.GREEN || panel_30.getBackground()==Color.RED) {
+					mntmCancelarReservacin_21.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_21.setVisible(false);
+				}
 				Color c1 = panel_30.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_30.setBackground(new Color (220,220,220));
@@ -1610,6 +2756,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_30.setLayout(null);
 		panel_30.setBounds(117, 395, 97, 82);
 		panel.add(panel_30);
+		
+		JPopupMenu popupMenu_29 = new JPopupMenu();
+		addPopup(panel_30, popupMenu_29);
+		
+		mntmCancelarReservacin_21 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_21.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel29 = true;
+						panel_30.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_30.getComponentCount();i++) {
+							panel_30.getComponent(i).setVisible(false);
+						}
+						label30.setVisible(true);
+						lblC_29.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_21.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_29.add(mntmCancelarReservacin_21);
 		
 		label30 = new JLabel("");
 		label30.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1628,17 +2799,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_31.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_31.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_31.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_31.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_31.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_31.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_31.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_31");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_31.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_31.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_31");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1646,6 +2821,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_31.getBackground()==Color.GREEN || panel_31.getBackground()==Color.RED) {
+					mntmCancelarReservacin_22.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_22.setVisible(false);
+				}
 				Color c1 = panel_31.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_31.setBackground(new Color (220,220,220));
@@ -1656,6 +2837,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_31.setLayout(null);
 		panel_31.setBounds(224, 395, 97, 82);
 		panel.add(panel_31);
+		
+		JPopupMenu popupMenu_30 = new JPopupMenu();
+		addPopup(panel_31, popupMenu_30);
+		
+		mntmCancelarReservacin_22 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_22.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel30 = true;
+						panel_31.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_31.getComponentCount();i++) {
+							panel_31.getComponent(i).setVisible(false);
+						}
+						label31.setVisible(true);
+						lblC_30.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_22.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_30.add(mntmCancelarReservacin_22);
 		
 		label31 = new JLabel("");
 		label31.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1674,17 +2880,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_32.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_32.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_32.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_32.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_32.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_32.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_32.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_32");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_32.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_32.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_32");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1692,6 +2902,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_32.getBackground()==Color.GREEN || panel_32.getBackground()==Color.RED) {
+					mntmCancelarReservacin_23.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_23.setVisible(false);
+				}
 				Color c1 = panel_32.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_32.setBackground(new Color (220,220,220));
@@ -1702,6 +2918,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_32.setLayout(null);
 		panel_32.setBounds(331, 395, 97, 82);
 		panel.add(panel_32);
+		
+		JPopupMenu popupMenu_31 = new JPopupMenu();
+		addPopup(panel_32, popupMenu_31);
+		
+		mntmCancelarReservacin_23 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_23.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel31 = true;
+						panel_32.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_32.getComponentCount();i++) {
+							panel_32.getComponent(i).setVisible(false);
+						}
+						label32.setVisible(true);
+						lblC_31.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_23.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_31.add(mntmCancelarReservacin_23);
 		
 		label32 = new JLabel("");
 		label32.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1720,17 +2961,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_33.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_33.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_33.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_33.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_33.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_33.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_33.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_33");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_33.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_33.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_33");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1738,6 +2983,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_33.getBackground()==Color.GREEN || panel_33.getBackground()==Color.RED) {
+					mntmCancelarReservacin_24.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_24.setVisible(false);
+				}
 				Color c1 = panel_33.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_33.setBackground(new Color (220,220,220));
@@ -1748,6 +2999,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_33.setLayout(null);
 		panel_33.setBounds(438, 395, 97, 82);
 		panel.add(panel_33);
+		
+		JPopupMenu popupMenu_32 = new JPopupMenu();
+		addPopup(panel_33, popupMenu_32);
+		
+		mntmCancelarReservacin_24 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_24.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel32 = true;
+						panel_33.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_33.getComponentCount();i++) {
+							panel_33.getComponent(i).setVisible(false);
+						}
+						label33.setVisible(true);
+						lblC_32.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_24.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_32.add(mntmCancelarReservacin_24);
 		
 		
 		label33 = new JLabel("");
@@ -1767,17 +3043,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_34.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_34.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_34.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_34.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_34.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_34.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_34.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_34");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_34.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_34.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_34");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1785,6 +3065,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_34.getBackground()==Color.GREEN || panel_34.getBackground()==Color.RED) {
+					mntmCancelarReservacin_25.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_25.setVisible(false);
+				}
 				Color c1 = panel_34.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_34.setBackground(new Color (220,220,220));
@@ -1795,6 +3081,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_34.setLayout(null);
 		panel_34.setBounds(545, 395, 97, 82);
 		panel.add(panel_34);
+		
+		JPopupMenu popupMenu_33 = new JPopupMenu();
+		addPopup(panel_34, popupMenu_33);
+		
+		mntmCancelarReservacin_25 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_25.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel33 = true;
+						panel_34.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_34.getComponentCount();i++) {
+							panel_34.getComponent(i).setVisible(false);
+						}
+						label34.setVisible(true);
+						lblC_33.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_25.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_33.add(mntmCancelarReservacin_25);
 		
 		label34 = new JLabel("");
 		label34.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1813,17 +3124,21 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_35.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Color c1 = panel_35.getBackground();
-				if (c1!=c2 && c1!=c3)
-					panel_35.setBackground(new Color(200,200,200));
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_35.getBackground();
+					if (c1!=c2 && c1!=c3)
+						panel_35.setBackground(new Color(200,200,200));
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				Color c1 = panel_35.getBackground();
-				if (c1!=c2 && c1!=c3) {
-					panel_35.setBackground(new Color (220,220,220));
-					RentRoom rent = new RentRoom("panel_35");
-					rent.setVisible(true);
+				if (SwingUtilities.isLeftMouseButton(e)){
+					Color c1 = panel_35.getBackground();
+					if (c1!=c2 && c1!=c3) {
+						panel_35.setBackground(new Color (220,220,220));
+						RentRoom rent = new RentRoom("panel_35");
+						rent.setVisible(true);
+					}
 				}
 			}
 		});
@@ -1831,6 +3146,12 @@ public class VisualMain extends JFrame implements Runnable{
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
+				if (panel_35.getBackground()==Color.GREEN || panel_35.getBackground()==Color.RED) {
+					mntmCancelarReservacin_26.setVisible(true);
+				}
+				else {
+					mntmCancelarReservacin_26.setVisible(false);
+				}
 				Color c1 = panel_35.getBackground();
 				if (c1!=c2 && c1!=c3) {
 					panel_35.setBackground(new Color (220,220,220));
@@ -1841,6 +3162,31 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_35.setLayout(null);
 		panel_35.setBounds(652, 395, 97, 82);
 		panel.add(panel_35);
+		
+		JPopupMenu popupMenu_34 = new JPopupMenu();
+		addPopup(panel_35, popupMenu_34);
+		
+		mntmCancelarReservacin_26 = new JMenuItem("Cancelar reservaci\u00F3n");
+		mntmCancelarReservacin_26.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel34 = true;
+						panel_35.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_35.getComponentCount();i++) {
+							panel_35.getComponent(i).setVisible(false);
+						}
+						label35.setVisible(true);
+						lblC_34.setVisible(true);
+						RentRoom.code--;
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_26.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_34.add(mntmCancelarReservacin_26);
 		
 		label35 = new JLabel("");
 		label35.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2257,5 +3603,22 @@ public class VisualMain extends JFrame implements Runnable{
 	}
 	public static JLabel getLblC_20() {
 		return lblC_20;
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }

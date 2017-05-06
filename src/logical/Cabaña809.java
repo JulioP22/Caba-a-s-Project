@@ -1,7 +1,16 @@
 package logical;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import visual.RentRoom;
 
 
 
@@ -20,6 +29,19 @@ public class Cabaña809 implements Serializable {
 	public static float simpleCompleteRoomPrice = 950;
 	public static float ejecutiveCompleteRoomPrice = 3000;
 	public static String nombre;
+	private static ObjectOutputStream writer;
+	private static ObjectInputStream reader;
+	private static ObjectOutputStream orderNo;
+	private static ObjectOutputStream fastRoom;
+	private static ObjectOutputStream fastExecutive;
+	private static ObjectOutputStream simpleComplete;
+	private static ObjectOutputStream executiveComplete;
+	
+	private static ObjectInputStream orderNoReader;
+	private static ObjectInputStream fastRoomReader;
+	private static ObjectInputStream fastExecutiveReader;
+	private static ObjectInputStream simpleCompleteReader;
+	private static ObjectInputStream executiveCompleteReader;
 
 	
 	
@@ -79,23 +101,75 @@ public class Cabaña809 implements Serializable {
 	}
 	
 	public void borrarProducto(String nombre){
-		
 		int  i = 0;
 		boolean found = false;
-		
-		while(i<misProduc.size() && !found)
-		{
-			if (misProduc.get(i).getNombre().equalsIgnoreCase(nombre))
-			{
+		while(i<misProduc.size() && !found){
+			if (misProduc.get(i).getNombre().equalsIgnoreCase(nombre)){
 				misProduc.remove(misProduc.get(i));
-				found = true;
-				
+				found = true;	
 			}
-			else {
+			else
 				i++;
-			}
-		}
+	    }
 	}
+	public static void writeAdmin() throws FileNotFoundException, IOException {
+		File file = new File("Files");
+		file.mkdirs();
+		writer = new ObjectOutputStream(new FileOutputStream("Files/datos.dat"));
+		writer.writeObject(Cabaña809.getInstance().getMisProduc());
+		writer.close();
+		orderNo = new ObjectOutputStream(new FileOutputStream("Files/numeroDeOrden.dat"));
+		orderNo.writeInt(RentRoom.code);
+		orderNo.close();
+		fastRoom = new ObjectOutputStream(new FileOutputStream("Files/precioHabitacionPaso.dat"));
+		fastRoom.writeFloat(simpleFastRoomPrice);
+		fastRoom.close();
+		fastExecutive = new ObjectOutputStream(new FileOutputStream("Files/precioHabitacionEjecutiva.dat"));
+		fastExecutive.writeFloat(ejecutiveFastRoomPrice);
+		fastExecutive.close();
+		simpleComplete = new ObjectOutputStream(new FileOutputStream("Files/habitacionSimpleAmanecida.dat"));
+		simpleComplete.writeFloat(simpleCompleteRoomPrice);
+		simpleComplete.close();
+		executiveComplete = new ObjectOutputStream(new FileOutputStream("Files/HabEjecutivaAmanecida.dat"));
+		executiveComplete.writeFloat(ejecutiveCompleteRoomPrice);
+		executiveComplete.close();
+	}
+	@SuppressWarnings("unchecked")
+	public static void readAdmin() throws FileNotFoundException, IOException, ClassNotFoundException {
+		reader = new ObjectInputStream(new FileInputStream("Files/datos.dat"));
+		Cabaña809.getInstance().setMisProduc((ArrayList<Producto>)reader.readObject());
+		reader.close();
+		
+		orderNoReader = new ObjectInputStream(new FileInputStream("Files/numeroDeOrden.dat"));
+		RentRoom.code = orderNoReader.readInt();
+		orderNoReader.close();
+		
+		fastRoomReader = new ObjectInputStream(new FileInputStream("Files/precioHabitacionPaso.dat"));
+		simpleFastRoomPrice = fastRoomReader.readFloat();
+		fastRoomReader.close();
+		
+		fastExecutiveReader = new ObjectInputStream(new FileInputStream("Files/precioHabitacionEjecutiva.dat"));
+		ejecutiveFastRoomPrice = fastExecutiveReader.readFloat();
+		fastExecutiveReader.close();
+		
+		simpleCompleteReader = new ObjectInputStream(new FileInputStream("Files/habitacionSimpleAmanecida.dat"));
+		simpleCompleteRoomPrice = simpleCompleteReader.readFloat();
+		simpleCompleteReader.close();
+		
+		executiveCompleteReader = new ObjectInputStream(new FileInputStream("Files/HabEjecutivaAmanecida.dat"));
+		ejecutiveCompleteRoomPrice = executiveCompleteReader.readFloat();
+		executiveCompleteReader.close();
+	}
+
+	public static Cabaña809 getCab() {
+		return cab;
+	}
+
+
+	public static void setCab(Cabaña809 cab) {
+		Cabaña809.cab = cab;
+	}
+	
 	
 
 	

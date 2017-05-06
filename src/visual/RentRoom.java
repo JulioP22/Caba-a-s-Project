@@ -28,25 +28,22 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
 import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
 
 public class RentRoom extends JDialog implements Runnable {
 
@@ -91,6 +88,7 @@ public class RentRoom extends JDialog implements Runnable {
 	private FileWriter writer;
 	private BufferedReader reader;
 	public static int code;
+
 	
 	private JTextArea txtAreaRecipe = new JTextArea();
 	/**
@@ -324,89 +322,113 @@ public class RentRoom extends JDialog implements Runnable {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				okButton = new JButton("Reservar");
+				okButton.setIcon(new ImageIcon(RentRoom.class.getResource("/icons/nuevo_opt.png")));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						VisualMain.getPanel(roomName).setBackground(Color.GREEN);
-						for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
-							VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
-						}if (dePaso.isSelected()) {
-							label = new JLabel("En uso");
-							label.setName("enUso");
-							label.setHorizontalAlignment(SwingConstants.CENTER);
-							label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
-							label.setBounds(3, 20, 93, 14);
-							VisualMain.getPanel(roomName).add(label);
-							
-							label1 = new JLabel(giveTime(14400));
-							label1.setName("time");
-							label1.setHorizontalAlignment(SwingConstants.CENTER);
-							label1.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
-							label1.setBounds(3, 55, 93, 14);
-							VisualMain.getPanel(roomName).add(label1);
-							String aux = null;
-							if (sencilla.isSelected())
-								aux = "fastRoom";
-							else
-								aux="fastEjecutive";
-							
-							try {
-								writeTicket(getRoomName(roomName), getEntryDate(), getFinalDate(), aux);
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+						if (dePaso.isSelected()) {
+							int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea hacer la reserva?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+							if (resp == JOptionPane.YES_OPTION) {
+								setAllCancelFalse();
+								VisualMain.getPanel(roomName).setBackground(Color.GREEN);
+								for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
+									VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
+								}
+								label = new JLabel("En uso");
+								label.setName("enUso");
+								label.setHorizontalAlignment(SwingConstants.CENTER);
+								label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+								label.setBounds(3, 20, 93, 14);
+								VisualMain.getPanel(roomName).add(label);
+								
+								label1 = new JLabel(giveTime(14400));
+								label1.setName("time");
+								label1.setHorizontalAlignment(SwingConstants.CENTER);
+								label1.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+								label1.setBounds(3, 55, 93, 14);
+								VisualMain.getPanel(roomName).add(label1);
+								String aux = null;
+								if (sencilla.isSelected())
+									aux = "fastRoom";
+								else
+									aux="fastEjecutive";
+								
+								try {
+									writeTicket(getRoomName(roomName), getEntryDate(), getFinalDate(), aux);
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								t.start();
+								try {
+									readTicket();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								try {
+									printComponent();
+								} catch (PrinterException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								dispose();
 							}
-							t.start();
-							try {
-								readTicket();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							printComponent();
-							dispose();
 						}else if (amanecida.isSelected()) {
-							label = new JLabel("En uso");
-							label.setName("enUso");
-							label.setHorizontalAlignment(SwingConstants.CENTER);
-							label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
-							label.setBounds(3, 10, 93, 14);
-							VisualMain.getPanel(roomName).add(label);
-							
-							label1 = new JLabel(getDate());
-							label1.setName("time");
-							label1.setHorizontalAlignment(SwingConstants.CENTER);
-							label1.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
-							label1.setBounds(0, 35, 100, 14);
-							VisualMain.getPanel(roomName).add(label1);
-							
-							label2 = new JLabel("10:00 AM");
-							label2.setName("time2");
-							label2.setHorizontalAlignment(SwingConstants.CENTER);
-							label2.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
-							label2.setBounds(-2, 60, 100, 14);
-							VisualMain.getPanel(roomName).add(label2);
-							String aux = null;
-							if (sencilla.isSelected())
-								aux = "simpleComplete";
-							else
-								aux="ejecutiveComplete";
-							
-							try {
-								writeTicket(getRoomName(roomName), getEntryDate(), getDate()+" 10:00:00", aux);
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+							int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea hacer la reserva?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+							if (resp == JOptionPane.YES_OPTION) {
+								setAllCancelFalse();
+								VisualMain.getPanel(roomName).setBackground(Color.GREEN);
+								for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
+									VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
+								}
+								label = new JLabel("En uso");
+								label.setName("enUso");
+								label.setHorizontalAlignment(SwingConstants.CENTER);
+								label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+								label.setBounds(3, 10, 93, 14);
+								VisualMain.getPanel(roomName).add(label);
+								
+								label1 = new JLabel(getDate());
+								label1.setName("time");
+								label1.setHorizontalAlignment(SwingConstants.CENTER);
+								label1.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+								label1.setBounds(0, 35, 100, 14);
+								VisualMain.getPanel(roomName).add(label1);
+								
+								label2 = new JLabel("10:00 AM");
+								label2.setName("time2");
+								label2.setHorizontalAlignment(SwingConstants.CENTER);
+								label2.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+								label2.setBounds(-2, 60, 100, 14);
+								VisualMain.getPanel(roomName).add(label2);
+								String aux = null;
+								if (sencilla.isSelected())
+									aux = "simpleComplete";
+								else
+									aux="ejecutiveComplete";
+								
+								try {
+									writeTicket(getRoomName(roomName), getEntryDate(), getDate()+" 10:00:00", aux);
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+								t.start();
+								try {
+									readTicket();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								try {
+									printComponent();
+								} catch (PrinterException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								dispose();
 							}
-							
-							t.start();
-							try {
-								readTicket();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							printComponent();
-							dispose();
 						}
 					}
 				});
@@ -416,6 +438,7 @@ public class RentRoom extends JDialog implements Runnable {
 			}
 			{
 				cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(RentRoom.class.getResource("/icons/cancelar_opt.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -513,6 +536,289 @@ public class RentRoom extends JDialog implements Runnable {
 						label2.setVisible(false);
 					break;
 				}
+				if (aux_1.equals("panel_1")) {
+					if (VisualMain.cancel) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_2")) {
+					if (VisualMain.cancel1) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_3")) {
+					if (VisualMain.cancel2) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_4")) {
+					if (VisualMain.cancel3) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_5")) {
+					if (VisualMain.cancel4) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_6")) {
+					if (VisualMain.cancel5) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_7")) {
+					if (VisualMain.cancel6) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_8")) {
+					if (VisualMain.cancel7) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_9")) {
+					if (VisualMain.cancel8) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_10")) {
+					if (VisualMain.cancel9) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_11")) {
+					if (VisualMain.cancel10) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_12")) {
+					if (VisualMain.cancel11) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_13")) {
+					if (VisualMain.cancel12) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_14")) {
+					if (VisualMain.cancel13) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_15")) {
+					if (VisualMain.cancel14) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_16")) {
+					if (VisualMain.cancel15) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_17")) {
+					if (VisualMain.cancel16) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_18")) {
+					if (VisualMain.cancel17) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_19")) {
+					if (VisualMain.cancel18) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_20")) {
+					if (VisualMain.cancel19) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_21")) {
+					if (VisualMain.cancel20) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_22")) {
+					if (VisualMain.cancel21) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_23")) {
+					if (VisualMain.cancel22) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_24")) {
+					if (VisualMain.cancel23) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_25")) {
+					if (VisualMain.cancel24) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_26")) {
+					if (VisualMain.cancel25) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_27")) {
+					if (VisualMain.cancel26) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_28")) {
+					if (VisualMain.cancel27) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_29")) {
+					if (VisualMain.cancel28) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_30")) {
+					if (VisualMain.cancel29) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_31")) {
+					if (VisualMain.cancel30) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_32")) {
+					if (VisualMain.cancel31) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_33")) {
+					if (VisualMain.cancel32) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_34")) {
+					if (VisualMain.cancel33) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_35")) {
+					if (VisualMain.cancel34) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}
+				
+				
 			}
 		}else {
 			while (true) {
@@ -530,6 +836,287 @@ public class RentRoom extends JDialog implements Runnable {
 					if (completeNight)
 						label2.setVisible(false);
 					break;
+				}
+				if (aux_1.equals("panel_1")) {
+					if (VisualMain.cancel) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_2")) {
+					if (VisualMain.cancel1) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_3")) {
+					if (VisualMain.cancel2) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_4")) {
+					if (VisualMain.cancel3) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_5")) {
+					if (VisualMain.cancel4) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_6")) {
+					if (VisualMain.cancel5) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_7")) {
+					if (VisualMain.cancel6) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_8")) {
+					if (VisualMain.cancel7) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_9")) {
+					if (VisualMain.cancel8) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_10")) {
+					if (VisualMain.cancel9) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_11")) {
+					if (VisualMain.cancel10) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_12")) {
+					if (VisualMain.cancel11) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_13")) {
+					if (VisualMain.cancel12) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_14")) {
+					if (VisualMain.cancel13) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_15")) {
+					if (VisualMain.cancel14) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_16")) {
+					if (VisualMain.cancel15) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_17")) {
+					if (VisualMain.cancel16) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_18")) {
+					if (VisualMain.cancel17) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_19")) {
+					if (VisualMain.cancel18) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_20")) {
+					if (VisualMain.cancel19) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_21")) {
+					if (VisualMain.cancel20) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_22")) {
+					if (VisualMain.cancel21) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_23")) {
+					if (VisualMain.cancel22) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_24")) {
+					if (VisualMain.cancel23) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_25")) {
+					if (VisualMain.cancel24) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_26")) {
+					if (VisualMain.cancel25) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_27")) {
+					if (VisualMain.cancel26) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_28")) {
+					if (VisualMain.cancel27) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_29")) {
+					if (VisualMain.cancel28) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_30")) {
+					if (VisualMain.cancel29) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_31")) {
+					if (VisualMain.cancel30) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_32")) {
+					if (VisualMain.cancel31) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_33")) {
+					if (VisualMain.cancel32) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_34")) {
+					if (VisualMain.cancel33) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
+				}else if (aux_1.equals("panel_35")) {
+					if (VisualMain.cancel34) {
+						label1.setVisible(false);
+						label.setVisible(false);
+						if (completeNight)
+							label2.setVisible(false);
+						break;
+					}
 				}
 			}
 		}
@@ -676,7 +1263,7 @@ public class RentRoom extends JDialog implements Runnable {
 		}
 	}
 	public void writeTicket(String room, String entryDate, String finalDate, String roomType) throws IOException {
-		writer = new FileWriter(new File("ticket.txt"));
+		writer = new FileWriter(new File("Files/ticket.txt"));
 		writer.write("CABAÑA 809...\n");
 		writer.write("RNC-05800189218 TU MEJOR ELECCION \n");
 		writer.write("C / Milagro Sánchez, Cotuí, R.D.\n");
@@ -926,8 +1513,8 @@ public class RentRoom extends JDialog implements Runnable {
 		aux = aux +" "+meridian;
 		return aux;
 	}
-	public void printComponent(){
-		PrinterJob pj = PrinterJob.getPrinterJob();
+	public void printComponent() throws PrinterException{
+		/*PrinterJob pj = PrinterJob.getPrinterJob();
 		pj.setJobName("Recibo");
 		pj.setPrintable (new Printable() {    
 		public int print(Graphics pg, PageFormat pf, int pageNum){
@@ -947,8 +1534,11 @@ public class RentRoom extends JDialog implements Runnable {
 		  } catch (PrinterException ex) {
 		        // handle exception
 		  }
-		  
-		}
+		  */
+		JTextPane text = new JTextPane();
+		text.setText(txtAreaRecipe.getText());
+		text.print();
+	}
 	private void readTicket() throws IOException {
 		reader = new BufferedReader(new FileReader(new File("ticket.txt")));
 		String aux = new String();
@@ -960,5 +1550,42 @@ public class RentRoom extends JDialog implements Runnable {
 		txtAreaRecipe.setText(aux);
 		reader.close();
 	}
-
+	private void setAllCancelFalse() {
+		VisualMain.cancel = false;
+		VisualMain.cancel1 = false;
+		VisualMain.cancel2 = false;
+		VisualMain.cancel3 = false;
+		VisualMain.cancel4 = false;
+		VisualMain.cancel5 = false;
+		VisualMain.cancel6 = false;
+		VisualMain.cancel7 = false;
+		VisualMain.cancel8 = false;
+		VisualMain.cancel9 = false;
+		VisualMain.cancel10 = false;
+		VisualMain.cancel11 = false;
+		VisualMain.cancel12 = false;
+		VisualMain.cancel13 = false;
+		VisualMain.cancel14 = false;
+		VisualMain.cancel15 = false;
+		VisualMain.cancel16 = false;
+		VisualMain.cancel17 = false;
+		VisualMain.cancel18 = false;
+		VisualMain.cancel19 = false;
+		VisualMain.cancel20 = false;
+		VisualMain.cancel21 = false;
+		VisualMain.cancel22 = false;
+		VisualMain.cancel22 = false;
+		VisualMain.cancel24 = false;
+		VisualMain.cancel25 = false;
+		VisualMain.cancel26 = false;
+		VisualMain.cancel27 = false;
+		VisualMain.cancel28 = false;
+		VisualMain.cancel29 = false;
+		VisualMain.cancel30 = false;
+		VisualMain.cancel31 = false;
+		VisualMain.cancel32 = false;
+		VisualMain.cancel33 = false;
+		VisualMain.cancel34 = false;
+		
+	}
 }

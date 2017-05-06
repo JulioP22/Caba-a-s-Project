@@ -110,8 +110,6 @@ public class Oferta extends JDialog{
 		
 		
 		
-		
-		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setBounds(0, 328, 446, 33);

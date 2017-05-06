@@ -1,7 +1,13 @@
 package logical;
 
-public class Habitacion {
+import java.io.Serializable;
+
+public class Habitacion implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5225446842337806664L;
 	private String tipo;
 	private float precio;
 	
