@@ -25,7 +25,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import org.jvnet.substance.SubstanceLookAndFeel;
-
 import visual.ClosingDialog;
 import logical.Cabaña809;
 
@@ -37,6 +36,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Component;
+
 
 public class VisualMain extends JFrame implements Runnable{
 
@@ -261,7 +261,7 @@ public class VisualMain extends JFrame implements Runnable{
 	private JPopupMenu popupMenu_32;
 	private JPopupMenu popupMenu_33;
 	private JPopupMenu popupMenu_34;
-	 
+	private ImageIcon frameIcon=new ImageIcon(VisualMain.class.getResource("/icons/frameIcon.png"));
 	
 	
 	//private Thread t;
@@ -320,7 +320,7 @@ public class VisualMain extends JFrame implements Runnable{
 		menuBar.setFont(new Font("Script MT Bold", Font.PLAIN, 14));
 		menuBar.setForeground(Color.BLACK);
 		setJMenuBar(menuBar);
-		
+		setIconImage(frameIcon.getImage());
 		
 		
 		mnProductos = new JMenu("Productos");

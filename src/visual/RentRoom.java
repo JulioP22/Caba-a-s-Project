@@ -267,6 +267,7 @@ public class RentRoom extends JDialog implements Runnable {
 		amanecida.setSelected(false);
 		
 		addButton = new JButton("A\u00F1adir");
+		addButton.setIcon(new ImageIcon(RentRoom.class.getResource("/icons/add_opt.png")));
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow()>=0) {
@@ -288,6 +289,7 @@ public class RentRoom extends JDialog implements Runnable {
 		addButton.setEnabled(false);
 		
 		deleteButton = new JButton("Eliminar");
+		deleteButton.setIcon(new ImageIcon(RentRoom.class.getResource("/icons/deleteIcon_opt.png")));
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (table_1.getSelectedRow()>=0) {
@@ -1539,10 +1541,11 @@ public class RentRoom extends JDialog implements Runnable {
 	public void printComponent() throws PrinterException{
 		JTextPane text = new JTextPane();
 		text.setText(txtAreaRecipe.getText());
+		text.setFont(new Font("Monospaced", Font.PLAIN, 11));
 		text.print();
 	}
 	private void readTicket() throws IOException {
-		reader = new BufferedReader(new FileReader(new File("ticket.txt")));
+		reader = new BufferedReader(new FileReader(new File("Files/ticket.txt")));
 		String aux = new String();
 		String line=null;
 		while((line = reader.readLine())!=null) {

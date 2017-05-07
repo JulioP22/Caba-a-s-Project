@@ -47,15 +47,14 @@ public class Cabaña809 implements Serializable {
 	
 	public Cabaña809() {
 		super();
-		
 		misHabs= new ArrayList<>();
 		misProduc= new ArrayList<>();
 	}
 
 	
 	public static Cabaña809 getInstance(){
-		if (cab == null){
-			cab = new Cabaña809();}
+		if (cab == null)
+			cab = new Cabaña809();
 		return cab;
 	}
 
@@ -99,7 +98,6 @@ public class Cabaña809 implements Serializable {
 		}
 		return aux;
 	}
-	
 	public void borrarProducto(String nombre){
 		int  i = 0;
 		boolean found = false;
@@ -161,7 +159,6 @@ public class Cabaña809 implements Serializable {
 		ejecutiveCompleteRoomPrice = executiveCompleteReader.readFloat();
 		executiveCompleteReader.close();
 	}
-
 	public static void setCab(Cabaña809 cab) {
 		Cabaña809.cab = cab;
 	}
