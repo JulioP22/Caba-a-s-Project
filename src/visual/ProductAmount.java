@@ -17,6 +17,7 @@ import java.awt.Font;
 import javax.swing.JSpinner;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SpinnerNumberModel;
 
 public class ProductAmount extends JDialog {
 
@@ -58,6 +59,8 @@ public class ProductAmount extends JDialog {
 			}
 			
 			spinner = new JSpinner();
+			spinner.setBackground(new Color(211, 211, 211));
+			spinner.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 			spinner.setBounds(122, 52, 149, 20);
 			panel.add(spinner);
 		}

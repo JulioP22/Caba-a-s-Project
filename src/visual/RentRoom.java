@@ -1268,7 +1268,11 @@ public class RentRoom extends JDialog implements Runnable {
 		writer.write("----------------------------------\n");
 		writer.write("Atendió: CABAÑA 809\n\n");
 		writer.write("Hab.: "+room+"\n\n");
-		writer.write("                       Orden No: "+String.valueOf(code++)+"\n");
+		String aux = "Orden No: "+String.valueOf(code++);
+		int value = aux.length();
+		for (int i=0;i<(34-value);i++)
+			aux = " "+aux;
+		writer.write(aux+"\n");
 		writer.write("Entrada: "+entryDate+"\n");
 		writer.write("Salida: "+finalDate+"\n");
 		writer.write("----------------------------------\n");
@@ -1281,17 +1285,39 @@ public class RentRoom extends JDialog implements Runnable {
 		else if (roomType.equals("ejecutiveComplete"))
 			writer.write("1.00 EJECUTIVA COMPLETA    "+String.format("%.2f", Cabaña809.ejecutiveCompleteRoomPrice)+"\n");
 		for (Producto i: selected) {
-			writer.write(String.format("%.2f",(float)i.getCantidad())+" "+i.getNombre()+"             "+String.format("%.2f", i.getPrecio()*i.getCantidad())+"\n");
+			String aux1 = String.format("%.2f",(float)i.getCantidad())+" "+i.getNombre();
+			int value2 = aux1.length();
+			aux = String.format("%.2f", i.getPrecio()*i.getCantidad());
+			value = aux.length();
+			for (int j=0;j<(34-value-value2);j++)
+				aux = " "+aux;
+			writer.write(aux1+aux+"\n");
 		}
 		writer.write("----------------------------------\n");
-		writer.write("IMPORTE:                   "+String.format("%.2f", setTotalAmount())+"\n");
+		aux = String.format("%.2f", setTotalAmount());
+		value = aux.length();
+		for (int i=0;i<(26-value);i++)
+			aux = " "+aux;
+		writer.write("IMPORTE:"+aux+"\n");
 		writer.write("DESCUENTO:                    0.00\n");
 		writer.write("                       -----------\n");
-		writer.write("SUB TOTAL:                 "+String.format("%.2f", setTotalAmount())+"\n");
+		aux = String.format("%.2f", setTotalAmount());
+		value = aux.length();
+		for (int i =0;i<(24-value);i++)
+			aux = " "+aux;
+		writer.write("SUB TOTAL:"+aux+"\n");
 		writer.write("10 % LEGAL:                   0.00\n");
-		writer.write("ITBIS:                      "+String.format("%.2f", setTotalAmount()*0.1525)+"\n");
+		aux = String.format("%.2f", setTotalAmount()*0.1525);
+		value = aux.length();
+		for (int i =0;i<(28-value);i++)
+			aux = " "+aux;
+		writer.write("ITBIS:"+aux+"\n");
 		writer.write("                       -----------\n");
-		writer.write("TOTAL:                     "+String.format("%.2f", setTotalAmount())+"\n");
+		aux = String.format("%.2f", setTotalAmount());
+		value = aux.length();
+		for (int i =0;i<(28-value);i++)
+			aux = " "+aux;
+		writer.write("TOTAL:"+aux+"\n");
 		writer.write("                  ================\n\n");
 		writer.write("**********************************\n");
 		writer.write("******GRACIAS POR PREFERIRNOS*****\n");
@@ -1511,27 +1537,6 @@ public class RentRoom extends JDialog implements Runnable {
 		return aux;
 	}
 	public void printComponent() throws PrinterException{
-		/*PrinterJob pj = PrinterJob.getPrinterJob();
-		pj.setJobName("Recibo");
-		pj.setPrintable (new Printable() {    
-		public int print(Graphics pg, PageFormat pf, int pageNum){
-		    if (pageNum > 0){
-		        return Printable.NO_SUCH_PAGE;
-		    }
-		    Graphics2D g2 = (Graphics2D) pg;
-		    g2.translate(pf.getImageableX(), pf.getImageableY());
-		    txtAreaRecipe.paint(g2);
-		    return Printable.PAGE_EXISTS;
-		}
-	});
-		  if (pj.printDialog() == false)
-			  return;
-		  try {
-		        pj.print();
-		  } catch (PrinterException ex) {
-		        // handle exception
-		  }
-		  */
 		JTextPane text = new JTextPane();
 		text.setText(txtAreaRecipe.getText());
 		text.print();

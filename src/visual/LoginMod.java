@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,6 +20,7 @@ import java.awt.Toolkit;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -145,16 +147,22 @@ public class LoginMod extends JDialog {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (txtPassword.getPassword().length!=0) {
-					txtPassword.setVisible(false);
-					showPass.setVisible(true);
-					showPass.setText(txtPassword.getText());
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					showPassLabel.setIcon(new ImageIcon(LoginMod.class.getResource("/icons/backTransition.png")));
+					if (txtPassword.getPassword().length!=0) {
+						txtPassword.setVisible(false);
+						showPass.setVisible(true);
+						showPass.setText(txtPassword.getText());
+					}
 				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				txtPassword.setVisible(true);
-				showPass.setVisible(false);
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					showPassLabel.setIcon(new ImageIcon(LoginMod.class.getResource("/icons/modificar_opt.png")));
+					txtPassword.setVisible(true);
+					showPass.setVisible(false);
+				}
 			}
 		});
 		showPassLabel.setIcon(new ImageIcon(LoginMod.class.getResource("/icons/modificar_opt.png")));
