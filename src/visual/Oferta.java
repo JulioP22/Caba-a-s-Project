@@ -145,10 +145,7 @@ public class Oferta extends JDialog{
 				btnModificar.setEnabled(false);
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						LoginMod o = new LoginMod();
-						o.setModal(true);
-						o.setLocationRelativeTo(null);
-						o.setResizable(false);
+						LoginMod o = new LoginMod(false);
 						o.setVisible(true);
 						
 						/*if (table.getSelectedRow()>=0) {

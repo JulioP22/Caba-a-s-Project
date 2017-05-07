@@ -114,7 +114,8 @@ public class Cabaña809 implements Serializable {
 	}
 	public static void writeAdmin() throws FileNotFoundException, IOException {
 		File file = new File("Files");
-		file.mkdirs();
+		if (!file.exists())
+			file.mkdirs();
 		writer = new ObjectOutputStream(new FileOutputStream("Files/datos.dat"));
 		writer.writeObject(Cabaña809.getInstance().getMisProduc());
 		writer.close();
@@ -160,11 +161,6 @@ public class Cabaña809 implements Serializable {
 		ejecutiveCompleteRoomPrice = executiveCompleteReader.readFloat();
 		executiveCompleteReader.close();
 	}
-
-	public static Cabaña809 getCab() {
-		return cab;
-	}
-
 
 	public static void setCab(Cabaña809 cab) {
 		Cabaña809.cab = cab;

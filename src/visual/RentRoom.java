@@ -408,24 +408,21 @@ public class RentRoom extends JDialog implements Runnable {
 									aux="ejecutiveComplete";
 								
 								try {
-									writeTicket(getRoomName(roomName), getEntryDate(), getDate()+" 10:00:00", aux);
+									writeTicket(getRoomName(roomName), getEntryDate(), getDate()+" 10:00:00 AM", aux);
 								} catch (IOException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
+									JOptionPane.showMessageDialog(null, "Se ha producido un error al tratar de crear el archivo ''ticket.txt''","Error", JOptionPane.ERROR_MESSAGE, null);
 								}
 								
 								t.start();
 								try {
 									readTicket();
 								} catch (IOException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
+									JOptionPane.showMessageDialog(null, "Se ha producido un error al tratar de leer ''ticket.txt''","Error", JOptionPane.ERROR_MESSAGE, null);
 								}
 								try {
 									printComponent();
 								} catch (PrinterException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
+									JOptionPane.showMessageDialog(null, "Se ha producido un error al tratar de usar la impresora","Error", JOptionPane.ERROR_MESSAGE, null);
 								}
 								dispose();
 							}

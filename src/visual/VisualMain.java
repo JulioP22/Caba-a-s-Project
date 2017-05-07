@@ -227,6 +227,40 @@ public class VisualMain extends JFrame implements Runnable{
 	private JMenuItem mntmCancelarReservacin_24;
 	private JMenuItem mntmCancelarReservacin_26;
 	private JMenuItem mntmCancelarReservacin_25;
+	private JPopupMenu popupMenu_1;
+	private JPopupMenu popupMenu_2;
+	private JPopupMenu popupMenu_3;
+	private JPopupMenu popupMenu_4;
+	private JPopupMenu popupMenu_5;
+	private JPopupMenu popupMenu_6;
+	private JPopupMenu popupMenu_7;
+	private JPopupMenu popupMenu_8;
+	private JPopupMenu popupMenu_9;
+	private JPopupMenu popupMenu_10;
+	private JPopupMenu popupMenu_11;
+	private JPopupMenu popupMenu_12;
+	private JPopupMenu popupMenu_13;
+	private JPopupMenu popupMenu_14;
+	private JPopupMenu popupMenu_15;
+	private JPopupMenu popupMenu_16;
+	private JPopupMenu popupMenu_17;
+	private JPopupMenu popupMenu_18;
+	private JPopupMenu popupMenu_19;
+	private JPopupMenu popupMenu_20;
+	private JPopupMenu popupMenu_21;
+	private JPopupMenu popupMenu_22;
+	private JPopupMenu popupMenu_23;
+	private JPopupMenu popupMenu_24;
+	private JPopupMenu popupMenu_25;
+	private JPopupMenu popupMenu_26;
+	private JPopupMenu popupMenu_27;
+	private JPopupMenu popupMenu_28;
+	private JPopupMenu popupMenu_29;
+	private JPopupMenu popupMenu_30;
+	private JPopupMenu popupMenu_31;
+	private JPopupMenu popupMenu_32;
+	private JPopupMenu popupMenu_33;
+	private JPopupMenu popupMenu_34;
 	 
 	
 	
@@ -337,8 +371,8 @@ public class VisualMain extends JFrame implements Runnable{
 		mntmModificarPrecioDe.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (SwingUtilities.isLeftMouseButton(e)){
-					ModifyPrices modi = new ModifyPrices();
-					modi.setVisible(true);
+					LoginMod mod = new LoginMod(true);
+					mod.setVisible(true);
 				}
 			}
 		});
@@ -392,10 +426,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_1.getBackground()==Color.GREEN || panel_1.getBackground()==Color.RED) {
-					cancelarReserva.setVisible(true);
+					panel_1.setEnabled(true);
 				}
 				else {
-					cancelarReserva.setVisible(false);
+					panel_1.setEnabled(false);
 				}	
 				Color c1 = panel_1.getBackground();
 				if (c1.getRGB()!=c2.getRGB() && c1.getRGB()!=c3.getRGB()) {
@@ -473,10 +507,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_2.getBackground()==Color.GREEN || panel_2.getBackground()==Color.RED) {
-					mntmNewMenuItem.setVisible(true);
+					panel_2.setEnabled(true);
 				}
 				else {
-					mntmNewMenuItem.setVisible(false);
+					panel_2.setEnabled(false);
 				}
 				Color c1 = panel_2.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -489,7 +523,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_2.setBounds(117, 23, 97, 82);
 		panel.add(panel_2);
 		
-		JPopupMenu popupMenu_1 = new JPopupMenu();
+		popupMenu_1 = new JPopupMenu();
 		addPopup(panel_2, popupMenu_1);
 		
 		mntmNewMenuItem = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -554,10 +588,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_3.getBackground()==Color.GREEN || panel_3.getBackground()==Color.RED) {
-					mntmCancelarReserva.setVisible(true);
+					panel_3.setEnabled(true);
 				}
 				else {
-					mntmCancelarReserva.setVisible(false);
+					panel_3.setEnabled(false);
 				}
 				Color c1 = panel_3.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -570,7 +604,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_3.setBounds(224, 23, 97, 82);
 		panel.add(panel_3);
 		
-		JPopupMenu popupMenu_2 = new JPopupMenu();
+		popupMenu_2 = new JPopupMenu();
 		addPopup(panel_3, popupMenu_2);
 		
 		mntmCancelarReserva = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -635,10 +669,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_4.getBackground()==Color.GREEN || panel_4.getBackground()==Color.RED) {
-					mntmCancelarReserva_1.setVisible(true);
+					panel_4.setEnabled(true);
 				}
 				else {
-					mntmCancelarReserva_1.setVisible(false);
+					panel_4.setEnabled(false);
 				}
 				Color c1 = panel_4.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -651,7 +685,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_4.setBounds(331, 23, 97, 82);
 		panel.add(panel_4);
 		
-		JPopupMenu popupMenu_3 = new JPopupMenu();
+		popupMenu_3 = new JPopupMenu();
 		addPopup(panel_4, popupMenu_3);
 		
 		mntmCancelarReserva_1 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -716,10 +750,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_5.getBackground()==Color.GREEN || panel_5.getBackground()==Color.RED) {
-					mntmCancelarReserva_2.setVisible(true);
+					panel_5.setEnabled(true);
 				}
 				else {
-					mntmCancelarReserva_2.setVisible(false);
+					panel_5.setEnabled(false);
 				}
 				Color c1 = panel_5.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -732,7 +766,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_5.setBounds(438, 23, 97, 82);
 		panel.add(panel_5);
 		
-		JPopupMenu popupMenu_4 = new JPopupMenu();
+		popupMenu_4 = new JPopupMenu();
 		addPopup(panel_5, popupMenu_4);
 		
 		mntmCancelarReserva_2 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -797,10 +831,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_6.getBackground()==Color.GREEN || panel_6.getBackground()==Color.RED) {
-					mntmCancelarReserva_3.setVisible(true);
+					panel_6.setEnabled(true);
 				}
 				else {
-					mntmCancelarReserva_3.setVisible(false);
+					panel_6.setEnabled(false);
 				}
 				Color c1 = panel_6.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -813,7 +847,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_6.setBounds(545, 23, 97, 82);
 		panel.add(panel_6);
 		
-		JPopupMenu popupMenu_5 = new JPopupMenu();
+		popupMenu_5 = new JPopupMenu();
 		addPopup(panel_6, popupMenu_5);
 		
 		mntmCancelarReserva_3 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -878,10 +912,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_7.getBackground()==Color.GREEN || panel_7.getBackground()==Color.RED) {
-					mntmCancelarReserva_4.setVisible(true);
+					panel_7.setEnabled(true);
 				}
 				else {
-					mntmCancelarReserva_4.setVisible(false);
+					panel_7.setEnabled(false);
 				}
 				Color c1 = panel_7.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -894,7 +928,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_7.setBounds(652, 23, 97, 82);
 		panel.add(panel_7);
 		
-		JPopupMenu popupMenu_6 = new JPopupMenu();
+		popupMenu_6 = new JPopupMenu();
 		addPopup(panel_7, popupMenu_6);
 		
 		mntmCancelarReserva_4 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -959,10 +993,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_8.getBackground()==Color.GREEN || panel_8.getBackground()==Color.RED) {
-					mntmCancelarReserva_5.setVisible(true);
+					panel_8.setEnabled(true);
 				}
 				else {
-					mntmCancelarReserva_5.setVisible(false);
+					panel_8.setEnabled(false);
 				}
 				Color c1 = panel_8.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -975,7 +1009,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_8.setBounds(10, 116, 97, 82);
 		panel.add(panel_8);
 		
-		JPopupMenu popupMenu_7 = new JPopupMenu();
+		popupMenu_7 = new JPopupMenu();
 		addPopup(panel_8, popupMenu_7);
 		
 		mntmCancelarReserva_5 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1040,10 +1074,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_9.getBackground()==Color.GREEN || panel_9.getBackground()==Color.RED) {
-					mntmCancelarReservacin.setVisible(true);
+					panel_9.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin.setVisible(false);
+					panel_9.setEnabled(false);
 				}
 				Color c1 = panel_9.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1056,7 +1090,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_9.setBounds(117, 116, 97, 82);
 		panel.add(panel_9);
 		
-		JPopupMenu popupMenu_8 = new JPopupMenu();
+		popupMenu_8 = new JPopupMenu();
 		addPopup(panel_9, popupMenu_8);
 		
 		mntmCancelarReservacin = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1121,10 +1155,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_10.getBackground()==Color.GREEN || panel_10.getBackground()==Color.RED) {
-					mntmCancelarReservacin_1.setVisible(true);
+					panel_10.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_1.setVisible(false);
+					panel_10.setEnabled(false);
 				}
 				Color c1 = panel_10.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1137,7 +1171,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_10.setBounds(224, 116, 97, 82);
 		panel.add(panel_10);
 		
-		JPopupMenu popupMenu_9 = new JPopupMenu();
+		popupMenu_9 = new JPopupMenu();
 		addPopup(panel_10, popupMenu_9);
 		
 		mntmCancelarReservacin_1 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1202,10 +1236,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_11.getBackground()==Color.GREEN || panel_11.getBackground()==Color.RED) {
-					mntmCancelarReservacin_2.setVisible(true);
+					panel_11.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_2.setVisible(false);
+					panel_11.setEnabled(false);
 				}
 				Color c1 = panel_11.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1218,7 +1252,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_11.setBounds(331, 116, 97, 82);
 		panel.add(panel_11);
 		
-		JPopupMenu popupMenu_10 = new JPopupMenu();
+		popupMenu_10 = new JPopupMenu();
 		addPopup(panel_11, popupMenu_10);
 		
 		mntmCancelarReservacin_2 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1283,10 +1317,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_12.getBackground()==Color.GREEN || panel_12.getBackground()==Color.RED) {
-					mntmCancelarReservacin_3.setVisible(true);
+					panel_12.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_3.setVisible(false);
+					panel_12.setEnabled(false);
 				}
 				Color c1 = panel_12.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1299,7 +1333,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_12.setBounds(438, 116, 97, 82);
 		panel.add(panel_12);
 		
-		JPopupMenu popupMenu_11 = new JPopupMenu();
+		popupMenu_11 = new JPopupMenu();
 		addPopup(panel_12, popupMenu_11);
 		
 		mntmCancelarReservacin_3 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1364,10 +1398,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_13.getBackground()==Color.GREEN || panel_13.getBackground()==Color.RED) {
-					mntmCancelarReservacin_4.setVisible(true);
+					panel_13.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_4.setVisible(false);
+					panel_13.setEnabled(false);
 				}
 				Color c1 = panel_13.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1380,7 +1414,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_13.setBounds(545, 116, 97, 82);
 		panel.add(panel_13);
 		
-		JPopupMenu popupMenu_12 = new JPopupMenu();
+		popupMenu_12 = new JPopupMenu();
 		addPopup(panel_13, popupMenu_12);
 		
 		mntmCancelarReservacin_4 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1445,10 +1479,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_14.getBackground()==Color.GREEN || panel_14.getBackground()==Color.RED) {
-					mntmCancelarReservacin_5.setVisible(true);
+					panel_14.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_5.setVisible(false);
+					panel_14.setEnabled(false);
 				}
 				Color c1 = panel_14.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1461,7 +1495,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_14.setBounds(652, 116, 97, 82);
 		panel.add(panel_14);
 		
-		JPopupMenu popupMenu_13 = new JPopupMenu();
+		popupMenu_13 = new JPopupMenu();
 		addPopup(panel_14, popupMenu_13);
 		
 		mntmCancelarReservacin_5 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1526,10 +1560,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_15.getBackground()==Color.GREEN || panel_15.getBackground()==Color.RED) {
-					mntmCancelarReservacin_6.setVisible(true);
+					panel_15.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_6.setVisible(false);
+					panel_15.setEnabled(false);
 				}
 				Color c1 = panel_15.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1542,7 +1576,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_15.setBounds(10, 209, 97, 82);
 		panel.add(panel_15);
 		
-		JPopupMenu popupMenu_14 = new JPopupMenu();
+		popupMenu_14 = new JPopupMenu();
 		addPopup(panel_15, popupMenu_14);
 		
 		mntmCancelarReservacin_6 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1607,10 +1641,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_16.getBackground()==Color.GREEN || panel_16.getBackground()==Color.RED) {
-					mntmCancelarReservacin_7.setVisible(true);
+					panel_16.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_7.setVisible(false);
+					panel_16.setEnabled(false);
 				}
 				Color c1 = panel_16.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1623,7 +1657,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_16.setBounds(117, 209, 97, 82);
 		panel.add(panel_16);
 		
-		JPopupMenu popupMenu_15 = new JPopupMenu();
+		popupMenu_15 = new JPopupMenu();
 		addPopup(panel_16, popupMenu_15);
 		
 		mntmCancelarReservacin_7 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1688,10 +1722,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_17.getBackground()==Color.GREEN || panel_17.getBackground()==Color.RED) {
-					mntmCancelarReservacin_8.setVisible(true);
+					panel_17.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_8.setVisible(false);
+					panel_17.setEnabled(false);
 				}
 				Color c1 = panel_17.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1704,7 +1738,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_17.setBounds(224, 209, 97, 82);
 		panel.add(panel_17);
 		
-		JPopupMenu popupMenu_16 = new JPopupMenu();
+		popupMenu_16 = new JPopupMenu();
 		addPopup(panel_17, popupMenu_16);
 		
 		mntmCancelarReservacin_8 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1769,10 +1803,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_18.getBackground()==Color.GREEN || panel_18.getBackground()==Color.RED) {
-					mntmCancelarReservacin_9.setVisible(true);
+					panel_18.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_9.setVisible(false);
+					panel_18.setEnabled(false);
 				}
 				Color c1 = panel_18.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1785,7 +1819,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_18.setBounds(331, 209, 97, 82);
 		panel.add(panel_18);
 		
-		JPopupMenu popupMenu_17 = new JPopupMenu();
+		popupMenu_17 = new JPopupMenu();
 		addPopup(panel_18, popupMenu_17);
 		
 		mntmCancelarReservacin_9 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1850,10 +1884,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_19.getBackground()==Color.GREEN || panel_19.getBackground()==Color.RED) {
-					mntmCancelarReservacin_10.setVisible(true);
+					panel_19.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_10.setVisible(false);
+					panel_19.setEnabled(false);
 				}
 				Color c1 = panel_19.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1866,7 +1900,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_19.setBounds(438, 209, 97, 82);
 		panel.add(panel_19);
 		
-		JPopupMenu popupMenu_18 = new JPopupMenu();
+		popupMenu_18 = new JPopupMenu();
 		addPopup(panel_19, popupMenu_18);
 		
 		mntmCancelarReservacin_10 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -1931,10 +1965,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_20.getBackground()==Color.GREEN || panel_20.getBackground()==Color.RED) {
-					mntmCancelarReservacin_11.setVisible(true);
+					panel_20.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_11.setVisible(false);
+					panel_20.setEnabled(false);
 				}
 				Color c1 = panel_20.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -1947,7 +1981,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_20.setBounds(545, 209, 97, 82);
 		panel.add(panel_20);
 		
-		JPopupMenu popupMenu_19 = new JPopupMenu();
+		popupMenu_19 = new JPopupMenu();
 		addPopup(panel_20, popupMenu_19);
 		
 		mntmCancelarReservacin_11 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2012,10 +2046,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_21.getBackground()==Color.GREEN || panel_21.getBackground()==Color.RED) {
-					mntmCancelarReservacin_12.setVisible(true);
+					panel_21.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_12.setVisible(false);
+					panel_21.setEnabled(false);
 				}
 				Color c1 = panel_21.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2028,7 +2062,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_21.setBounds(652, 209, 97, 82);
 		panel.add(panel_21);
 		
-		JPopupMenu popupMenu_20 = new JPopupMenu();
+		popupMenu_20 = new JPopupMenu();
 		addPopup(panel_21, popupMenu_20);
 		
 		mntmCancelarReservacin_12 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2093,10 +2127,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_22.getBackground()==Color.GREEN || panel_22.getBackground()==Color.RED) {
-					mntmCancelarReservacin_13.setVisible(true);
+					panel_22.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_13.setVisible(false);
+					panel_22.setEnabled(false);
 				}
 				Color c1 = panel_22.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2109,7 +2143,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_22.setBounds(10, 302, 97, 82);
 		panel.add(panel_22);
 		
-		JPopupMenu popupMenu_21 = new JPopupMenu();
+		popupMenu_21 = new JPopupMenu();
 		addPopup(panel_22, popupMenu_21);
 		
 		mntmCancelarReservacin_13 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2174,10 +2208,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_23.getBackground()==Color.GREEN || panel_23.getBackground()==Color.RED) {
-					mntmCancelarReservacin_14.setVisible(true);
+					panel_23.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_14.setVisible(false);
+					panel_23.setEnabled(false);
 				}
 				Color c1 = panel_23.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2190,7 +2224,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_23.setBounds(117, 302, 97, 82);
 		panel.add(panel_23);
 		
-		JPopupMenu popupMenu_22 = new JPopupMenu();
+		popupMenu_22 = new JPopupMenu();
 		addPopup(panel_23, popupMenu_22);
 		
 		mntmCancelarReservacin_14 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2255,10 +2289,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_24.getBackground()==Color.GREEN || panel_24.getBackground()==Color.RED) {
-					mntmCancelarReservacin_15.setVisible(true);
+					panel_24.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_15.setVisible(false);
+					panel_24.setEnabled(false);
 				}
 				Color c1 = panel_24.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2271,7 +2305,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_24.setBounds(224, 302, 97, 82);
 		panel.add(panel_24);
 		
-		JPopupMenu popupMenu_23 = new JPopupMenu();
+		popupMenu_23 = new JPopupMenu();
 		addPopup(panel_24, popupMenu_23);
 		
 		mntmCancelarReservacin_15 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2336,10 +2370,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_25.getBackground()==Color.GREEN || panel_25.getBackground()==Color.RED) {
-					mntmCancelarReservacin_16.setVisible(true);
+					panel_25.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_16.setVisible(false);
+					panel_25.setEnabled(false);
 				}
 				Color c1 = panel_25.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2352,7 +2386,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_25.setBounds(331, 302, 97, 82);
 		panel.add(panel_25);
 		
-		JPopupMenu popupMenu_24 = new JPopupMenu();
+		popupMenu_24 = new JPopupMenu();
 		addPopup(panel_25, popupMenu_24);
 		
 		mntmCancelarReservacin_16 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2417,10 +2451,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_26.getBackground()==Color.GREEN || panel_26.getBackground()==Color.RED) {
-					mntmCancelarReservacin_17.setVisible(true);
+					panel_26.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_17.setVisible(false);
+					panel_26.setEnabled(false);
 				}
 				Color c1 = panel_26.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2433,7 +2467,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_26.setBounds(438, 302, 97, 82);
 		panel.add(panel_26);
 		
-		JPopupMenu popupMenu_25 = new JPopupMenu();
+		popupMenu_25 = new JPopupMenu();
 		addPopup(panel_26, popupMenu_25);
 		
 		mntmCancelarReservacin_17 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2498,10 +2532,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_27.getBackground()==Color.GREEN || panel_27.getBackground()==Color.RED) {
-					mntmCancelarReservacin_18.setVisible(true);
+					panel_27.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_18.setVisible(false);
+					panel_27.setEnabled(false);
 				}
 				Color c1 = panel_27.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2514,7 +2548,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_27.setBounds(545, 302, 97, 82);
 		panel.add(panel_27);
 		
-		JPopupMenu popupMenu_26 = new JPopupMenu();
+		popupMenu_26 = new JPopupMenu();
 		addPopup(panel_27, popupMenu_26);
 		
 		mntmCancelarReservacin_18 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2579,10 +2613,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_28.getBackground()==Color.GREEN || panel_28.getBackground()==Color.RED) {
-					mntmCancelarReservacin_19.setVisible(true);
+					panel_28.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_19.setVisible(false);
+					panel_28.setEnabled(false);
 				}
 				Color c1 = panel_28.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2595,7 +2629,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_28.setBounds(652, 302, 97, 82);
 		panel.add(panel_28);
 		
-		JPopupMenu popupMenu_27 = new JPopupMenu();
+		popupMenu_27 = new JPopupMenu();
 		addPopup(panel_28, popupMenu_27);
 		
 		mntmCancelarReservacin_19 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2660,10 +2694,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_29.getBackground()==Color.GREEN || panel_29.getBackground()==Color.RED) {
-					mntmCancelarReservacin_20.setVisible(true);
+					panel_29.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_20.setVisible(false);
+					panel_29.setEnabled(false);
 				}
 				Color c1 = panel_29.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2676,7 +2710,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_29.setBounds(10, 395, 97, 82);
 		panel.add(panel_29);
 		
-		JPopupMenu popupMenu_28 = new JPopupMenu();
+		popupMenu_28 = new JPopupMenu();
 		addPopup(panel_29, popupMenu_28);
 		
 		mntmCancelarReservacin_20 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2741,10 +2775,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_30.getBackground()==Color.GREEN || panel_30.getBackground()==Color.RED) {
-					mntmCancelarReservacin_21.setVisible(true);
+					panel_30.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_21.setVisible(false);
+					panel_30.setEnabled(false);
 				}
 				Color c1 = panel_30.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2757,7 +2791,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_30.setBounds(117, 395, 97, 82);
 		panel.add(panel_30);
 		
-		JPopupMenu popupMenu_29 = new JPopupMenu();
+		popupMenu_29 = new JPopupMenu();
 		addPopup(panel_30, popupMenu_29);
 		
 		mntmCancelarReservacin_21 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2822,10 +2856,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_31.getBackground()==Color.GREEN || panel_31.getBackground()==Color.RED) {
-					mntmCancelarReservacin_22.setVisible(true);
+					panel_31.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_22.setVisible(false);
+					panel_31.setEnabled(false);
 				}
 				Color c1 = panel_31.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2838,7 +2872,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_31.setBounds(224, 395, 97, 82);
 		panel.add(panel_31);
 		
-		JPopupMenu popupMenu_30 = new JPopupMenu();
+		popupMenu_30 = new JPopupMenu();
 		addPopup(panel_31, popupMenu_30);
 		
 		mntmCancelarReservacin_22 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2903,10 +2937,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_32.getBackground()==Color.GREEN || panel_32.getBackground()==Color.RED) {
-					mntmCancelarReservacin_23.setVisible(true);
+					panel_32.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_23.setVisible(false);
+					panel_32.setEnabled(false);
 				}
 				Color c1 = panel_32.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -2919,7 +2953,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_32.setBounds(331, 395, 97, 82);
 		panel.add(panel_32);
 		
-		JPopupMenu popupMenu_31 = new JPopupMenu();
+		popupMenu_31 = new JPopupMenu();
 		addPopup(panel_32, popupMenu_31);
 		
 		mntmCancelarReservacin_23 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -2984,10 +3018,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_33.getBackground()==Color.GREEN || panel_33.getBackground()==Color.RED) {
-					mntmCancelarReservacin_24.setVisible(true);
+					panel_33.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_24.setVisible(false);
+					panel_33.setEnabled(false);
 				}
 				Color c1 = panel_33.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -3000,7 +3034,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_33.setBounds(438, 395, 97, 82);
 		panel.add(panel_33);
 		
-		JPopupMenu popupMenu_32 = new JPopupMenu();
+		popupMenu_32 = new JPopupMenu();
 		addPopup(panel_33, popupMenu_32);
 		
 		mntmCancelarReservacin_24 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -3066,10 +3100,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_34.getBackground()==Color.GREEN || panel_34.getBackground()==Color.RED) {
-					mntmCancelarReservacin_25.setVisible(true);
+					panel_34.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_25.setVisible(false);
+					panel_34.setEnabled(false);
 				}
 				Color c1 = panel_34.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -3082,7 +3116,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_34.setBounds(545, 395, 97, 82);
 		panel.add(panel_34);
 		
-		JPopupMenu popupMenu_33 = new JPopupMenu();
+		popupMenu_33 = new JPopupMenu();
 		addPopup(panel_34, popupMenu_33);
 		
 		mntmCancelarReservacin_25 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -3147,10 +3181,10 @@ public class VisualMain extends JFrame implements Runnable{
 			public void mouseMoved(MouseEvent e) {
 				setOriginalColor();
 				if (panel_35.getBackground()==Color.GREEN || panel_35.getBackground()==Color.RED) {
-					mntmCancelarReservacin_26.setVisible(true);
+					panel_35.setEnabled(true);
 				}
 				else {
-					mntmCancelarReservacin_26.setVisible(false);
+					panel_35.setEnabled(false);
 				}
 				Color c1 = panel_35.getBackground();
 				if (c1!=c2 && c1!=c3) {
@@ -3163,7 +3197,7 @@ public class VisualMain extends JFrame implements Runnable{
 		panel_35.setBounds(652, 395, 97, 82);
 		panel.add(panel_35);
 		
-		JPopupMenu popupMenu_34 = new JPopupMenu();
+		popupMenu_34 = new JPopupMenu();
 		addPopup(panel_35, popupMenu_34);
 		
 		mntmCancelarReservacin_26 = new JMenuItem("Cancelar reservaci\u00F3n");
@@ -3608,12 +3642,14 @@ public class VisualMain extends JFrame implements Runnable{
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (e.isPopupTrigger()) {
-					showMenu(e);
+					if (component.isEnabled())
+						showMenu(e);
 				}
 			}
 			public void mouseReleased(MouseEvent e) {
 				if (e.isPopupTrigger()) {
-					showMenu(e);
+					if (component.isEnabled())
+						showMenu(e);
 				}
 			}
 			private void showMenu(MouseEvent e) {

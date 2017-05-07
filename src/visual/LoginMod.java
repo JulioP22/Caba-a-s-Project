@@ -20,6 +20,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginMod extends JDialog {
 
@@ -30,6 +32,9 @@ public class LoginMod extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUser;
 	private JPasswordField txtPassword;
+	private JTextField showPass;
+	private JLabel showPassLabel;
+
 
 	/**
 	 * Launch the application.
@@ -47,10 +52,13 @@ public class LoginMod extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public LoginMod() {
+	public LoginMod(final boolean modifyPrice) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginMod.class.getResource("/javax/swing/plaf/metal/icons/ocean/floppy.gif")));
 		setTitle("Iniciar Sesi\u00F3n\r\n");
 		setBounds(100, 100, 399, 226);
+		setModal(true);
+		setLocationRelativeTo(null);
+		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -68,10 +76,20 @@ public class LoginMod extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if(txtUser.getText().equalsIgnoreCase("Diego") && txtPassword.getText().equalsIgnoreCase("flamenco"))
 						{
-							NuevoProducto modify = new NuevoProducto(true, 0);
-							modify.setVisible(true);
 							dispose();
-						}else{JOptionPane.showMessageDialog(null, "Contraseña incorrecta", null, JOptionPane.ERROR_MESSAGE, null);}
+							if (!modifyPrice) {
+								NuevoProducto modify = new NuevoProducto(true, 0);
+								modify.setVisible(true);
+							}
+							else {
+								ModifyPrices mod = new ModifyPrices();
+								mod.setVisible(true);
+								dispose();
+							}
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "Contraseña incorrecta", null, JOptionPane.ERROR_MESSAGE, null);
+						}
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -121,5 +139,34 @@ public class LoginMod extends JDialog {
 		lblNewLabel.setIcon(new ImageIcon(LoginMod.class.getResource("/icons/admin_opt.png")));
 		lblNewLabel.setBounds(261, 66, 76, 67);
 		panel.add(lblNewLabel);
+		
+		showPassLabel = new JLabel("");
+		showPassLabel.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("deprecation")
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (txtPassword.getPassword().length!=0) {
+					txtPassword.setVisible(false);
+					showPass.setVisible(true);
+					showPass.setText(txtPassword.getText());
+				}
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				txtPassword.setVisible(true);
+				showPass.setVisible(false);
+			}
+		});
+		showPassLabel.setIcon(new ImageIcon(LoginMod.class.getResource("/icons/modificar_opt.png")));
+		showPassLabel.setBackground(new Color(211, 211, 211));
+		showPassLabel.setBounds(228, 83, 23, 23);
+		panel.add(showPassLabel);
+		
+		showPass = new JTextField();
+		showPass.setVisible(false);
+		showPass.setBounds(107, 83, 117, 23);
+		showPass.setBackground(new Color(211,211,211));
+		panel.add(showPass);
+		showPass.setColumns(10);
 	}
 }

@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JPasswordField;
@@ -35,6 +37,8 @@ public class BorrarLog extends JDialog {
 	private JTextField txtUser;
 	private JPasswordField txtPassword;
 	private JButton btnCancelar;
+	private JLabel showPassLabel;
+	private JTextField showPass;
 
 	/**
 	 * Launch the application.
@@ -131,5 +135,32 @@ public class BorrarLog extends JDialog {
 		label.setIcon(new ImageIcon(BorrarLog.class.getResource("/icons/admin_opt.png")));
 		label.setBounds(261, 66, 76, 67);
 		panel.add(label);
+		
+		showPassLabel = new JLabel("");
+		showPassLabel.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("deprecation")
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (txtPassword.getPassword().length!=0) {
+					txtPassword.setVisible(false);
+					showPass.setVisible(true);
+					showPass.setText(txtPassword.getText());
+				}
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				txtPassword.setVisible(true);
+				showPass.setVisible(false);
+			}
+		});
+		showPassLabel.setIcon(new ImageIcon(BorrarLog.class.getResource("/icons/modificar_opt.png")));
+		showPassLabel.setBounds(228, 83, 23, 23);
+		panel.add(showPassLabel);
+		
+		showPass = new JTextField();
+		showPass.setBackground(new Color(211, 211, 211));
+		showPass.setBounds(107, 83, 117, 23);
+		panel.add(showPass);
+		showPass.setColumns(10);
 	}
 }
