@@ -13,8 +13,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
-//import org.jvnet.substance.SubstanceLookAndFeel;
-
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
@@ -25,6 +23,8 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import org.jvnet.substance.SubstanceLookAndFeel;
+import org.jvnet.substance.skin.BusinessSkin;
+
 import visual.ClosingDialog;
 import logical.Cabaña809;
 
@@ -276,6 +276,7 @@ public class VisualMain extends JFrame implements Runnable{
 					JFrame.setDefaultLookAndFeelDecorated(true);
 					SubstanceLookAndFeel.setCurrentWatermark("org.jvnet.substance.watermark.SubstanceBinaryWatermark");
 					SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceSteelBlueTheme");
+					//SubstanceLookAndFeel.setSkin(new BusinessBlackSteelSkin());
 					//SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.CremeSkin");
 					try{ 
 						Cabaña809.readAdmin();
@@ -296,6 +297,12 @@ public class VisualMain extends JFrame implements Runnable{
 	 * Create the frame.
 	 */
 	public VisualMain() {
+		addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				setOriginalColor();
+			}
+		});
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -386,12 +393,6 @@ public class VisualMain extends JFrame implements Runnable{
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
-		panel.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseMoved(MouseEvent e) {
-					setOriginalColor();
-			}
-		});
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Control de Caba\u00F1as", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 759, 491);

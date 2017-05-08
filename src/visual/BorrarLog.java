@@ -79,14 +79,22 @@ public class BorrarLog extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if(txtUser.getText().equalsIgnoreCase("Diego") && txtPassword.getText().equalsIgnoreCase("flamenco"))
 						{
-							Producto aux = Cabaña809.getInstance().buscarProductoporNombre(Cabaña809.nombre);
-							  int delete = JOptionPane.showConfirmDialog(null, "Realmente desea eliminar el producto: " + aux.getNombre()+"?", null, JOptionPane.YES_NO_OPTION);
-								    if (delete == JOptionPane.YES_OPTION)
-								    {
-								    	Cabaña809.getInstance().borrarProducto(Cabaña809.nombre);
-								    	
-								    }dispose();
-						}else{JOptionPane.showMessageDialog(null, "Contraseña incorrecta", null, JOptionPane.ERROR_MESSAGE, null);}
+							  Producto aux = Cabaña809.getInstance().buscarProductoporNombre(Cabaña809.nombre);
+							  if (aux != null) {
+								  int delete = JOptionPane.showConfirmDialog(null, "Realmente desea eliminar el producto: " + aux.getNombre()+"?", null, JOptionPane.YES_NO_OPTION);
+									    if (delete == JOptionPane.YES_OPTION){
+									    	Cabaña809.getInstance().borrarProducto(Cabaña809.nombre);	
+									    }
+									    Oferta.loadProductList();
+									    dispose();
+							  }
+							  else {
+								  JOptionPane.showMessageDialog(null, "No hay ningún producto seleccionado", "Error", JOptionPane.ERROR_MESSAGE, null);
+							  }
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "Contraseña incorrecta", null, JOptionPane.ERROR_MESSAGE, null);
+						}
 					}
 				});
 				okButton.setActionCommand("OK");

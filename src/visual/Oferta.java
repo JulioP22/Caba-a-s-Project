@@ -83,7 +83,7 @@ public class Oferta extends JDialog{
 		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				
 			/*String country;
 				int delivery;*/
@@ -126,17 +126,8 @@ public class Oferta extends JDialog{
 						o.setLocationRelativeTo(null);
 						o.setResizable(false);
 						o.setVisible(true);
-						
-						
-						/*Producto aux = Cabaña809.getInstance().buscarProductoporNombre(Cabaña809.nombre);
-						  int delete = JOptionPane.showConfirmDialog(null, "Realmente desea eliminar el producto: " + aux.getNombre(), null, JOptionPane.YES_NO_OPTION);
-							    if (delete == JOptionPane.YES_OPTION)
-							    {
-							    	Cabaña809.getInstance().borrarProducto(Cabaña809.nombre);
-							    	loadProductList();
-							    }*/
-							    
-							
+						btnEliminar.setEnabled(false);
+						btnModificar.setEnabled(false);
 					}
 				});
 				

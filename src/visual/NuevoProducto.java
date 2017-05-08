@@ -117,12 +117,17 @@ public class NuevoProducto extends JDialog {
 								if (!existingProduct(txtNombre.getText())) {
 									Producto aux = null;
 									String nombre = txtNombre.getText();
-									float precio = new Float (txtPrecio.getText().toString());
-									
-									aux = new Producto(nombre, precio);
-									Cabaña809.getInstance().agregarProduc(aux);
-									JOptionPane.showMessageDialog(null, "El producto ''" + nombre+"'' se agregó sastifactoriamente.", null, JOptionPane.INFORMATION_MESSAGE, null);
-									limpiar();
+									if (nombre.length()<=21) {
+										float precio = new Float (txtPrecio.getText().toString());
+										
+										aux = new Producto(nombre, precio);
+										Cabaña809.getInstance().agregarProduc(aux);
+										JOptionPane.showMessageDialog(null, "El producto ''" + nombre+"'' se agregó sastifactoriamente.", null, JOptionPane.INFORMATION_MESSAGE, null);
+										limpiar();
+									}
+									else {
+										JOptionPane.showMessageDialog(null, "El nombre del producto es demasiado largo. Inserte otro", "Error", JOptionPane.ERROR_MESSAGE, null);
+									}
 								}
 								else {
 									JOptionPane.showMessageDialog(null, "Producto existente", null, JOptionPane.WARNING_MESSAGE, null);
