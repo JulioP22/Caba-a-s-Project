@@ -1,5 +1,6 @@
 package visual;
 
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -12,7 +13,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
-
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
@@ -23,17 +23,34 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+
+
+
+
+
+
+import org.omg.CORBA.portable.InputStream;
+import org.omg.CORBA_2_3.portable.OutputStream;
+
+
+
+
+
 import visual.ClosingDialog;
 import logical.Cabaña809;
 
 import java.awt.Font;
 import java.awt.event.MouseMotionAdapter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class VisualMain extends JFrame implements Runnable{
@@ -385,6 +402,38 @@ public class VisualMain extends JFrame implements Runnable{
 		mntmModificarPrecioDe.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		mntmModificarPrecioDe.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/modifyIcon_opt.png")));
 		mnConfiguracin.add(mntmModificarPrecioDe);
+		
+		JMenu mnInformacin = new JMenu("Informaci\u00F3n");
+		mnInformacin.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		mnInformacin.setIcon(new ImageIcon(VisualMain.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
+		menuBar.add(mnInformacin);
+		
+		JMenuItem mntmManual = new JMenuItem("Manual");
+		mntmManual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				java.io.InputStream input = VisualMain.class.getResourceAsStream("/icons/Manual del sistema.pdf");
+				File file = null;
+				FileOutputStream out = null;
+				try {
+					file = File.createTempFile("readme", ".pdf");
+					out = new FileOutputStream(file);
+					int aux = 0;
+					while ((aux=input.read())!=-1)
+						out.write(aux);
+					out.close();
+					input.close();
+					Desktop.getDesktop().open(file);
+					file.deleteOnExit();
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(null, "No se puede abrir el archivo de ayuda, probablemente fue borrado","ERROR",JOptionPane.ERROR_MESSAGE);	
+				}
+				
+				
+			}
+		});
+		mntmManual.setIcon(new ImageIcon(VisualMain.class.getResource("/resource/text-x-generic.png")));
+		mntmManual.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
+		mnInformacin.add(mntmManual);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -3638,7 +3687,7 @@ public class VisualMain extends JFrame implements Runnable{
 	public static JLabel getLblC_20() {
 		return lblC_20;
 	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
+	private static void addPopup(final Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (e.isPopupTrigger()) {
