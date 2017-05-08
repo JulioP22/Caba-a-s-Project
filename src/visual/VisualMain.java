@@ -21,9 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-
-import org.jvnet.substance.SubstanceLookAndFeel;
-import org.jvnet.substance.skin.BusinessSkin;
+import javax.swing.UIManager;
 
 import visual.ClosingDialog;
 import logical.Cabaña809;
@@ -273,11 +271,12 @@ public class VisualMain extends JFrame implements Runnable{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JFrame.setDefaultLookAndFeelDecorated(true);
-					SubstanceLookAndFeel.setCurrentWatermark("org.jvnet.substance.watermark.SubstanceBinaryWatermark");
-					SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceSteelBlueTheme");
+					//JFrame.setDefaultLookAndFeelDecorated(true);
+					//SubstanceLookAndFeel.setCurrentWatermark("org.jvnet.substance.watermark.SubstanceBinaryWatermark");
+					//SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceSteelBlueTheme");
 					//SubstanceLookAndFeel.setSkin(new BusinessBlackSteelSkin());
 					//SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.CremeSkin");
+					UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 					try{ 
 						Cabaña809.readAdmin();
 					}catch(IOException e) {
