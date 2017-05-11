@@ -13,6 +13,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
+
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
@@ -24,26 +25,16 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 
-
-
-
-
-
-import org.omg.CORBA.portable.InputStream;
-import org.omg.CORBA_2_3.portable.OutputStream;
-
-
-
-
-
 import visual.ClosingDialog;
 import logical.Cabaña809;
+import logical.Habitacion;
 
 import java.awt.Font;
 import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
@@ -277,6 +268,7 @@ public class VisualMain extends JFrame implements Runnable{
 	private JPopupMenu popupMenu_33;
 	private JPopupMenu popupMenu_34;
 	private ImageIcon frameIcon=new ImageIcon(VisualMain.class.getResource("/icons/frameIcon.png"));
+	private Thread t;
 	
 	
 	//private Thread t;
@@ -305,6 +297,20 @@ public class VisualMain extends JFrame implements Runnable{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
+				Runtime.getRuntime ().addShutdownHook ( 
+						 new Thread () {   
+						           @Override    
+						          public void run () {    
+						              //System.out.println ( "Shutdown hook" );
+						              try {
+										Cabaña809.writeAdmin();
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+						         }      
+						    } ); 
 			}
 		});
 	}
@@ -338,6 +344,9 @@ public class VisualMain extends JFrame implements Runnable{
 		setBounds(100, 100, 785, 573);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		
+		t = new Thread(this);
+		t.start();
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Script MT Bold", Font.PLAIN, 14));
@@ -411,7 +420,7 @@ public class VisualMain extends JFrame implements Runnable{
 		JMenuItem mntmManual = new JMenuItem("Manual");
 		mntmManual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				java.io.InputStream input = VisualMain.class.getResourceAsStream("/icons/Manual del sistema.pdf");
+				java.io.InputStream input = VisualMain.class.getResourceAsStream("/icons/readme.pdf");
 				File file = null;
 				FileOutputStream out = null;
 				try {
@@ -427,21 +436,17 @@ public class VisualMain extends JFrame implements Runnable{
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(null, "No se puede abrir el archivo de ayuda, probablemente fue borrado","ERROR",JOptionPane.ERROR_MESSAGE);	
 				}
-				
-				
 			}
 		});
 		mntmManual.setIcon(new ImageIcon(VisualMain.class.getResource("/resource/text-x-generic.png")));
 		mntmManual.setFont(new Font("Segoe UI Black", Font.PLAIN, 12));
 		mnInformacin.add(mntmManual);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBackground(Color.WHITE);
 		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Control de Caba\u00F1as", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(10, 11, 759, 491);
 		contentPane.add(panel);
@@ -464,7 +469,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_1.getBackground();
 					if (c1.getRGB()!=c2.getRGB() && c1.getRGB()!=c3.getRGB()) {
 						panel_1.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_1");
+						RentRoom rent = new RentRoom("panel_1", null);
 						rent.setVisible(true);
 					}
 				}
@@ -545,7 +550,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_2.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_2.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_2");
+						RentRoom rent = new RentRoom("panel_2", null);
 						rent.setVisible(true);
 					}
 				}
@@ -626,7 +631,7 @@ public class VisualMain extends JFrame implements Runnable{
 				Color c1 = panel_3.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_3.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_3");
+						RentRoom rent = new RentRoom("panel_3", null);
 						rent.setVisible(true);
 					}
 				}
@@ -707,7 +712,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_4.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_4.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_4");
+						RentRoom rent = new RentRoom("panel_4", null);
 						rent.setVisible(true);
 					}
 				}
@@ -788,7 +793,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_5.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_5.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_5");
+						RentRoom rent = new RentRoom("panel_5", null);
 						rent.setVisible(true);
 					}
 				}
@@ -869,7 +874,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_6.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_6.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_6");
+						RentRoom rent = new RentRoom("panel_6", null);
 						rent.setVisible(true);
 					}
 				}
@@ -950,7 +955,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_7.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_7.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_7");
+						RentRoom rent = new RentRoom("panel_7", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1031,7 +1036,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_8.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_8.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_8");
+						RentRoom rent = new RentRoom("panel_8", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1112,7 +1117,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_9.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_9.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_9");
+						RentRoom rent = new RentRoom("panel_9", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1193,7 +1198,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_10.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_10.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_10");
+						RentRoom rent = new RentRoom("panel_10", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1274,7 +1279,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_11.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_11.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_11");
+						RentRoom rent = new RentRoom("panel_11", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1355,7 +1360,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_12.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_12.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_12");
+						RentRoom rent = new RentRoom("panel_12", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1436,7 +1441,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_13.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_13.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_13");
+						RentRoom rent = new RentRoom("panel_13", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1517,7 +1522,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_14.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_14.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_14");
+						RentRoom rent = new RentRoom("panel_14", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1598,7 +1603,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_15.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_15.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_15");
+						RentRoom rent = new RentRoom("panel_15", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1679,7 +1684,7 @@ public class VisualMain extends JFrame implements Runnable{
 				Color c1 = panel_16.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_16.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_16");
+						RentRoom rent = new RentRoom("panel_16", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1760,7 +1765,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_17.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_17.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_17");
+						RentRoom rent = new RentRoom("panel_17", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1841,7 +1846,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_18.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_18.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_18");
+						RentRoom rent = new RentRoom("panel_18", null);
 						rent.setVisible(true);
 					}
 				}
@@ -1922,7 +1927,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_19.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_19.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_19");
+						RentRoom rent = new RentRoom("panel_19", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2003,7 +2008,7 @@ public class VisualMain extends JFrame implements Runnable{
 				Color c1 = panel_20.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_20.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_20");
+						RentRoom rent = new RentRoom("panel_20", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2084,7 +2089,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_21.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_21.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_21");
+						RentRoom rent = new RentRoom("panel_21", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2165,7 +2170,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_22.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_22.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_22");
+						RentRoom rent = new RentRoom("panel_22", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2246,7 +2251,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_23.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_23.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_23");
+						RentRoom rent = new RentRoom("panel_23", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2327,7 +2332,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_24.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_24.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_24");
+						RentRoom rent = new RentRoom("panel_24", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2408,7 +2413,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_25.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_25.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_25");
+						RentRoom rent = new RentRoom("panel_25", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2489,7 +2494,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_26.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_26.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_26");
+						RentRoom rent = new RentRoom("panel_26", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2570,7 +2575,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_27.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_27.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_27");
+						RentRoom rent = new RentRoom("panel_27", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2651,7 +2656,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_28.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_28.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_28");
+						RentRoom rent = new RentRoom("panel_28", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2732,7 +2737,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_29.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_29.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_29");
+						RentRoom rent = new RentRoom("panel_29", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2813,7 +2818,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_30.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_30.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_30");
+						RentRoom rent = new RentRoom("panel_30", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2894,7 +2899,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_31.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_31.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_31");
+						RentRoom rent = new RentRoom("panel_31", null);
 						rent.setVisible(true);
 					}
 				}
@@ -2975,7 +2980,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_32.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_32.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_32");
+						RentRoom rent = new RentRoom("panel_32", null);
 						rent.setVisible(true);
 					}
 				}
@@ -3056,7 +3061,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_33.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_33.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_33");
+						RentRoom rent = new RentRoom("panel_33", null);
 						rent.setVisible(true);
 					}
 				}
@@ -3138,7 +3143,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_34.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_34.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_34");
+						RentRoom rent = new RentRoom("panel_34", null);
 						rent.setVisible(true);
 					}
 				}
@@ -3219,7 +3224,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_35.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_35.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_35");
+						RentRoom rent = new RentRoom("panel_35", null);
 						rent.setVisible(true);
 					}
 				}
@@ -3283,7 +3288,9 @@ public class VisualMain extends JFrame implements Runnable{
 		lblC_34.setBounds(10, 56, 79, 20);
 		panel_35.add(lblC_34);
 		
-		
+		setOriginalColor();
+		refreshReservationsState();
+		resumeReservations();
 	}
 	private void setOriginalColor() {
 		Color c1 = panel_1.getBackground();
@@ -3404,7 +3411,25 @@ public class VisualMain extends JFrame implements Runnable{
 
 	@Override
 	public void run() {
-		System.out.println("Is working");
+		int counter = 0;
+		while(true) {
+			if (counter<15) {
+				counter++;
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Cabaña809.writeAdmin();
+					counter = 0;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}	
+			}
+		}
 	}
 	public static JPanel getPanel(String name) {
 		   JPanel aux = null;
@@ -3706,4 +3731,26 @@ public class VisualMain extends JFrame implements Runnable{
 			}
 		});
 	}
+	private void resumeReservations() {
+		for (Habitacion i: Cabaña809.getInstance().getMisHabs()) {
+			if (i.isOnUse()) {
+				RentRoom resume = new RentRoom(i.getRoomName(), i);
+				resume.dispose();
+			}
+		}
+	}
+	private void refreshReservationsState() {
+		Date date = new Date();
+		long time = date.getTime();
+		for (Habitacion i: Cabaña809.getInstance().getMisHabs()) {
+			if (i.isOnUse()) {
+				if (time > i.getFinalDate()) {
+					i.setOnUse(false);
+					i.setTipo(null);
+					i.setFinalDate(0);
+				}
+			}
+		}
+	}
+	
 }

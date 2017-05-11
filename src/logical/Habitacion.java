@@ -9,13 +9,15 @@ public class Habitacion implements Serializable{
 	 */
 	private static final long serialVersionUID = -5225446842337806664L;
 	private String tipo;
-	private float precio;
+	private long seconds;
+	private String roomName;
+	private boolean onUse = false;
+	private long finalDate;
 	
 	
-	public Habitacion(String tipo, float precio) {
+	public Habitacion(String roomName) {
 		super();
-		this.tipo = tipo;
-		this.precio = precio;
+		this.roomName = roomName;
 	}
 
 
@@ -29,14 +31,46 @@ public class Habitacion implements Serializable{
 	}
 
 
-	public float getPrecio() {
-		return precio;
+	public long getSeconds() {
+		return seconds;
 	}
 
 
-	public void setPrecio(float precio) {
-		this.precio = precio;
-	} 
+	public void setSeconds(long seconds) {
+		this.seconds = seconds;
+	}
+
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
+
+	public boolean isOnUse() {
+		return onUse;
+	}
+
+
+	public void setOnUse(boolean onUse) {
+		this.onUse = onUse;
+	}
+
+
+	public long getFinalDate() {
+		return finalDate;
+	}
+
+
+	public void setFinalDate(long finalDate) {
+		this.finalDate = finalDate;
+	}
+
+
 	
 	
 

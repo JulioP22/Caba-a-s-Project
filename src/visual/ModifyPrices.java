@@ -69,7 +69,7 @@ public class ModifyPrices extends JDialog {
 			}
 			{
 				JLabel lblHabitacinAmanecida = new JLabel("Habitaci\u00F3n amanecida: ");
-				lblHabitacinAmanecida.setBounds(20, 120, 135, 14);
+				lblHabitacinAmanecida.setBounds(20, 120, 148, 14);
 				panel.add(lblHabitacinAmanecida);
 			}
 			{
@@ -92,7 +92,7 @@ public class ModifyPrices extends JDialog {
 				}
 			});
 			fastRoom.setBackground(new Color(211, 211, 211));
-			fastRoom.setBounds(165, 26, 209, 23);
+			fastRoom.setBounds(178, 26, 196, 23);
 			panel.add(fastRoom);
 			fastRoom.setColumns(10);
 			
@@ -111,7 +111,7 @@ public class ModifyPrices extends JDialog {
 			});
 			fastExecutive.setBackground(new Color(211, 211, 211));
 			fastExecutive.setColumns(10);
-			fastExecutive.setBounds(165, 71, 209, 23);
+			fastExecutive.setBounds(178, 71, 196, 23);
 			panel.add(fastExecutive);
 			
 			simpleComplete = new JTextField();
@@ -129,7 +129,7 @@ public class ModifyPrices extends JDialog {
 			});
 			simpleComplete.setBackground(new Color(211, 211, 211));
 			simpleComplete.setColumns(10);
-			simpleComplete.setBounds(165, 116, 128, 23);
+			simpleComplete.setBounds(178, 116, 115, 23);
 			panel.add(simpleComplete);
 			
 			executiveComplete = new JTextField();
@@ -147,7 +147,7 @@ public class ModifyPrices extends JDialog {
 			});
 			executiveComplete.setBackground(new Color(211, 211, 211));
 			executiveComplete.setColumns(10);
-			executiveComplete.setBounds(165, 161, 128, 23);
+			executiveComplete.setBounds(178, 161, 115, 23);
 			panel.add(executiveComplete);
 			{
 				JLabel lblNewLabel = new JLabel("");
