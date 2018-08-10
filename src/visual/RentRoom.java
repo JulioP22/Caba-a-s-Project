@@ -571,17 +571,26 @@ public class RentRoom extends JDialog implements Runnable {
 				Cabaña809.getInstance().getMisHabs().get(index).setSeconds(seconds);
 				if ((seconds/1000)<3600)
 					VisualMain.getPanel(aux_1).setBackground(red);
+				else
+					VisualMain.getPanel(aux_1).setBackground(Color.GREEN);
 				seconds--;
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if (seconds==0) {
+				if ((seconds/1000)<1) {
 					label1.setVisible(false);
 					label.setVisible(false);
 					if (completeNight)
 						label2.setVisible(false);
+					
+					Habitacion room = Cabaña809.getInstance().getMisHabs().get(index);
+					calendar.setTimeInMillis(room.getFinalDate());
+					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
+					String aux1 = formatter.format(calendar.getTime());
+					String[] separator = aux1.split(" ");
+					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+getRoomName(aux_1)+" ha finalizado a las "+separator[0]+" el "+separator[1], null, JOptionPane.INFORMATION_MESSAGE, null);
 					break;
 				}
 				if (aux_1.equals("panel_1")) {
@@ -871,8 +880,11 @@ public class RentRoom extends JDialog implements Runnable {
 		}else {
 			while (true) {
 				long time = getTime();
+				
 				if (time<3600000)
 					VisualMain.getPanel(aux_1).setBackground(red);
+				else
+					VisualMain.getPanel(aux_1).setBackground(Color.GREEN);
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -883,6 +895,13 @@ public class RentRoom extends JDialog implements Runnable {
 					label.setVisible(false);
 					if (completeNight)
 						label2.setVisible(false);
+					
+					Habitacion room = Cabaña809.getInstance().getMisHabs().get(index);
+					calendar.setTimeInMillis(room.getFinalDate());
+					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
+					String aux = formatter.format(calendar.getTime());
+					String[] separator = aux.split(" ");
+					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+getRoomName(aux_1)+" ha finalizado a las "+separator[0]+" el "+separator[1], null, JOptionPane.INFORMATION_MESSAGE, null);
 					break;
 				}
 				if (aux_1.equals("panel_1")) {
@@ -1310,6 +1329,7 @@ public class RentRoom extends JDialog implements Runnable {
 			VisualMain.getLabel35().setVisible(true);
 			VisualMain.getLblC_34().setVisible(true);
 		}
+		 
 	}
 	public void writeTicket(String room, String entryDate, String finalDate, String roomType) throws IOException {
 		writer = new FileWriter(new File("Files/ticket.txt"));
@@ -1499,7 +1519,7 @@ public class RentRoom extends JDialog implements Runnable {
 		
 		return month;
 	}
-	private String getRoomName(String panelName) {
+	public static String getRoomName(String panelName) {
 		String aux = null;
 		if (panelName.equals("panel_1"))
 			aux = "C-1";
@@ -1653,12 +1673,7 @@ public class RentRoom extends JDialog implements Runnable {
 		
 	}
 	public void resumeReservation() {
-		if (room.getTipo().equals("amanecida")) {
-			t.start();
-		}
-		else {
-			t.start();
-		}
+			t.start();		
 	}
 	public void enableRoom(String roomName) {
 		for (Habitacion i: Cabaña809.getInstance().getMisHabs()) {

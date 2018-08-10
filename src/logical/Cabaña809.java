@@ -112,62 +112,66 @@ public class Cabaña809 implements Serializable {
 	    }
 	}
 	public static void writeAdmin() throws FileNotFoundException, IOException {
-		File file = new File("Files");
+		String path = System.getProperty("user.home");
+		path = path+File.separator+"Files";
+		File file = new File(path);
 		if (!file.exists())
 			file.mkdirs();
-		writer = new ObjectOutputStream(new FileOutputStream("Files/datos.dat"));
+		writer = new ObjectOutputStream(new FileOutputStream(path+File.separator+"datos.dat"));
 		writer.writeObject(Cabaña809.getInstance().getMisProduc());
 		writer.close();
 		if (misHabs == null) {
 			misHabs = new ArrayList<>();
 			createRooms();
 		}
-		roomWriter = new ObjectOutputStream(new FileOutputStream("Files/Habitaciones.dat"));
+		roomWriter = new ObjectOutputStream(new FileOutputStream(path+File.separator+"Habitaciones.dat"));
 		roomWriter.writeObject(misHabs);
 		roomWriter.close();
-		orderNo = new ObjectOutputStream(new FileOutputStream("Files/numeroDeOrden.dat"));
+		orderNo = new ObjectOutputStream(new FileOutputStream(path+File.separator+"numeroDeOrden.dat"));
 		orderNo.writeInt(RentRoom.code);
 		orderNo.close();
-		fastRoom = new ObjectOutputStream(new FileOutputStream("Files/precioHabitacionPaso.dat"));
+		fastRoom = new ObjectOutputStream(new FileOutputStream(path+File.separator+"precioHabitacionPaso.dat"));
 		fastRoom.writeFloat(simpleFastRoomPrice);
 		fastRoom.close();
-		fastExecutive = new ObjectOutputStream(new FileOutputStream("Files/precioHabitacionEjecutiva.dat"));
+		fastExecutive = new ObjectOutputStream(new FileOutputStream(path+File.separator+"precioHabitacionEjecutiva.dat"));
 		fastExecutive.writeFloat(ejecutiveFastRoomPrice);
 		fastExecutive.close();
-		simpleComplete = new ObjectOutputStream(new FileOutputStream("Files/habitacionSimpleAmanecida.dat"));
+		simpleComplete = new ObjectOutputStream(new FileOutputStream(path+File.separator+"habitacionSimpleAmanecida.dat"));
 		simpleComplete.writeFloat(simpleCompleteRoomPrice);
 		simpleComplete.close();
-		executiveComplete = new ObjectOutputStream(new FileOutputStream("Files/HabEjecutivaAmanecida.dat"));
+		executiveComplete = new ObjectOutputStream(new FileOutputStream(path+File.separator+"HabEjecutivaAmanecida.dat"));
 		executiveComplete.writeFloat(ejecutiveCompleteRoomPrice);
 		executiveComplete.close();
 	}
 	@SuppressWarnings("unchecked")
 	public static void readAdmin() throws FileNotFoundException, IOException, ClassNotFoundException {
-		reader = new ObjectInputStream(new FileInputStream("Files/datos.dat"));
+		String path = System.getProperty("user.home");
+		path = path+File.separator+"Files";
+		reader = new ObjectInputStream(new FileInputStream(path+File.separator+"datos.dat"));
 		Cabaña809.getInstance().setMisProduc((ArrayList<Producto>)reader.readObject());
 		reader.close();
 		
-		roomReader = new ObjectInputStream(new FileInputStream("Files/Habitaciones.dat"));
+		roomReader = new ObjectInputStream(new FileInputStream(path+File.separator+"Habitaciones.dat"));
 		Cabaña809.getInstance().setMisHabs((ArrayList<Habitacion>)roomReader.readObject());
 		roomReader.close();
 		
-		orderNoReader = new ObjectInputStream(new FileInputStream("Files/numeroDeOrden.dat"));
+		orderNoReader = new ObjectInputStream(new FileInputStream(path+File.separator+"numeroDeOrden.dat"));
 		RentRoom.code = orderNoReader.readInt();
 		orderNoReader.close();
 		
-		fastRoomReader = new ObjectInputStream(new FileInputStream("Files/precioHabitacionPaso.dat"));
+		fastRoomReader = new ObjectInputStream(new FileInputStream(path+File.separator+"precioHabitacionPaso.dat"));
 		simpleFastRoomPrice = fastRoomReader.readFloat();
 		fastRoomReader.close();
 		
-		fastExecutiveReader = new ObjectInputStream(new FileInputStream("Files/precioHabitacionEjecutiva.dat"));
+		fastExecutiveReader = new ObjectInputStream(new FileInputStream(path+File.separator+"precioHabitacionEjecutiva.dat"));
 		ejecutiveFastRoomPrice = fastExecutiveReader.readFloat();
 		fastExecutiveReader.close();
 		
-		simpleCompleteReader = new ObjectInputStream(new FileInputStream("Files/habitacionSimpleAmanecida.dat"));
+		simpleCompleteReader = new ObjectInputStream(new FileInputStream(path+File.separator+"habitacionSimpleAmanecida.dat"));
 		simpleCompleteRoomPrice = simpleCompleteReader.readFloat();
 		simpleCompleteReader.close();
 		
-		executiveCompleteReader = new ObjectInputStream(new FileInputStream("Files/HabEjecutivaAmanecida.dat"));
+		executiveCompleteReader = new ObjectInputStream(new FileInputStream(path+File.separator+"HabEjecutivaAmanecida.dat"));
 		ejecutiveCompleteRoomPrice = executiveCompleteReader.readFloat();
 		executiveCompleteReader.close();
 	}

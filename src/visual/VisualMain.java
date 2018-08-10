@@ -34,7 +34,10 @@ import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
@@ -347,7 +350,7 @@ public class VisualMain extends JFrame implements Runnable{
 		
 		t = new Thread(this);
 		t.start();
-		
+			
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Script MT Bold", Font.PLAIN, 14));
 		menuBar.setForeground(Color.BLACK);
@@ -3745,6 +3748,13 @@ public class VisualMain extends JFrame implements Runnable{
 		for (Habitacion i: Cabaña809.getInstance().getMisHabs()) {
 			if (i.isOnUse()) {
 				if (time > i.getFinalDate()) {
+					Calendar calendar = new GregorianCalendar();
+					calendar.setTimeInMillis(i.getFinalDate());
+					Date date1 = calendar.getTime();
+					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd/MM/yy");
+					String aux = formatter.format(date1);
+					String[] separator = aux.split(" ");
+					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+RentRoom.getRoomName(i.getRoomName())+" ha finalizado a las "+separator[0]+" el "+separator[1]);
 					i.setOnUse(false);
 					i.setTipo(null);
 					i.setFinalDate(0);
