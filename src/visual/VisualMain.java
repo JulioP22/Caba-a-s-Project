@@ -406,7 +406,7 @@ public class VisualMain extends JFrame implements Runnable{
 		mntmModificarPrecioDe.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (SwingUtilities.isLeftMouseButton(e)){
-					LoginMod mod = new LoginMod(true);
+					LoginMod mod = new LoginMod(true, -1);
 					mod.setVisible(true);
 				}
 			}

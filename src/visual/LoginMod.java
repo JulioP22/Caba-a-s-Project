@@ -54,7 +54,7 @@ public class LoginMod extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public LoginMod(final boolean modifyPrice) {
+	public LoginMod(final boolean modifyPrice, final int index) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginMod.class.getResource("/javax/swing/plaf/metal/icons/ocean/floppy.gif")));
 		setTitle("Iniciar Sesi\u00F3n\r\n");
 		setBounds(100, 100, 399, 226);
@@ -80,7 +80,7 @@ public class LoginMod extends JDialog {
 						{
 							dispose();
 							if (!modifyPrice) {
-								NuevoProducto modify = new NuevoProducto(true, 0);
+								NuevoProducto modify = new NuevoProducto(true, index);
 								modify.setVisible(true);
 							}
 							else {
