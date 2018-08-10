@@ -29,7 +29,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
@@ -44,6 +43,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+
+import javax.print.Doc;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.ServiceUI;
+import javax.print.SimpleDoc;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
 import javax.swing.ImageIcon;
 
 public class RentRoom extends JDialog implements Runnable {
@@ -1618,10 +1627,26 @@ public class RentRoom extends JDialog implements Runnable {
 		return aux;
 	}
 	public void printComponent() throws PrinterException{
-		JTextPane text = new JTextPane();
-		text.setText(txtAreaRecipe.getText());
-		text.setFont(new Font("Monospaced", Font.PLAIN, 11));
-		text.print();
+		String content = txtAreaRecipe.getText();
+		content += "\n\n\n\n\n\n\n\n\n\n";
+		DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+	    PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
+	    PrintService printService[] = PrintServiceLookup.lookupPrintServices(flavor, pras);
+	    PrintService defaultService = PrintServiceLookup.lookupDefaultPrintService();
+	    PrintService service = ServiceUI.printDialog(null, 700, 200, printService, defaultService, flavor, pras);
+	      
+	    byte[] bytes = content.getBytes();
+	    System.out.println(service);
+	    Doc doc = new SimpleDoc(bytes,flavor,null);
+	    DocPrintJob job = null;
+	    if (service != null) {
+	    	job = service.createPrintJob();
+	    	try {
+	  	      job.print(doc, null);
+	  	    } catch (Exception er) {
+	  	      JOptionPane.showMessageDialog(null,"Error al imprimir: " + er.getMessage());
+	  	    }
+	    }
 	}
 	private void readTicket() throws IOException {
 		reader = new BufferedReader(new FileReader(new File("Files/ticket.txt")));
