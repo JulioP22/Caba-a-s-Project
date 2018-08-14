@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 
@@ -69,6 +71,18 @@ public class Discount extends JDialog {
 		monto.setBounds(132, 46, 246, 25);
 		panel.add(monto);
 		monto.setColumns(10);
+		monto.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c =  e.getKeyChar();
+				if((c < '0' || c > '9') && c != '.')
+					e.consume();
+				if (dotAmount() && c=='.')
+					e.consume();
+				if (c=='.' &&monto.getText().length()==0)
+					e.consume();
+			}
+		});
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -114,5 +128,16 @@ public class Discount extends JDialog {
 		return revision;
 		
 	}
+	
+	 private boolean dotAmount() {
+		 boolean aux = false;
+		 String aux1 = monto.getText();
+		 char[] aux2 = aux1.toCharArray();
+		 for (int i =0;i<aux2.length;i++) {
+			 if (aux2[i]=='.')
+				 aux = true;
+		 }
+		 return aux;
+	 }
 	
 }

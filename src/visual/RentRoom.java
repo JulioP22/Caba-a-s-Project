@@ -36,6 +36,8 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.print.PrinterException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -115,6 +117,17 @@ public class RentRoom extends JDialog implements Runnable {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				Cabaña809.getInstance().totalAmount = setTotalAmount();
+			}
+		});
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				try {
+					Cabaña809.getInstance().discount = 0f;
+					Cabaña809.getInstance().totalAmount = 0f;
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Se ha producido inesperado", "Error", JOptionPane.ERROR_MESSAGE, null);
+				}
 			}
 		});
 		this.roomName = roomName;
@@ -468,6 +481,8 @@ public class RentRoom extends JDialog implements Runnable {
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
+						Cabaña809.getInstance().discount = 0f;
+						Cabaña809.getInstance().totalAmount = 0f;
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
