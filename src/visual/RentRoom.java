@@ -101,6 +101,7 @@ public class RentRoom extends JDialog implements Runnable {
 
 	private JTextArea txtAreaRecipe = new JTextArea();
 	private Habitacion room;
+	private JButton btnDescuento;
 	/**
 	 * Launch the application.
 	 */
@@ -113,7 +114,7 @@ public class RentRoom extends JDialog implements Runnable {
 		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				setTotalAmount();
+				Cabaña809.getInstance().totalAmount = setTotalAmount();
 			}
 		});
 		this.roomName = roomName;
@@ -381,6 +382,8 @@ public class RentRoom extends JDialog implements Runnable {
 								}
 								try {
 									printComponent();
+									Cabaña809.getInstance().discount = 0f;
+									Cabaña809.getInstance().totalAmount = 0f;
 								} catch (PrinterException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
@@ -435,6 +438,8 @@ public class RentRoom extends JDialog implements Runnable {
 								}
 								try {
 									printComponent();
+									Cabaña809.getInstance().discount = 0f;
+									Cabaña809.getInstance().totalAmount = 0f;
 								} catch (PrinterException e1) {
 									JOptionPane.showMessageDialog(null, "Se ha producido un error al tratar de usar la impresora","Error", JOptionPane.ERROR_MESSAGE, null);
 								}
@@ -443,6 +448,16 @@ public class RentRoom extends JDialog implements Runnable {
 						}
 					}
 				});
+				
+				btnDescuento = new JButton("Descuento");
+				btnDescuento.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Discount dis = new Discount();
+						dis.setVisible(true);
+					}
+				});
+				btnDescuento.setIcon(new ImageIcon(RentRoom.class.getResource("/icons/login_opt.png")));
+				buttonPane.add(btnDescuento);
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -506,7 +521,7 @@ public class RentRoom extends JDialog implements Runnable {
     	for (Producto i: selected) {
     		aux += i.getPrecio()*i.getCantidad();
     	}
-    	priceLabel.setText(String.valueOf(aux));
+    	priceLabel.setText(String.valueOf(aux - Cabaña809.getInstance().discount));
     	return aux;
     }
     private boolean isAdded(String name) {
@@ -1380,21 +1395,21 @@ public class RentRoom extends JDialog implements Runnable {
 		for (int i=0;i<(26-value);i++)
 			aux = " "+aux;
 		writer.write("IMPORTE:"+aux+"\n");
-		writer.write("DESCUENTO:                    0.00\n");
+		writer.write("DESCUENTO:                  "+String.format("%.2f", Cabaña809.getInstance().discount)+"\n");
 		writer.write("                       -----------\n");
-		aux = String.format("%.2f", setTotalAmount());
+		aux = String.format("%.2f", setTotalAmount()-Cabaña809.getInstance().discount);
 		value = aux.length();
 		for (int i =0;i<(24-value);i++)
 			aux = " "+aux;
 		writer.write("SUB TOTAL:"+aux+"\n");
 		writer.write("10 % LEGAL:                   0.00\n");
-		aux = String.format("%.2f", setTotalAmount()*0.1525);
+		aux = String.format("%.2f", (setTotalAmount()-Cabaña809.getInstance().discount)*0.1525);
 		value = aux.length();
 		for (int i =0;i<(28-value);i++)
 			aux = " "+aux;
 		writer.write("ITBIS:"+aux+"\n");
 		writer.write("                       -----------\n");
-		aux = String.format("%.2f", setTotalAmount());
+		aux = String.format("%.2f", setTotalAmount()-Cabaña809.getInstance().discount);
 		value = aux.length();
 		for (int i =0;i<(28-value);i++)
 			aux = " "+aux;
@@ -1404,8 +1419,6 @@ public class RentRoom extends JDialog implements Runnable {
 		writer.write("******GRACIAS POR PREFERIRNOS*****\n");
 		writer.write("**********************************\n");
 		writer.close();
-		
-		
 	}
 	private String getDate() {
 		Calendar calendar = new GregorianCalendar();

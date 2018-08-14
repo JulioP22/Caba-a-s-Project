@@ -34,6 +34,9 @@ import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -56,7 +59,7 @@ public class VisualMain extends JFrame implements Runnable{
 	private JPanel contentPane;
 	private JPanel panel_1;
 	private JPanel panel_2;
-	private JPanel panel_3;
+	private JPanel panel_3;  
 	private JPanel panel_4;
 	private JPanel panel_5;
 	private JPanel panel_6;
@@ -289,14 +292,24 @@ public class VisualMain extends JFrame implements Runnable{
 					//SubstanceLookAndFeel.setSkin(new BusinessBlackSteelSkin());
 					//SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.CremeSkin");
 					UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
-					try{ 
-						Cabaña809.readAdmin();
-					}catch(IOException e) {
-						JOptionPane.showMessageDialog(null, "Archivos no encontrados, generando nuevos archivos", "Archivos no encontrados", JOptionPane.WARNING_MESSAGE,null);
-						Cabaña809.writeAdmin();
+					String userHome = System.getProperty("user.home");
+					File file = new File(userHome, "my.lock");
+					FileChannel fc = FileChannel.open(file.toPath(),StandardOpenOption.CREATE,StandardOpenOption.WRITE);
+					FileLock lock = fc.tryLock();
+					if (lock == null) {
+					    JOptionPane.showMessageDialog(null, "Existe otra instancia del programa abierta", "Error", JOptionPane.ERROR_MESSAGE, null);
+					    System.exit(0);
 					}
-					VisualMain frame = new VisualMain();
-					frame.setVisible(true);
+					else {
+						try{ 
+							Cabaña809.readAdmin();
+						}catch(IOException e) {
+							JOptionPane.showMessageDialog(null, "Archivos no encontrados, generando nuevos archivos", "Archivos no encontrados", JOptionPane.WARNING_MESSAGE,null);
+							Cabaña809.writeAdmin();
+						}
+						VisualMain frame = new VisualMain();
+						frame.setVisible(true);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

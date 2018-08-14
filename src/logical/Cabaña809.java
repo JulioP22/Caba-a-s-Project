@@ -44,8 +44,10 @@ public class Cabaña809 implements Serializable {
 	private static ObjectInputStream simpleCompleteReader;
 	private static ObjectInputStream executiveCompleteReader;
 	private static ObjectInputStream roomReader;
-
 	
+	public float totalAmount = 0f;
+	public float discount = 0f;
+
 	
 	public Cabaña809() {
 		super();
