@@ -1371,21 +1371,21 @@ public class RentRoom extends JDialog implements Runnable {
 		 
 	}
 	public void writeTicket(String room, String entryDate, String finalDate, String roomType) throws IOException {
-		writer = new FileWriter(new File("Files/ticket.txt"));
-		writer.write("CABAÑA 809...\n");
+		writer = new FileWriter(new File(System.getProperty("user.home")+File.separator+"Files/ticket.txt"));
+		writer.write("CABANA 809...\n");
 		writer.write("RNC-05800189218 TU MEJOR ELECCION \n");
-		writer.write("C / Milagro Sánchez, Cotuí, R.D.\n");
+		writer.write("C / MILAGRO SANCHEZ, COTUI, R.D.\n");
 		writer.write("809-240-0768\n");
 		writer.write("----------------------------------\n");
-		writer.write("Atendió: CABAÑA 809\n\n");
-		writer.write("Hab.: "+room+"\n\n");
-		String aux = "Orden No: "+String.valueOf(code++);
+		writer.write("ATENDIO: CABANA 809\n\n");
+		writer.write("HAB.: "+room+"\n\n");
+		String aux = "ORDEN NO: "+String.valueOf(code++);
 		int value = aux.length();
 		for (int i=0;i<(34-value);i++)
 			aux = " "+aux;
 		writer.write(aux+"\n");
-		writer.write("Entrada: "+entryDate+"\n");
-		writer.write("Salida: "+finalDate+"\n");
+		writer.write("ENTRADA: "+entryDate.toUpperCase()+"\n");
+		writer.write("SALIDA: "+finalDate.toUpperCase()+"\n");
 		writer.write("----------------------------------\n");
 		if (roomType.equals("fastRoom"))
 			writer.write("1.00 HABITACION PASO        "+String.format("%.2f", Cabaña809.simpleFastRoomPrice)+"\n");
@@ -1675,9 +1675,14 @@ public class RentRoom extends JDialog implements Runnable {
 	  	      JOptionPane.showMessageDialog(null,"Error al imprimir: " + er.getMessage());
 	  	    }
 	    }
+	    
+//	    JTextPane text = new JTextPane();
+//		text.setText(txtAreaRecipe.getText());
+//		text.setFont(new Font("Monospaced", Font.PLAIN, 11));
+//		text.print();
 	}
 	private void readTicket() throws IOException {
-		reader = new BufferedReader(new FileReader(new File("Files/ticket.txt")));
+		reader = new BufferedReader(new FileReader(new File(System.getProperty("user.home")+File.separator+"Files/ticket.txt")));
 		String aux = new String();
 		String line=null;
 		while((line = reader.readLine())!=null) {
