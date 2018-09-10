@@ -45,6 +45,8 @@ public class Cabaña809 implements Serializable {
 	private static ObjectInputStream executiveCompleteReader;
 	private static ObjectInputStream roomReader;
 	
+	public static ArrayList<Integer> canceled = new ArrayList<>();
+		
 	public float totalAmount = 0f;
 	public float discount = 0f;
 
@@ -114,11 +116,9 @@ public class Cabaña809 implements Serializable {
 	    }
 	}
 	public static void writeAdmin() throws FileNotFoundException, IOException {
-		String path = System.getProperty("user.home");
-		path = path+File.separator+"Files";
+		String path = System.getProperty("user.home")+File.separator+"Files";
 		File file = new File(path);
-		if (!file.exists())
-			file.mkdirs();
+		if (!file.exists()) file.mkdirs();
 		writer = new ObjectOutputStream(new FileOutputStream(path+File.separator+"datos.dat"));
 		writer.writeObject(Cabaña809.getInstance().getMisProduc());
 		writer.close();
@@ -144,11 +144,14 @@ public class Cabaña809 implements Serializable {
 		executiveComplete = new ObjectOutputStream(new FileOutputStream(path+File.separator+"HabEjecutivaAmanecida.dat"));
 		executiveComplete.writeFloat(ejecutiveCompleteRoomPrice);
 		executiveComplete.close();
+		
+		executiveComplete = new ObjectOutputStream(new FileOutputStream(path+File.separator+"numerosOrden.dat"));
+		executiveComplete.writeObject(canceled);
+		executiveComplete.close();
 	}
 	@SuppressWarnings("unchecked")
 	public static void readAdmin() throws FileNotFoundException, IOException, ClassNotFoundException {
-		String path = System.getProperty("user.home");
-		path = path+File.separator+"Files";
+		String path = System.getProperty("user.home")+File.separator+"Files";
 		reader = new ObjectInputStream(new FileInputStream(path+File.separator+"datos.dat"));
 		Cabaña809.getInstance().setMisProduc((ArrayList<Producto>)reader.readObject());
 		reader.close();
@@ -176,6 +179,17 @@ public class Cabaña809 implements Serializable {
 		executiveCompleteReader = new ObjectInputStream(new FileInputStream(path+File.separator+"HabEjecutivaAmanecida.dat"));
 		ejecutiveCompleteRoomPrice = executiveCompleteReader.readFloat();
 		executiveCompleteReader.close();
+		
+		File file = new File(path+File.separator+"numerosOrden.dat");
+		if (!file.exists()) canceled = new ArrayList<>();
+		else {
+			executiveCompleteReader = new ObjectInputStream(new FileInputStream(path+File.separator+"numerosOrden.dat"));
+			canceled = (ArrayList<Integer>) executiveCompleteReader.readObject();
+			executiveCompleteReader.close();
+			for(Integer i : canceled) {
+				System.out.println(i);
+			}
+		}
 	}
 	public static void setCab(Cabaña809 cab) {
 		Cabaña809.cab = cab;

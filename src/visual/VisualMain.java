@@ -275,6 +275,40 @@ public class VisualMain extends JFrame implements Runnable{
 	private JPopupMenu popupMenu_34;
 	private ImageIcon frameIcon=new ImageIcon(VisualMain.class.getResource("/icons/frameIcon.png"));
 	private Thread t;
+	private JMenuItem menuItem;
+	private JMenuItem menuItem_1;
+	private JMenuItem menuItem_2;
+	private JMenuItem menuItem_3;
+	private JMenuItem menuItem_4;
+	private JMenuItem menuItem_5;
+	private JMenuItem menuItem_6;
+	private JMenuItem menuItem_7;
+	private JMenuItem menuItem_8;
+	private JMenuItem menuItem_9;
+	private JMenuItem menuItem_10;
+	private JMenuItem menuItem_11;
+	private JMenuItem menuItem_12;
+	private JMenuItem menuItem_13;
+	private JMenuItem menuItem_14;
+	private JMenuItem menuItem_15;
+	private JMenuItem menuItem_16;
+	private JMenuItem menuItem_17;
+	private JMenuItem menuItem_18;
+	private JMenuItem menuItem_19;
+	private JMenuItem menuItem_20;
+	private JMenuItem menuItem_21;
+	private JMenuItem menuItem_22;
+	private JMenuItem menuItem_23;
+	private JMenuItem menuItem_24;
+	private JMenuItem menuItem_25;
+	private JMenuItem menuItem_26;
+	private JMenuItem menuItem_27;
+	private JMenuItem menuItem_28;
+	private JMenuItem menuItem_29;
+	private JMenuItem menuItem_30;
+	private JMenuItem menuItem_31;
+	private JMenuItem menuItem_32;
+	private JMenuItem menuItem_33;
 	
 	
 	//private Thread t;
@@ -286,11 +320,6 @@ public class VisualMain extends JFrame implements Runnable{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//JFrame.setDefaultLookAndFeelDecorated(true);
-					//SubstanceLookAndFeel.setCurrentWatermark("org.jvnet.substance.watermark.SubstanceBinaryWatermark");
-					//SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceSteelBlueTheme");
-					//SubstanceLookAndFeel.setSkin(new BusinessBlackSteelSkin());
-					//SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.CremeSkin");
 					UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
 					String userHome = System.getProperty("user.home");
 					File file = new File(userHome, "my.lock");
@@ -485,7 +514,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_1.getBackground();
 					if (c1.getRGB()!=c2.getRGB() && c1.getRGB()!=c3.getRGB()) {
 						panel_1.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_1", null);
+						RentRoom rent = new RentRoom("panel_1", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -529,13 +558,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label1.setVisible(true);
 						lblC.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-1",1);
 					}
 				}
 			}
 		});
 		cancelarReserva.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu.add(cancelarReserva);
+		
+		JMenuItem mntmVerHabitacin = new JMenuItem("Ver Habitaci\u00F3n");
+		mntmVerHabitacin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_1", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		mntmVerHabitacin.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		popupMenu.add(mntmVerHabitacin);
 		
 		label1 = new JLabel("");
 		label1.setBounds(14, 5, 79, 51);
@@ -566,7 +605,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_2.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_2.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_2", null);
+						RentRoom rent = new RentRoom("panel_2", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -610,13 +649,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label2.setVisible(true);
 						lblC_1.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-2",1);
 					}
 				}
 			}
 		});
 		mntmNewMenuItem.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_1.add(mntmNewMenuItem);
+		
+		menuItem = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_2", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		menuItem.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		popupMenu_1.add(menuItem);
 		
 		label2 = new JLabel("");
 		label2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -647,7 +696,7 @@ public class VisualMain extends JFrame implements Runnable{
 				Color c1 = panel_3.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_3.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_3", null);
+						RentRoom rent = new RentRoom("panel_3", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -691,13 +740,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label3.setVisible(true);
 						lblC_2.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-3",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_2.add(mntmCancelarReserva);
+		
+		menuItem_1 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_3", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_2.add(menuItem_1);
 		
 		label3 = new JLabel("");
 		label3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -728,7 +787,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_4.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_4.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_4", null);
+						RentRoom rent = new RentRoom("panel_4", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -772,13 +831,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label4.setVisible(true);
 						lblC_3.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-4",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva_1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_3.add(mntmCancelarReserva_1);
+		
+		menuItem_2 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_4", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_3.add(menuItem_2);
 		
 		label4 = new JLabel("");
 		label4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -809,7 +878,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_5.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_5.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_5", null);
+						RentRoom rent = new RentRoom("panel_5", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -853,13 +922,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label5.setVisible(true);
 						lblC_4.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-5",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva_2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_4.add(mntmCancelarReserva_2);
+		
+		menuItem_3 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_5", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_4.add(menuItem_3);
 		
 		label5 = new JLabel("");
 		label5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -890,7 +969,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_6.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_6.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_6", null);
+						RentRoom rent = new RentRoom("panel_6", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -934,13 +1013,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label6.setVisible(true);
 						lblC_5.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-6",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva_3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_5.add(mntmCancelarReserva_3);
+		
+		menuItem_4 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_6", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_5.add(menuItem_4);
 		
 		label6 = new JLabel("");
 		label6.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -971,7 +1060,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_7.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_7.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_7", null);
+						RentRoom rent = new RentRoom("panel_7", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1015,13 +1104,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label7.setVisible(true);
 						lblC_6.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-7",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva_4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_6.add(mntmCancelarReserva_4);
+		
+		menuItem_5 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_7", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_6.add(menuItem_5);
 		
 		label7 = new JLabel("");
 		label7.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1052,7 +1151,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_8.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_8.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_8", null);
+						RentRoom rent = new RentRoom("panel_8", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1096,13 +1195,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label8.setVisible(true);
 						lblC_7.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-8",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva_5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_7.add(mntmCancelarReserva_5);
+		
+		menuItem_6 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_6.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_8", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_7.add(menuItem_6);
 		
 		label8 = new JLabel("");
 		label8.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1133,7 +1242,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_9.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_9.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_9", null);
+						RentRoom rent = new RentRoom("panel_9", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1177,13 +1286,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label9.setVisible(true);
 						lblC_8.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-9",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_8.add(mntmCancelarReservacin);
+		
+		menuItem_7 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_7.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_9", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_8.add(menuItem_7);
 		
 		label9 = new JLabel("");
 		label9.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1214,7 +1333,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_10.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_10.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_10", null);
+						RentRoom rent = new RentRoom("panel_10", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1258,13 +1377,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label10.setVisible(true);
 						lblC_9.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-10",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_9.add(mntmCancelarReservacin_1);
+		
+		menuItem_8 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_8.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_10", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_9.add(menuItem_8);
 		
 		label10 = new JLabel("");
 		label10.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1295,7 +1424,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_11.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_11.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_11", null);
+						RentRoom rent = new RentRoom("panel_11", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1339,13 +1468,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label11.setVisible(true);
 						lblC_10.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-11",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_10.add(mntmCancelarReservacin_2);
+		
+		menuItem_9 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_9.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_11", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_10.add(menuItem_9);
 		
 		label11 = new JLabel("");
 		label11.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1376,7 +1515,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_12.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_12.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_12", null);
+						RentRoom rent = new RentRoom("panel_12", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1420,13 +1559,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label12.setVisible(true);
 						lblC_11.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-12",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_11.add(mntmCancelarReservacin_3);
+		
+		menuItem_10 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_10.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_12", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_11.add(menuItem_10);
 		 
 		label12 = new JLabel("");
 		label12.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1457,7 +1606,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_13.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_13.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_13", null);
+						RentRoom rent = new RentRoom("panel_13", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1501,13 +1650,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label13.setVisible(true);
 						lblC_12.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-13",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_12.add(mntmCancelarReservacin_4);
+		
+		menuItem_11 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_11.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_13", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_12.add(menuItem_11);
 		
 		label13 = new JLabel("");
 		label13.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1538,7 +1697,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_14.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_14.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_14", null);
+						RentRoom rent = new RentRoom("panel_14", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1582,13 +1741,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label14.setVisible(true);
 						lblC_13.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-14",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_13.add(mntmCancelarReservacin_5);
+		
+		menuItem_12 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_12.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_14", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_13.add(menuItem_12);
 		
 		label14 = new JLabel("");
 		label14.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1619,7 +1788,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_15.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_15.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_15", null);
+						RentRoom rent = new RentRoom("panel_15", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1663,13 +1832,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label15.setVisible(true);
 						lblC_14.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-15",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_6.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_14.add(mntmCancelarReservacin_6);
+		
+		menuItem_13 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_13.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_15", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_14.add(menuItem_13);
 		
 		label15 = new JLabel("");
 		label15.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1700,7 +1879,7 @@ public class VisualMain extends JFrame implements Runnable{
 				Color c1 = panel_16.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_16.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_16", null);
+						RentRoom rent = new RentRoom("panel_16", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1744,13 +1923,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label16.setVisible(true);
 						lblC_15.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-16",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_7.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_15.add(mntmCancelarReservacin_7);
+		
+		menuItem_14 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_14.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_16", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_15.add(menuItem_14);
 		
 		label16 = new JLabel("");
 		label16.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1781,7 +1970,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_17.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_17.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_17", null);
+						RentRoom rent = new RentRoom("panel_17", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1825,13 +2014,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label17.setVisible(true);
 						lblC_16.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-17",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_8.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_16.add(mntmCancelarReservacin_8);
+		
+		menuItem_15 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_15.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_17", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_16.add(menuItem_15);
 		
 		label17 = new JLabel("");
 		label17.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1862,7 +2061,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_18.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_18.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_18", null);
+						RentRoom rent = new RentRoom("panel_18", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1906,13 +2105,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label18.setVisible(true);
 						lblC_17.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-18",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_9.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_17.add(mntmCancelarReservacin_9);
+		
+		menuItem_16 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_16.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_18", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_17.add(menuItem_16);
 		
 		label18 = new JLabel("");
 		label18.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -1943,7 +2152,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_19.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_19.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_19", null);
+						RentRoom rent = new RentRoom("panel_19", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -1987,13 +2196,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label19.setVisible(true);
 						lblC_18.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-19",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_10.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_18.add(mntmCancelarReservacin_10);
+		
+		menuItem_17 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_17.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_19", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_18.add(menuItem_17);
 		
 		label19 = new JLabel("");
 		label19.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2024,7 +2243,7 @@ public class VisualMain extends JFrame implements Runnable{
 				Color c1 = panel_20.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_20.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_20", null);
+						RentRoom rent = new RentRoom("panel_20", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2068,13 +2287,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label20.setVisible(true);
 						lblC_19.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-20",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_11.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_19.add(mntmCancelarReservacin_11);
+		
+		menuItem_18 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_18.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_20", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_19.add(menuItem_18);
 		
 		label20 = new JLabel("");
 		label20.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2105,7 +2334,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_21.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_21.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_21", null);
+						RentRoom rent = new RentRoom("panel_21", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2149,13 +2378,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label21.setVisible(true);
 						lblC_20.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-21",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_12.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_20.add(mntmCancelarReservacin_12);
+		
+		menuItem_19 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_19.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_21", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_20.add(menuItem_19);
 		
 		label21 = new JLabel("");
 		label21.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2186,7 +2425,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_22.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_22.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_22", null);
+						RentRoom rent = new RentRoom("panel_22", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2230,13 +2469,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label22.setVisible(true);
 						lblC_21.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-22",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_13.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_21.add(mntmCancelarReservacin_13);
+		
+		menuItem_20 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_20.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_22", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_21.add(menuItem_20);
 		
 		label22 = new JLabel("");
 		label22.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2267,7 +2516,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_23.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_23.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_23", null);
+						RentRoom rent = new RentRoom("panel_23", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2311,13 +2560,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label23.setVisible(true);
 						lblC_22.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-23",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_14.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_22.add(mntmCancelarReservacin_14);
+		
+		menuItem_21 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_21.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_21.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_23", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_22.add(menuItem_21);
 		
 		label23 = new JLabel("");
 		label23.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2348,7 +2607,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_24.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_24.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_24", null);
+						RentRoom rent = new RentRoom("panel_24", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2392,13 +2651,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label24.setVisible(true);
 						lblC_23.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-24",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_15.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_23.add(mntmCancelarReservacin_15);
+		
+		menuItem_22 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_22.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_22.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_24", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_23.add(menuItem_22);
 		
 		label24 = new JLabel("");
 		label24.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2429,7 +2698,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_25.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_25.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_25", null);
+						RentRoom rent = new RentRoom("panel_25", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2473,13 +2742,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label25.setVisible(true);
 						lblC_24.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-25",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_16.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_24.add(mntmCancelarReservacin_16);
+		
+		menuItem_23 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_23.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_23.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_25", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_24.add(menuItem_23);
 		
 		label25 = new JLabel("");
 		label25.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2510,7 +2789,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_26.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_26.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_26", null);
+						RentRoom rent = new RentRoom("panel_26", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2554,13 +2833,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label26.setVisible(true);
 						lblC_25.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-26",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_17.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_25.add(mntmCancelarReservacin_17);
+		
+		menuItem_24 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_24.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_24.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_26", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_25.add(menuItem_24);
 		
 		label26 = new JLabel("");
 		label26.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2591,7 +2880,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_27.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_27.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_27", null);
+						RentRoom rent = new RentRoom("panel_27", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2635,13 +2924,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label27.setVisible(true);
 						lblC_26.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-27",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_18.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_26.add(mntmCancelarReservacin_18);
+		
+		menuItem_25 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_25.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_25.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_27", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_26.add(menuItem_25);
 		
 		label27 = new JLabel("");
 		label27.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2672,7 +2971,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_28.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_28.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_28", null);
+						RentRoom rent = new RentRoom("panel_28", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2716,13 +3015,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label28.setVisible(true);
 						lblC_27.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-28",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_19.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_27.add(mntmCancelarReservacin_19);
+		
+		menuItem_26 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_26.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_26.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_28", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_27.add(menuItem_26);
 		
 		label28 = new JLabel("");
 		label28.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2753,7 +3062,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_29.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_29.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_29", null);
+						RentRoom rent = new RentRoom("panel_29", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2797,13 +3106,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label29.setVisible(true);
 						lblC_28.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-29",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_20.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_28.add(mntmCancelarReservacin_20);
+		
+		menuItem_27 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_27.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_27.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_29", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_28.add(menuItem_27);
 		
 		label29 = new JLabel("");
 		label29.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2834,7 +3153,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_30.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_30.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_30", null);
+						RentRoom rent = new RentRoom("panel_30", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2878,13 +3197,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label30.setVisible(true);
 						lblC_29.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-30",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_21.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_29.add(mntmCancelarReservacin_21);
+		
+		menuItem_28 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_28.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_28.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_30", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_29.add(menuItem_28);
 		
 		label30 = new JLabel("");
 		label30.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2915,7 +3244,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_31.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_31.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_31", null);
+						RentRoom rent = new RentRoom("panel_31", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -2959,13 +3288,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label31.setVisible(true);
 						lblC_30.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-31",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_22.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_30.add(mntmCancelarReservacin_22);
+		
+		menuItem_29 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_29.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_29.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_31", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_30.add(menuItem_29);
 		
 		label31 = new JLabel("");
 		label31.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -2996,7 +3335,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_32.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_32.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_32", null);
+						RentRoom rent = new RentRoom("panel_32", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -3040,13 +3379,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label32.setVisible(true);
 						lblC_31.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-32",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_23.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_31.add(mntmCancelarReservacin_23);
+		
+		menuItem_30 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_30.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_30.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_32", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_31.add(menuItem_30);
 		
 		label32 = new JLabel("");
 		label32.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -3077,7 +3426,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_33.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_33.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_33", null);
+						RentRoom rent = new RentRoom("panel_33", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -3121,13 +3470,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label33.setVisible(true);
 						lblC_32.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-33",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_24.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_32.add(mntmCancelarReservacin_24);
+		
+		menuItem_31 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_31.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_31.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_33", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_32.add(menuItem_31);
 		
 		
 		label33 = new JLabel("");
@@ -3159,7 +3518,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_34.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_34.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_34", null);
+						RentRoom rent = new RentRoom("panel_34", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -3203,13 +3562,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label34.setVisible(true);
 						lblC_33.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-34",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_25.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_33.add(mntmCancelarReservacin_25);
+		
+		menuItem_32 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_32.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_32.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_34", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_33.add(menuItem_32);
 		
 		label34 = new JLabel("");
 		label34.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -3240,7 +3609,7 @@ public class VisualMain extends JFrame implements Runnable{
 					Color c1 = panel_35.getBackground();
 					if (c1!=c2 && c1!=c3) {
 						panel_35.setBackground(new Color (220,220,220));
-						RentRoom rent = new RentRoom("panel_35", null);
+						RentRoom rent = new RentRoom("panel_35", null, 1);
 						rent.setVisible(true);
 					}
 				}
@@ -3284,13 +3653,23 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label35.setVisible(true);
 						lblC_34.setVisible(true);
-						RentRoom.code--;
+						RentRoom.deleteTempFile("C-35",1);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_26.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
 		popupMenu_34.add(mntmCancelarReservacin_26);
+		
+		menuItem_33 = new JMenuItem("Ver Habitaci\u00F3n");
+		menuItem_33.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/list_opt.png")));
+		menuItem_33.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RentRoom rent = new RentRoom("panel_35", null, 2);
+				rent.setVisible(true);
+			}
+		});
+		popupMenu_34.add(menuItem_33);
 		
 		label35 = new JLabel("");
 		label35.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/room_opt.png")));
@@ -3429,7 +3808,7 @@ public class VisualMain extends JFrame implements Runnable{
 	public void run() {
 		int counter = 0;
 		while(true) {
-			if (counter<15) {
+			if (counter<60) {
 				counter++;
 				try {
 					Thread.sleep(1000);
@@ -3750,7 +4129,7 @@ public class VisualMain extends JFrame implements Runnable{
 	private void resumeReservations() {
 		for (Habitacion i: Cabaña809.getInstance().getMisHabs()) {
 			if (i.isOnUse()) {
-				RentRoom resume = new RentRoom(i.getRoomName(), i);
+				RentRoom resume = new RentRoom(i.getRoomName(), i, 1);
 				resume.dispose();
 			}
 		}
@@ -3768,6 +4147,7 @@ public class VisualMain extends JFrame implements Runnable{
 					String aux = formatter.format(date1);
 					String[] separator = aux.split(" ");
 					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+RentRoom.getRoomName(i.getRoomName())+" ha finalizado a las "+separator[0]+" el "+separator[1]);
+					RentRoom.deleteTempFile(RentRoom.getRoomName(i.getRoomName()), 2);
 					i.setOnUse(false);
 					i.setTipo(null);
 					i.setFinalDate(0);
@@ -3775,5 +4155,4 @@ public class VisualMain extends JFrame implements Runnable{
 			}
 		}
 	}
-	
 }
