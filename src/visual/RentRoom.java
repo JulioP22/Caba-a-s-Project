@@ -325,14 +325,19 @@ public class RentRoom extends JDialog implements Runnable {
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (table.getSelectedRow()>=0) {
-					int index = table.getSelectedRow();
-					if (!isAdded(Cabaña809.getInstance().getMisProduc().get(index).getNombre())) {
-				    	Producto product = Cabaña809.getInstance().getMisProduc().get(index);
-					    ProductAmount amount = new ProductAmount(product);
-					    amount.setVisible(true);
+					int index = getIndexFromName(tableModel.getValueAt(table.getSelectedRow(), 0).toString());
+					if (index != -1) {
+						if (!isAdded(Cabaña809.getInstance().getMisProduc().get(index).getNombre())) {
+					    	Producto product = Cabaña809.getInstance().getMisProduc().get(index);
+						    ProductAmount amount = new ProductAmount(product);
+						    amount.setVisible(true);
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Este producto ya ha sido agregado");
+						}
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "Este producto ya ha sido agregado");
+						JOptionPane.showMessageDialog(null, "Ha ocurrido un error al agregar este producto");
 					}
 				}
 			}
@@ -588,6 +593,18 @@ public class RentRoom extends JDialog implements Runnable {
 	   		}
 	   	}
 	}
+	
+	private int getIndexFromName(String name) {
+		int index = -1;
+		for(int i = 0;i<Cabaña809.getInstance().getMisProduc().size();i++) {
+			if (Cabaña809.getInstance().getMisProduc().get(i).getNombre().equalsIgnoreCase(name)) {
+				index = i;
+				break;
+			}
+		}
+		return index;
+	}
+	
     public static void loadSelected() {
        	tableModel1.setRowCount(0);
 	   	DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
@@ -681,7 +698,7 @@ public class RentRoom extends JDialog implements Runnable {
 					}
 					else {
 						i.setTipo("dePaso");
-						i.setFinalDate(calendar.getTimeInMillis()+60000);
+						i.setFinalDate(calendar.getTimeInMillis()+14400000);
 					}
 					i.setNumeroOrden(ownCode);
 					i.setOnUse(true);
@@ -1642,7 +1659,7 @@ public class RentRoom extends JDialog implements Runnable {
 		Date date1 = new Date();
 		String[] separate = date.split("/");
 		String realDate = separate[3]+", "+separate[0]+" "+separate[1]+" "+separate[2]+" 10:00:00 GMT";
-		aux = Date.parse(realDate)-date1.getTime()+60000;
+		aux = Date.parse(realDate)-date1.getTime()+14400000;
 		return aux;
 	}
 	@SuppressWarnings("deprecation")
@@ -1651,7 +1668,7 @@ public class RentRoom extends JDialog implements Runnable {
 		String date = getDate1();
 		String[] separate = date.split("/");
 		String realDate = separate[3]+", "+separate[0]+" "+separate[1]+" "+separate[2]+" 10:00:00 GMT";
-		aux = Date.parse(realDate) + 60000;
+		aux = Date.parse(realDate) + 14400000;
 		return aux;
 	}
 	private String getDate1() {
@@ -1824,7 +1841,7 @@ public class RentRoom extends JDialog implements Runnable {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
-		calendar.setTimeInMillis(calendar.getTimeInMillis()+60000);
+		calendar.setTimeInMillis(calendar.getTimeInMillis()+14400000);
 		Date date1 = calendar.getTime();
 		String aux = formatter.format(date1);
 		String meridian = calendar.get(Calendar.AM_PM) == Calendar.AM?"AM": "PM";
