@@ -13,6 +13,7 @@ public class Habitacion implements Serializable{
 	private String roomName;
 	private boolean onUse = false;
 	private long finalDate;
+	private long numeroOrden;
 	
 	
 	public Habitacion(String roomName) {
@@ -71,6 +72,16 @@ public class Habitacion implements Serializable{
 	}
 
 
+	public long getNumeroOrden() {
+		return numeroOrden;
+	}
+
+
+	public void setNumeroOrden(long numeroOrden) {
+		this.numeroOrden = numeroOrden;
+	}
+
+	
 	
 	
 

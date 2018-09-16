@@ -29,25 +29,12 @@ public class Discount extends JDialog {
 	private static final long serialVersionUID = -2204537697058904578L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField monto;
+	private String action;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			Discount dialog = new Discount();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
-	/**
-	 * Create the dialog.
-	 */
-	public Discount() {
-		setTitle("Descuento");
+	public Discount(String action) {
+		this.action = action;
+		setTitle(action);
 		setBounds(100, 100, 450, 221);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,7 +45,7 @@ public class Discount extends JDialog {
 		setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Descuento", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), action, TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(12, 13, 408, 113);
 		contentPanel.add(panel);
 		panel.setLayout(null);
@@ -93,9 +80,9 @@ public class Discount extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if (validateValue()) {
 							Cabaña809.getInstance().discount = Float.parseFloat(monto.getText());
-							JOptionPane.showMessageDialog(null, "Descuento aplicado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE, null);
+							if (action.equals("Aumento")) Cabaña809.getInstance().discount *= -1;
+							JOptionPane.showMessageDialog(null, action+" aplicado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE, null);
 							dispose();
-							
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "El valor digitado no es válido (puede que sea este sea mayor que el total de la factura), intente con otro valor", "Error", JOptionPane.ERROR_MESSAGE, null);
@@ -123,7 +110,7 @@ public class Discount extends JDialog {
 		boolean revision = false;
 		if (!monto.getText().equals("")) {
 			float value = Float.parseFloat(monto.getText());
-			if (value <= Cabaña809.getInstance().totalAmount) revision = true;
+			if (value <= Cabaña809.getInstance().totalAmount || action.equals("Aumento")) revision = true;
 		}
 		return revision;
 		

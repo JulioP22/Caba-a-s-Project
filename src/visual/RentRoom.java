@@ -62,6 +62,9 @@ import javax.print.SimpleDoc;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RentRoom extends JDialog implements Runnable {
 
@@ -115,6 +118,8 @@ public class RentRoom extends JDialog implements Runnable {
 	private int option;
 	private Temporal temp = null;
 	private JButton btnProductosAnteriores;
+	private long ownCode;
+	private JTextField finder;
 	/**
 	 * Launch the application.
 	 */
@@ -145,7 +150,7 @@ public class RentRoom extends JDialog implements Runnable {
 		this.room = habitacion;
 		this.option = option;
 		setTitle("Alquiler de caba\u00F1a");
-		setBounds(100, 100, 530, 378);
+		setBounds(100, 100, 883, 648);
 		setModal(true);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -171,18 +176,18 @@ public class RentRoom extends JDialog implements Runnable {
 		
 		panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Productos disponibles", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_2.setBounds(10, 81, 253, 193);
+		panel_2.setBounds(10, 81, 453, 453);
 		contentPanel.add(panel_2);
 		panel_2.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 22, 233, 125);
+		scrollPane.setBounds(10, 79, 431, 325);
 		panel_2.add(scrollPane);
 		
 		{
 			panel = new JPanel();
 			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Tipo de caba\u00F1a", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 253, 59);
+			panel.setBounds(10, 11, 453, 59);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			
@@ -193,7 +198,7 @@ public class RentRoom extends JDialog implements Runnable {
 					ejecutiva.setSelected(true);
 				}
 			});
-			ejecutiva.setBounds(19, 23, 91, 23);
+			ejecutiva.setBounds(69, 23, 91, 23);
 			panel.add(ejecutiva);
 			
 			sencilla = new JRadioButton("Sencilla");
@@ -203,7 +208,7 @@ public class RentRoom extends JDialog implements Runnable {
 					ejecutiva.setSelected(false);
 				}
 			});
-			sencilla.setBounds(149, 23, 86, 23);
+			sencilla.setBounds(295, 23, 86, 23);
 			panel.add(sencilla);
 		}
 		ejecutiva.setSelected(true);
@@ -211,13 +216,13 @@ public class RentRoom extends JDialog implements Runnable {
 		
 		panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Seleccionado", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_3.setBounds(273, 81, 241, 193);
+		panel_3.setBounds(475, 81, 390, 453);
 		contentPanel.add(panel_3);
 		panel_3.setLayout(null);
 		
 		
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 22, 221, 125);
+		scrollPane_1.setBounds(10, 22, 368, 382);
 		panel_3.add(scrollPane_1);
 		///////////////////////////////////////Lo que se debe copiar para hacer las tablas/////////////////////////////////////////////////
 		String[] columnsHeaders = {"Nombre","Precio"};
@@ -286,7 +291,7 @@ public class RentRoom extends JDialog implements Runnable {
 		{
 			panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2, true), "Servicio", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_1.setBounds(273, 11, 241, 59);
+			panel_1.setBounds(475, 11, 390, 59);
 			contentPanel.add(panel_1);
 			panel_1.setLayout(null);
 			{
@@ -297,7 +302,7 @@ public class RentRoom extends JDialog implements Runnable {
 						amanecida.setSelected(false);
 					}
 				});
-				dePaso.setBounds(25, 23, 90, 23);
+				dePaso.setBounds(58, 23, 90, 23);
 				panel_1.add(dePaso);
 			}
 			
@@ -308,7 +313,7 @@ public class RentRoom extends JDialog implements Runnable {
 					amanecida.setSelected(true);
 				}
 			});
-			amanecida.setBounds(129, 23, 106, 23);
+			amanecida.setBounds(249, 23, 106, 23);
 			panel_1.add(amanecida);
 		}
 		if (room == null)
@@ -332,10 +337,25 @@ public class RentRoom extends JDialog implements Runnable {
 				}
 			}
 		});
-		addButton.setBounds(154, 159, 89, 23);
+		addButton.setBounds(352, 417, 89, 23);
 		panel_2.add(addButton);
 		
 		addButton.setEnabled(false);
+		
+		finder = new JTextField();
+		finder.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				loadProducts();
+			}
+		});
+		finder.setBounds(113, 34, 274, 23);
+		panel_2.add(finder);
+		finder.setColumns(10);
+		
+		JLabel lblBsqueda = new JLabel("B\u00FAsqueda: ");
+		lblBsqueda.setBounds(24, 37, 77, 16);
+		panel_2.add(lblBsqueda);
 		
 		deleteButton = new JButton("Eliminar");
 		deleteButton.setIcon(new ImageIcon(RentRoom.class.getResource("/icons/deleteIcon_opt.png")));
@@ -347,25 +367,25 @@ public class RentRoom extends JDialog implements Runnable {
 				}
 			}
 		});
-		deleteButton.setBounds(143, 159, 88, 23);
+		deleteButton.setBounds(290, 417, 88, 23);
 		deleteButton.setEnabled(false);
 		
 		panel_3.add(deleteButton);
 		
 		lblMontoTotal = new JLabel("Monto total: ");
 		lblMontoTotal.setFont(new Font("Century Schoolbook", Font.ITALIC, 14));
-		lblMontoTotal.setBounds(306, 289, 93, 14);
+		lblMontoTotal.setBounds(649, 551, 93, 14);
 		contentPanel.add(lblMontoTotal);
 		
 		priceLabel = new JLabel("0.00");
 		priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		priceLabel.setFont(new Font("Century Schoolbook", Font.ITALIC, 14));
-		priceLabel.setBounds(395, 289, 68, 14);
+		priceLabel.setBounds(754, 551, 68, 14);
 		contentPanel.add(priceLabel);
 		
 		lblNewLabel = new JLabel("RD$");
 		lblNewLabel.setFont(new Font("Century Schoolbook", Font.ITALIC, 14));
-		lblNewLabel.setBounds(473, 285, 31, 22);
+		lblNewLabel.setBounds(834, 547, 31, 22);
 		contentPanel.add(lblNewLabel);
 		{
 			JPanel buttonPane = new JPanel();
@@ -379,13 +399,36 @@ public class RentRoom extends JDialog implements Runnable {
 						if (dePaso.isSelected()) {
 							int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea hacer la reserva?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
 							if (resp == JOptionPane.YES_OPTION) {
+								String aux = null;
+								
+								if (sencilla.isSelected()) aux = "fastRoom";
+								else aux = "fastEjecutive";
+								
+								try {
+									writeTicket(getRoomName(roomName), getEntryDate(), getFinalDate(), aux);
+								} catch (Exception e1) {
+									e1.printStackTrace();
+								}
+								try {
+									readTicket();
+								} catch (IOException e1) {
+									e1.printStackTrace();
+								}
+								try {
+									printComponent();
+									Cabaña809.getInstance().discount = 0f;
+									Cabaña809.getInstance().totalAmount = 0f;
+								} catch (PrinterException e1) {
+									e1.printStackTrace();
+								}
+								
 								if (option == 1) {
 									setAllCancelFalse();
 									VisualMain.getPanel(roomName).setBackground(Color.GREEN);
 									for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
 										VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
 									}
-									label = new JLabel("En uso");
+									label = new JLabel(ownCode +" - En uso");
 									label.setName("enUso");
 									label.setHorizontalAlignment(SwingConstants.CENTER);
 									label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
@@ -399,68 +442,13 @@ public class RentRoom extends JDialog implements Runnable {
 									label1.setBounds(3, 55, 93, 14);
 									VisualMain.getPanel(roomName).add(label1);
 									
-									
 									t.start();
-								}
-								String aux = null;
-								
-								if (sencilla.isSelected()) aux = "fastRoom";
-								else aux = "fastEjecutive";
-								
-								try {
-									writeTicket(getRoomName(roomName), getEntryDate(), getFinalDate(), aux);
-								} catch (Exception e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								try {
-									readTicket();
-								} catch (IOException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								try {
-									printComponent();
-									Cabaña809.getInstance().discount = 0f;
-									Cabaña809.getInstance().totalAmount = 0f;
-								} catch (PrinterException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
 								}
 								dispose();
 							}
 						}else if (amanecida.isSelected()) {
 							int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea hacer la reserva?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
 							if (resp == JOptionPane.YES_OPTION) {
-								if (option == 1) {
-									setAllCancelFalse();
-									VisualMain.getPanel(roomName).setBackground(Color.GREEN);
-									for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
-										VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
-									}
-									label = new JLabel("En uso");
-									label.setName("enUso");
-									label.setHorizontalAlignment(SwingConstants.CENTER);
-									label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
-									label.setBounds(3, 10, 93, 14);
-									VisualMain.getPanel(roomName).add(label);
-									
-									label1 = new JLabel(getDate());
-									label1.setName("time");
-									label1.setHorizontalAlignment(SwingConstants.CENTER);
-									label1.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
-									label1.setBounds(0, 35, 100, 14);
-									VisualMain.getPanel(roomName).add(label1);
-									
-									label2 = new JLabel("10:00 AM");
-									label2.setName("time2");
-									label2.setHorizontalAlignment(SwingConstants.CENTER);
-									label2.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
-									label2.setBounds(-2, 60, 100, 14);
-									VisualMain.getPanel(roomName).add(label2);
-									
-									t.start();
-								}
 								String aux = null;
 								
 								if (sencilla.isSelected()) aux = "simpleComplete";
@@ -484,6 +472,35 @@ public class RentRoom extends JDialog implements Runnable {
 								} catch (PrinterException e1) {
 									JOptionPane.showMessageDialog(null, "Se ha producido un error al tratar de usar la impresora","Error", JOptionPane.ERROR_MESSAGE, null);
 								}
+								if (option == 1) {
+									setAllCancelFalse();
+									VisualMain.getPanel(roomName).setBackground(Color.GREEN);
+									for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
+										VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
+									}
+									label = new JLabel(ownCode+" - En uso");
+									label.setName("enUso");
+									label.setHorizontalAlignment(SwingConstants.CENTER);
+									label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+									label.setBounds(3, 10, 93, 14);
+									VisualMain.getPanel(roomName).add(label);
+									
+									label1 = new JLabel(getDate());
+									label1.setName("time");
+									label1.setHorizontalAlignment(SwingConstants.CENTER);
+									label1.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+									label1.setBounds(0, 35, 100, 14);
+									VisualMain.getPanel(roomName).add(label1);
+									
+									label2 = new JLabel("10:00 AM");
+									label2.setName("time2");
+									label2.setHorizontalAlignment(SwingConstants.CENTER);
+									label2.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
+									label2.setBounds(-2, 60, 100, 14);
+									VisualMain.getPanel(roomName).add(label2);
+									
+									t.start();
+								}
 								dispose();
 							}
 						}
@@ -493,10 +510,20 @@ public class RentRoom extends JDialog implements Runnable {
 				btnDescuento = new JButton("Descuento");
 				btnDescuento.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Discount dis = new Discount();
+						Discount dis = new Discount("Descuento");
 						dis.setVisible(true);
 					}
 				});
+				
+				JButton btnAumento = new JButton("Aumento");
+				btnAumento.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Discount dis = new Discount("Aumento");
+						dis.setVisible(true);
+					}
+				});
+				btnAumento.setIcon(new ImageIcon(RentRoom.class.getResource("/icons/login_opt.png")));
+				buttonPane.add(btnAumento);
 				btnDescuento.setIcon(new ImageIcon(RentRoom.class.getResource("/icons/login_opt.png")));
 				buttonPane.add(btnDescuento);
 				
@@ -554,9 +581,11 @@ public class RentRoom extends JDialog implements Runnable {
 	   	table.getColumnModel().getColumn(1).setCellRenderer(tcr);
 	   	row = new Object[tableModel.getColumnCount()];
 	   	for (Producto pr: Cabaña809.getInstance().getMisProduc()) {
-	   	    row[0]=pr.getNombre();
-	   	    row[1]=pr.getPrecio();
-	   	    tableModel.addRow(row);
+	   		if (finder.getText().equals("") || pr.getNombre().toLowerCase().indexOf(finder.getText().toLowerCase()) != -1) {
+	   			row[0]=pr.getNombre();
+		   	    row[1]=pr.getPrecio();
+		   	    tableModel.addRow(row);
+	   		}
 	   	}
 	}
     public static void loadSelected() {
@@ -567,9 +596,9 @@ public class RentRoom extends JDialog implements Runnable {
 	   	table_1.getColumnModel().getColumn(1).setCellRenderer(tcr);
 	   	row1 = new Object[tableModel1.getColumnCount()];
 	   	for (Producto pr : selected) {
-	   			row1[0]=pr.getNombre();
-	   			row1[1]=pr.getCantidad();
-	   			tableModel1.addRow(row1);
+   			row1[0]=pr.getNombre();
+   			row1[1]=pr.getCantidad();
+   			tableModel1.addRow(row1);
 	   	}
     }
     public static void addSelected(Producto product) {
@@ -609,7 +638,7 @@ public class RentRoom extends JDialog implements Runnable {
         return String.format("%d:%02d:%02d", h,m,s);
     }
     
-    public static void deleteTempFile(String roomName, int options) {
+    public static void deleteTempFile(String roomName, int options, int keepNumber) {
     	if (roomName == null || roomName == "") return;
     	String path = System.getProperty("user.home")+File.separator+"Files/Temporal";
     	File file = new File(path);
@@ -620,7 +649,7 @@ public class RentRoom extends JDialog implements Runnable {
     		try {
 				objReader = new ObjectInputStream(new FileInputStream(System.getProperty("user.home")+File.separator+"Files/Temporal/"+roomName.trim()+".dat"));
 				Temporal temp = (Temporal) objReader.readObject();
-				Cabaña809.canceled.add(temp.getOrderNumber());
+				if (keepNumber == 1) Cabaña809.canceled.add(temp.getOrderNumber());
 				objReader.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -652,8 +681,9 @@ public class RentRoom extends JDialog implements Runnable {
 					}
 					else {
 						i.setTipo("dePaso");
-						i.setFinalDate(calendar.getTimeInMillis()+14400000);
+						i.setFinalDate(calendar.getTimeInMillis()+60000);
 					}
+					i.setNumeroOrden(ownCode);
 					i.setOnUse(true);
 					break;
 				}
@@ -695,19 +725,19 @@ public class RentRoom extends JDialog implements Runnable {
 					e.printStackTrace();
 				}
 				if ((seconds/1000)<1) {
-					label1.setVisible(false);
-					label.setVisible(false);
-					if (completeNight)
-						label2.setVisible(false);
-					
-					Habitacion room = Cabaña809.getInstance().getMisHabs().get(index);
-					calendar.setTimeInMillis(room.getFinalDate());
-					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
-					String aux1 = formatter.format(calendar.getTime());
-					String[] separator = aux1.split(" ");
-					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+getRoomName(aux_1)+" ha finalizado a las "+separator[0]+" el "+separator[1], null, JOptionPane.INFORMATION_MESSAGE, null);
-					deleteTempFile(getRoomName(aux_1),2);
-					break;
+//					label1.setVisible(false);
+//					label.setVisible(false);
+//					if (completeNight)
+//						label2.setVisible(false);
+//					
+//					Habitacion room = Cabaña809.getInstance().getMisHabs().get(index);
+//					calendar.setTimeInMillis(room.getFinalDate());
+//					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
+//					String aux1 = formatter.format(calendar.getTime());
+//					String[] separator = aux1.split(" ");
+//					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+getRoomName(aux_1)+" ha finalizado a las "+separator[0]+" el "+separator[1], null, JOptionPane.INFORMATION_MESSAGE, null);
+//					deleteTempFile(getRoomName(aux_1),2);
+//					break;
 				}
 				if (aux_1.equals("panel_1")) {
 					if (VisualMain.cancel) {
@@ -1005,19 +1035,19 @@ public class RentRoom extends JDialog implements Runnable {
 					e.printStackTrace();
 				}
 				if (time<=1000) {
-					label1.setVisible(false);
-					label.setVisible(false);
-					if (completeNight)
-						label2.setVisible(false);
-					
-					Habitacion room = Cabaña809.getInstance().getMisHabs().get(index);
-					calendar.setTimeInMillis(room.getFinalDate());
-					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
-					String aux = formatter.format(calendar.getTime());
-					String[] separator = aux.split(" ");
-					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+getRoomName(aux_1)+" ha finalizado a las "+separator[0]+" el "+separator[1], null, JOptionPane.INFORMATION_MESSAGE, null);
-					deleteTempFile(getRoomName(aux_1),2);
-					break;
+//					label1.setVisible(false);
+//					label.setVisible(false);
+//					if (completeNight)
+//						label2.setVisible(false);
+//					
+//					Habitacion room = Cabaña809.getInstance().getMisHabs().get(index);
+//					calendar.setTimeInMillis(room.getFinalDate());
+//					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
+//					String aux = formatter.format(calendar.getTime());
+//					String[] separator = aux.split(" ");
+//					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+getRoomName(aux_1)+" ha finalizado a las "+separator[0]+" el "+separator[1], null, JOptionPane.INFORMATION_MESSAGE, null);
+//					deleteTempFile(getRoomName(aux_1),2);
+//					break;
 				}
 				if (aux_1.equals("panel_1")) {
 					if (VisualMain.cancel) {
@@ -1459,16 +1489,19 @@ public class RentRoom extends JDialog implements Runnable {
 	}
 	
 	public void writeTicket(String room, String entryDate, String finalDate, String roomType) throws IOException, ClassNotFoundException {
+		Producto hab = new Producto();
 		writer = new FileWriter(new File(System.getProperty("user.home")+File.separator+"Files/ticket.txt"));
 		writer.write("CABANA 809...\n");
 		writer.write("RNC-05800189218 TU MEJOR ELECCION \n");
 		writer.write("C / MILAGRO SANCHEZ, COTUI, R.D.\n");
 		writer.write("809-240-0768\n");
 		writer.write("----------------------------------\n");
+		writer.write("    ***PARA CONSUMIDOR FINAL***   \n\n");
 		writer.write("ATENDIO: CABANA 809\n\n");
 		writer.write("HAB.: "+room+"\n\n");
 		int cod = -1;
 		String aux = "ORDEN NO: "+String.valueOf(this.option != 2 ? cod = getCode() : temp.getOrderNumber());
+		ownCode = cod;
 		int value = aux.length();
 		for (int i=0;i<(34-value);i++)
 			aux = " "+aux;
@@ -1478,10 +1511,30 @@ public class RentRoom extends JDialog implements Runnable {
 		writer.write("----------------------------------\n");
 		
 		if (this.option != 2) {
-			if (roomType.equals("fastRoom"))               writer.write("1.00 HABITACION PASO        "+String.format("%.2f", Cabaña809.simpleFastRoomPrice)+"\n");
-			else if (roomType.equals("fastEjecutive"))     writer.write("1.00 EJECUTIVA PASO        "+String.format("%.2f", Cabaña809.ejecutiveFastRoomPrice)+"\n");
-			else if (roomType.equals("simpleComplete"))    writer.write("1.00 SIMPLE AMANECIDA       "+String.format("%.2f", Cabaña809.simpleCompleteRoomPrice)+"\n");
-			else if (roomType.equals("ejecutiveComplete")) writer.write("1.00 EJECUTIVA COMPLETA    "+String.format("%.2f", Cabaña809.ejecutiveCompleteRoomPrice)+"\n");
+			if (roomType.equals("fastRoom"))               {
+				writer.write("1.00 HABITACION PASO        "+String.format("%.2f", Cabaña809.simpleFastRoomPrice)+"\n");
+				hab.setNombre("HABITACION PASO");
+				hab.setPrecio(Cabaña809.simpleFastRoomPrice);
+				hab.setCantidad(1);
+			}
+			else if (roomType.equals("fastEjecutive"))     {
+				writer.write("1.00 EJECUTIVA PASO        "+String.format("%.2f", Cabaña809.ejecutiveFastRoomPrice)+"\n");
+				hab.setNombre("EJECUTIVA PASO");
+				hab.setPrecio(Cabaña809.ejecutiveFastRoomPrice);
+				hab.setCantidad(1);
+			}
+			else if (roomType.equals("simpleComplete"))    {
+				writer.write("1.00 SIMPLE AMANECIDA       "+String.format("%.2f", Cabaña809.simpleCompleteRoomPrice)+"\n");
+				hab.setNombre("SIMPLE AMANECIDA");
+				hab.setPrecio(Cabaña809.simpleCompleteRoomPrice);
+				hab.setCantidad(1);
+			}
+			else if (roomType.equals("ejecutiveComplete")) {
+				writer.write("1.00 EJECUTIVA COMPLETA    "+String.format("%.2f", Cabaña809.ejecutiveCompleteRoomPrice)+"\n");
+				hab.setNombre("EJECUTIVA COMPLETA");
+				hab.setPrecio(Cabaña809.ejecutiveCompleteRoomPrice);
+				hab.setCantidad(1);
+			}
 		}
 		
 		for (Producto i: selected) {
@@ -1523,7 +1576,7 @@ public class RentRoom extends JDialog implements Runnable {
 		writer.write("******GRACIAS POR PREFERIRNOS*****\n");
 		writer.write("**********************************\n");
 		writer.close();
-		createTempFile(room, cod);
+		createTempFile(room, cod, hab);
 	}
 	
 	private void createTemp(Temporal temp, String roomName) throws FileNotFoundException, IOException {
@@ -1535,10 +1588,11 @@ public class RentRoom extends JDialog implements Runnable {
 		objWriter.close();
 	}
 	
-	private void createTempFile(String roomName, int orderNumber) throws IOException, ClassNotFoundException {
+	private void createTempFile(String roomName, int orderNumber, Producto prod) throws IOException, ClassNotFoundException {
 		String path1 = System.getProperty("user.home")+File.separator+"Files/Temporal/"+roomName+".dat";
 		File fil = new File(path1);
 		if (!fil.exists()) {
+			selected.add(prod);
 			Temporal temp = new Temporal(selected, roomName, orderNumber);
 			createTemp(temp, roomName);
 		}
@@ -1588,7 +1642,7 @@ public class RentRoom extends JDialog implements Runnable {
 		Date date1 = new Date();
 		String[] separate = date.split("/");
 		String realDate = separate[3]+", "+separate[0]+" "+separate[1]+" "+separate[2]+" 10:00:00 GMT";
-		aux = Date.parse(realDate)-date1.getTime()+14400000;
+		aux = Date.parse(realDate)-date1.getTime()+60000;
 		return aux;
 	}
 	@SuppressWarnings("deprecation")
@@ -1597,7 +1651,7 @@ public class RentRoom extends JDialog implements Runnable {
 		String date = getDate1();
 		String[] separate = date.split("/");
 		String realDate = separate[3]+", "+separate[0]+" "+separate[1]+" "+separate[2]+" 10:00:00 GMT";
-		aux = Date.parse(realDate) + 14400000;
+		aux = Date.parse(realDate) + 60000;
 		return aux;
 	}
 	private String getDate1() {
@@ -1770,7 +1824,7 @@ public class RentRoom extends JDialog implements Runnable {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
-		calendar.setTimeInMillis(calendar.getTimeInMillis()+14400000);
+		calendar.setTimeInMillis(calendar.getTimeInMillis()+60000);
 		Date date1 = calendar.getTime();
 		String aux = formatter.format(date1);
 		String meridian = calendar.get(Calendar.AM_PM) == Calendar.AM?"AM": "PM";
@@ -1833,7 +1887,7 @@ public class RentRoom extends JDialog implements Runnable {
 		VisualMain.cancel20 = false;
 		VisualMain.cancel21 = false;
 		VisualMain.cancel22 = false;
-		VisualMain.cancel22 = false;
+		VisualMain.cancel23 = false;
 		VisualMain.cancel24 = false;
 		VisualMain.cancel25 = false;
 		VisualMain.cancel26 = false;
@@ -1855,6 +1909,7 @@ public class RentRoom extends JDialog implements Runnable {
 			if (i.getRoomName().equals(roomName)) {
 				i.setTipo(null);
 				i.setOnUse(false);
+				i.setNumeroOrden(-1);
 				break;
 			}
 		}
@@ -1865,7 +1920,7 @@ public class RentRoom extends JDialog implements Runnable {
 		for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
 			VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
 		}
-		label = new JLabel("En uso");
+		label = new JLabel(room.getNumeroOrden()+" - En uso");
 		label.setName("enUso");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
@@ -1885,7 +1940,7 @@ public class RentRoom extends JDialog implements Runnable {
 		for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
 			VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
 		}
-		label = new JLabel("En uso");
+		label = new JLabel(room.getNumeroOrden()+" - En uso");
 		label.setName("enUso");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));

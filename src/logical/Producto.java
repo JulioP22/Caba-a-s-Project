@@ -19,7 +19,17 @@ public class Producto implements Serializable{
 		this.nombre = nombre;
 		this.precio = precio;
 	}
-
+	
+	public Producto(String nombre, float precio, int cantidad) {
+		super();
+		this.nombre = nombre;
+		this.precio = precio;
+		this.cantidad = cantidad;
+	}
+	
+	public Producto() {
+		super();
+	}
 
 	public String getNombre() {
 		return nombre;

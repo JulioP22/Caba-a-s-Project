@@ -37,10 +37,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.file.StandardOpenOption;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
@@ -344,18 +340,17 @@ public class VisualMain extends JFrame implements Runnable{
 				}
 				
 				Runtime.getRuntime ().addShutdownHook ( 
-						 new Thread () {   
-						           @Override    
-						          public void run () {    
-						              //System.out.println ( "Shutdown hook" );
-						              try {
-										Cabaña809.writeAdmin();
-									} catch (IOException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-						         }      
-						    } ); 
+				 new Thread () {   
+				           @Override    
+				          public void run () {    
+				              //System.out.println ( "Shutdown hook" );
+				              try {
+								Cabaña809.writeAdmin();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+				         }      
+				    } ); 
 			}
 		});
 	}
@@ -558,12 +553,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label1.setVisible(true);
 						lblC.setVisible(true);
-						RentRoom.deleteTempFile("C-1",1);
+						RentRoom.deleteTempFile("C-1",1,0);
 					}
 				}
 			}
 		});
 		cancelarReserva.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu.add(cancelarReserva);
+		
+		cancelarReserva = new JMenuItem("Guardar número de orden");
+		cancelarReserva.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel = true;
+						panel_1.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_1.getComponentCount();i++) {
+							panel_1.getComponent(i).setVisible(false);
+						}
+						label1.setVisible(true);
+						lblC.setVisible(true);
+						RentRoom.deleteTempFile("C-1",1,1);
+					}
+				}
+			}
+		});
+		cancelarReserva.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu.add(cancelarReserva);
 		
 		JMenuItem mntmVerHabitacin = new JMenuItem("Ver Habitaci\u00F3n");
@@ -649,12 +666,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label2.setVisible(true);
 						lblC_1.setVisible(true);
-						RentRoom.deleteTempFile("C-2",1);
+						RentRoom.deleteTempFile("C-2",1,0);
 					}
 				}
 			}
 		});
 		mntmNewMenuItem.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_1.add(mntmNewMenuItem);
+		
+		mntmNewMenuItem = new JMenuItem("Guardar número de orden");
+		mntmNewMenuItem.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel1 = true;
+						panel_2.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_2.getComponentCount();i++) {
+							panel_2.getComponent(i).setVisible(false);
+						}
+						label2.setVisible(true);
+						lblC_1.setVisible(true);
+						RentRoom.deleteTempFile("C-2",1,1);
+					}
+				}
+			}
+		});
+		mntmNewMenuItem.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_1.add(mntmNewMenuItem);
 		
 		menuItem = new JMenuItem("Ver Habitaci\u00F3n");
@@ -740,12 +779,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label3.setVisible(true);
 						lblC_2.setVisible(true);
-						RentRoom.deleteTempFile("C-3",1);
+						RentRoom.deleteTempFile("C-3",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_2.add(mntmCancelarReserva);
+		
+		mntmCancelarReserva = new JMenuItem("Guardar número de orden");
+		mntmCancelarReserva.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel2 = true;
+						panel_3.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_3.getComponentCount();i++) {
+							panel_3.getComponent(i).setVisible(false);
+						}
+						label3.setVisible(true);
+						lblC_2.setVisible(true);
+						RentRoom.deleteTempFile("C-3",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReserva.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_2.add(mntmCancelarReserva);
 		
 		menuItem_1 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -831,12 +892,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label4.setVisible(true);
 						lblC_3.setVisible(true);
-						RentRoom.deleteTempFile("C-4",1);
+						RentRoom.deleteTempFile("C-4",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva_1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_3.add(mntmCancelarReserva_1);
+		
+		mntmCancelarReserva_1 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReserva_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel3 = true;
+						panel_4.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_4.getComponentCount();i++) {
+							panel_4.getComponent(i).setVisible(false);
+						}
+						label4.setVisible(true);
+						lblC_3.setVisible(true);
+						RentRoom.deleteTempFile("C-4",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReserva_1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_3.add(mntmCancelarReserva_1);
 		
 		menuItem_2 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -922,12 +1005,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label5.setVisible(true);
 						lblC_4.setVisible(true);
-						RentRoom.deleteTempFile("C-5",1);
+						RentRoom.deleteTempFile("C-5",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva_2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_4.add(mntmCancelarReserva_2);
+		
+		mntmCancelarReserva_2 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReserva_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel4 = true;
+						panel_5.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_5.getComponentCount();i++) {
+							panel_5.getComponent(i).setVisible(false);
+						}
+						label5.setVisible(true);
+						lblC_4.setVisible(true);
+						RentRoom.deleteTempFile("C-5",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReserva_2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_4.add(mntmCancelarReserva_2);
 		
 		menuItem_3 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1013,12 +1118,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label6.setVisible(true);
 						lblC_5.setVisible(true);
-						RentRoom.deleteTempFile("C-6",1);
+						RentRoom.deleteTempFile("C-6",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva_3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_5.add(mntmCancelarReserva_3);
+		
+		mntmCancelarReserva_3 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReserva_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel5 = true;
+						panel_6.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_6.getComponentCount();i++) {
+							panel_6.getComponent(i).setVisible(false);
+						}
+						label6.setVisible(true);
+						lblC_5.setVisible(true);
+						RentRoom.deleteTempFile("C-6",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReserva_3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_5.add(mntmCancelarReserva_3);
 		
 		menuItem_4 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1104,12 +1231,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label7.setVisible(true);
 						lblC_6.setVisible(true);
-						RentRoom.deleteTempFile("C-7",1);
+						RentRoom.deleteTempFile("C-7",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva_4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_6.add(mntmCancelarReserva_4);
+		
+		mntmCancelarReserva_4 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReserva_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel6 = true;
+						panel_7.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_7.getComponentCount();i++) {
+							panel_7.getComponent(i).setVisible(false);
+						}
+						label7.setVisible(true);
+						lblC_6.setVisible(true);
+						RentRoom.deleteTempFile("C-7",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReserva_4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_6.add(mntmCancelarReserva_4);
 		
 		menuItem_5 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1195,12 +1344,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label8.setVisible(true);
 						lblC_7.setVisible(true);
-						RentRoom.deleteTempFile("C-8",1);
+						RentRoom.deleteTempFile("C-8",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReserva_5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_7.add(mntmCancelarReserva_5);
+		
+		mntmCancelarReserva_5 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReserva_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel7 = true;
+						panel_8.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_8.getComponentCount();i++) {
+							panel_8.getComponent(i).setVisible(false);
+						}
+						label8.setVisible(true);
+						lblC_7.setVisible(true);
+						RentRoom.deleteTempFile("C-8",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReserva_5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_7.add(mntmCancelarReserva_5);
 		
 		menuItem_6 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1286,12 +1457,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label9.setVisible(true);
 						lblC_8.setVisible(true);
-						RentRoom.deleteTempFile("C-9",1);
+						RentRoom.deleteTempFile("C-9",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_8.add(mntmCancelarReservacin);
+		
+		mntmCancelarReservacin = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel8 = true;
+						panel_9.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_9.getComponentCount();i++) {
+							panel_9.getComponent(i).setVisible(false);
+						}
+						label9.setVisible(true);
+						lblC_8.setVisible(true);
+						RentRoom.deleteTempFile("C-9",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_8.add(mntmCancelarReservacin);
 		
 		menuItem_7 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1377,12 +1570,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label10.setVisible(true);
 						lblC_9.setVisible(true);
-						RentRoom.deleteTempFile("C-10",1);
+						RentRoom.deleteTempFile("C-10",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_9.add(mntmCancelarReservacin_1);
+		
+		mntmCancelarReservacin_1 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel9 = true;
+						panel_10.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_10.getComponentCount();i++) {
+							panel_10.getComponent(i).setVisible(false);
+						}
+						label10.setVisible(true);
+						lblC_9.setVisible(true);
+						RentRoom.deleteTempFile("C-10",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_1.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_9.add(mntmCancelarReservacin_1);
 		
 		menuItem_8 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1468,12 +1683,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label11.setVisible(true);
 						lblC_10.setVisible(true);
-						RentRoom.deleteTempFile("C-11",1);
+						RentRoom.deleteTempFile("C-11",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_10.add(mntmCancelarReservacin_2);
+		
+		mntmCancelarReservacin_2 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel10 = true;
+						panel_11.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_11.getComponentCount();i++) {
+							panel_11.getComponent(i).setVisible(false);
+						}
+						label11.setVisible(true);
+						lblC_10.setVisible(true);
+						RentRoom.deleteTempFile("C-11",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_2.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_10.add(mntmCancelarReservacin_2);
 		
 		menuItem_9 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1559,12 +1796,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label12.setVisible(true);
 						lblC_11.setVisible(true);
-						RentRoom.deleteTempFile("C-12",1);
+						RentRoom.deleteTempFile("C-12",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_11.add(mntmCancelarReservacin_3);
+		
+		mntmCancelarReservacin_3 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel11 = true;
+						panel_12.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_12.getComponentCount();i++) {
+							panel_12.getComponent(i).setVisible(false);
+						}
+						label12.setVisible(true);
+						lblC_11.setVisible(true);
+						RentRoom.deleteTempFile("C-12",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_3.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_11.add(mntmCancelarReservacin_3);
 		
 		menuItem_10 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1650,12 +1909,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label13.setVisible(true);
 						lblC_12.setVisible(true);
-						RentRoom.deleteTempFile("C-13",1);
+						RentRoom.deleteTempFile("C-13",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_12.add(mntmCancelarReservacin_4);
+		
+		mntmCancelarReservacin_4 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel12 = true;
+						panel_13.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_13.getComponentCount();i++) {
+							panel_13.getComponent(i).setVisible(false);
+						}
+						label13.setVisible(true);
+						lblC_12.setVisible(true);
+						RentRoom.deleteTempFile("C-13",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_4.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_12.add(mntmCancelarReservacin_4);
 		
 		menuItem_11 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1741,12 +2022,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label14.setVisible(true);
 						lblC_13.setVisible(true);
-						RentRoom.deleteTempFile("C-14",1);
+						RentRoom.deleteTempFile("C-14",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_13.add(mntmCancelarReservacin_5);
+		
+		mntmCancelarReservacin_5 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel13 = true;
+						panel_14.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_14.getComponentCount();i++) {
+							panel_14.getComponent(i).setVisible(false);
+						}
+						label14.setVisible(true);
+						lblC_13.setVisible(true);
+						RentRoom.deleteTempFile("C-14",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_5.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_13.add(mntmCancelarReservacin_5);
 		
 		menuItem_12 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1832,12 +2135,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label15.setVisible(true);
 						lblC_14.setVisible(true);
-						RentRoom.deleteTempFile("C-15",1);
+						RentRoom.deleteTempFile("C-15",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_6.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_14.add(mntmCancelarReservacin_6);
+		
+		mntmCancelarReservacin_6 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel14 = true;
+						panel_15.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_15.getComponentCount();i++) {
+							panel_15.getComponent(i).setVisible(false);
+						}
+						label15.setVisible(true);
+						lblC_14.setVisible(true);
+						RentRoom.deleteTempFile("C-15",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_6.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_14.add(mntmCancelarReservacin_6);
 		
 		menuItem_13 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -1923,12 +2248,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label16.setVisible(true);
 						lblC_15.setVisible(true);
-						RentRoom.deleteTempFile("C-16",1);
+						RentRoom.deleteTempFile("C-16",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_7.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_15.add(mntmCancelarReservacin_7);
+		
+		mntmCancelarReservacin_7 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel15 = true;
+						panel_16.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_16.getComponentCount();i++) {
+							panel_16.getComponent(i).setVisible(false);
+						}
+						label16.setVisible(true);
+						lblC_15.setVisible(true);
+						RentRoom.deleteTempFile("C-16",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_7.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_15.add(mntmCancelarReservacin_7);
 		
 		menuItem_14 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2014,12 +2361,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label17.setVisible(true);
 						lblC_16.setVisible(true);
-						RentRoom.deleteTempFile("C-17",1);
+						RentRoom.deleteTempFile("C-17",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_8.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_16.add(mntmCancelarReservacin_8);
+		
+		mntmCancelarReservacin_8 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel16 = true;
+						panel_17.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_17.getComponentCount();i++) {
+							panel_17.getComponent(i).setVisible(false);
+						}
+						label17.setVisible(true);
+						lblC_16.setVisible(true);
+						RentRoom.deleteTempFile("C-17",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_8.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_16.add(mntmCancelarReservacin_8);
 		
 		menuItem_15 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2105,12 +2474,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label18.setVisible(true);
 						lblC_17.setVisible(true);
-						RentRoom.deleteTempFile("C-18",1);
+						RentRoom.deleteTempFile("C-18",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_9.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_17.add(mntmCancelarReservacin_9);
+		
+		mntmCancelarReservacin_9 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel17 = true;
+						panel_18.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_18.getComponentCount();i++) {
+							panel_18.getComponent(i).setVisible(false);
+						}
+						label18.setVisible(true);
+						lblC_17.setVisible(true);
+						RentRoom.deleteTempFile("C-18",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_9.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_17.add(mntmCancelarReservacin_9);
 		
 		menuItem_16 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2196,12 +2587,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label19.setVisible(true);
 						lblC_18.setVisible(true);
-						RentRoom.deleteTempFile("C-19",1);
+						RentRoom.deleteTempFile("C-19",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_10.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_18.add(mntmCancelarReservacin_10);
+		
+		mntmCancelarReservacin_10 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_10.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel18 = true;
+						panel_19.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_19.getComponentCount();i++) {
+							panel_19.getComponent(i).setVisible(false);
+						}
+						label19.setVisible(true);
+						lblC_18.setVisible(true);
+						RentRoom.deleteTempFile("C-19",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_10.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_18.add(mntmCancelarReservacin_10);
 		
 		menuItem_17 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2287,12 +2700,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label20.setVisible(true);
 						lblC_19.setVisible(true);
-						RentRoom.deleteTempFile("C-20",1);
+						RentRoom.deleteTempFile("C-20",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_11.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_19.add(mntmCancelarReservacin_11);
+		
+		mntmCancelarReservacin_11 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_11.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel19 = true;
+						panel_20.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_20.getComponentCount();i++) {
+							panel_20.getComponent(i).setVisible(false);
+						}
+						label20.setVisible(true);
+						lblC_19.setVisible(true);
+						RentRoom.deleteTempFile("C-20",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_11.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_19.add(mntmCancelarReservacin_11);
 		
 		menuItem_18 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2378,12 +2813,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label21.setVisible(true);
 						lblC_20.setVisible(true);
-						RentRoom.deleteTempFile("C-21",1);
+						RentRoom.deleteTempFile("C-21",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_12.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_20.add(mntmCancelarReservacin_12);
+		
+		mntmCancelarReservacin_12 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_12.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel20 = true;
+						panel_21.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_21.getComponentCount();i++) {
+							panel_21.getComponent(i).setVisible(false);
+						}
+						label21.setVisible(true);
+						lblC_20.setVisible(true);
+						RentRoom.deleteTempFile("C-21",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_12.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_20.add(mntmCancelarReservacin_12);
 		
 		menuItem_19 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2469,12 +2926,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label22.setVisible(true);
 						lblC_21.setVisible(true);
-						RentRoom.deleteTempFile("C-22",1);
+						RentRoom.deleteTempFile("C-22",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_13.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_21.add(mntmCancelarReservacin_13);
+		
+		mntmCancelarReservacin_13 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_13.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel21 = true;
+						panel_22.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_22.getComponentCount();i++) {
+							panel_22.getComponent(i).setVisible(false);
+						}
+						label22.setVisible(true);
+						lblC_21.setVisible(true);
+						RentRoom.deleteTempFile("C-22",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_13.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_21.add(mntmCancelarReservacin_13);
 		
 		menuItem_20 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2560,12 +3039,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label23.setVisible(true);
 						lblC_22.setVisible(true);
-						RentRoom.deleteTempFile("C-23",1);
+						RentRoom.deleteTempFile("C-23",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_14.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_22.add(mntmCancelarReservacin_14);
+		
+		mntmCancelarReservacin_14 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_14.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel22 = true;
+						panel_23.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_23.getComponentCount();i++) {
+							panel_23.getComponent(i).setVisible(false);
+						}
+						label23.setVisible(true);
+						lblC_22.setVisible(true);
+						RentRoom.deleteTempFile("C-23",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_14.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_22.add(mntmCancelarReservacin_14);
 		
 		menuItem_21 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2651,12 +3152,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label24.setVisible(true);
 						lblC_23.setVisible(true);
-						RentRoom.deleteTempFile("C-24",1);
+						RentRoom.deleteTempFile("C-24",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_15.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_23.add(mntmCancelarReservacin_15);
+		
+		mntmCancelarReservacin_15 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_15.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel23 = true;
+						panel_24.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_24.getComponentCount();i++) {
+							panel_24.getComponent(i).setVisible(false);
+						}
+						label24.setVisible(true);
+						lblC_23.setVisible(true);
+						RentRoom.deleteTempFile("C-24",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_15.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_23.add(mntmCancelarReservacin_15);
 		
 		menuItem_22 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2742,12 +3265,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label25.setVisible(true);
 						lblC_24.setVisible(true);
-						RentRoom.deleteTempFile("C-25",1);
+						RentRoom.deleteTempFile("C-25",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_16.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_24.add(mntmCancelarReservacin_16);
+		
+		mntmCancelarReservacin_16 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_16.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel24 = true;
+						panel_25.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_25.getComponentCount();i++) {
+							panel_25.getComponent(i).setVisible(false);
+						}
+						label25.setVisible(true);
+						lblC_24.setVisible(true);
+						RentRoom.deleteTempFile("C-25",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_16.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_24.add(mntmCancelarReservacin_16);
 		
 		menuItem_23 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2833,12 +3378,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label26.setVisible(true);
 						lblC_25.setVisible(true);
-						RentRoom.deleteTempFile("C-26",1);
+						RentRoom.deleteTempFile("C-26",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_17.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_25.add(mntmCancelarReservacin_17);
+		
+		mntmCancelarReservacin_17 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_17.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel25 = true;
+						panel_26.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_26.getComponentCount();i++) {
+							panel_26.getComponent(i).setVisible(false);
+						}
+						label26.setVisible(true);
+						lblC_25.setVisible(true);
+						RentRoom.deleteTempFile("C-26",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_17.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_25.add(mntmCancelarReservacin_17);
 		
 		menuItem_24 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -2924,12 +3491,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label27.setVisible(true);
 						lblC_26.setVisible(true);
-						RentRoom.deleteTempFile("C-27",1);
+						RentRoom.deleteTempFile("C-27",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_18.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_26.add(mntmCancelarReservacin_18);
+		
+		mntmCancelarReservacin_18 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_18.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel26 = true;
+						panel_27.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_27.getComponentCount();i++) {
+							panel_27.getComponent(i).setVisible(false);
+						}
+						label27.setVisible(true);
+						lblC_26.setVisible(true);
+						RentRoom.deleteTempFile("C-27",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_18.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_26.add(mntmCancelarReservacin_18);
 		
 		menuItem_25 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -3015,12 +3604,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label28.setVisible(true);
 						lblC_27.setVisible(true);
-						RentRoom.deleteTempFile("C-28",1);
+						RentRoom.deleteTempFile("C-28",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_19.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_27.add(mntmCancelarReservacin_19);
+		
+		mntmCancelarReservacin_19 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_19.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel27 = true;
+						panel_28.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_28.getComponentCount();i++) {
+							panel_28.getComponent(i).setVisible(false);
+						}
+						label28.setVisible(true);
+						lblC_27.setVisible(true);
+						RentRoom.deleteTempFile("C-28",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_19.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_27.add(mntmCancelarReservacin_19);
 		
 		menuItem_26 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -3106,12 +3717,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label29.setVisible(true);
 						lblC_28.setVisible(true);
-						RentRoom.deleteTempFile("C-29",1);
+						RentRoom.deleteTempFile("C-29",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_20.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_28.add(mntmCancelarReservacin_20);
+		
+		mntmCancelarReservacin_20 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_20.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel28 = true;
+						panel_29.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_29.getComponentCount();i++) {
+							panel_29.getComponent(i).setVisible(false);
+						}
+						label29.setVisible(true);
+						lblC_28.setVisible(true);
+						RentRoom.deleteTempFile("C-29",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_20.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_28.add(mntmCancelarReservacin_20);
 		
 		menuItem_27 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -3197,12 +3830,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label30.setVisible(true);
 						lblC_29.setVisible(true);
-						RentRoom.deleteTempFile("C-30",1);
+						RentRoom.deleteTempFile("C-30",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_21.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_29.add(mntmCancelarReservacin_21);
+		
+		mntmCancelarReservacin_21 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_21.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel29 = true;
+						panel_30.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_30.getComponentCount();i++) {
+							panel_30.getComponent(i).setVisible(false);
+						}
+						label30.setVisible(true);
+						lblC_29.setVisible(true);
+						RentRoom.deleteTempFile("C-30",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_21.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_29.add(mntmCancelarReservacin_21);
 		
 		menuItem_28 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -3288,12 +3943,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label31.setVisible(true);
 						lblC_30.setVisible(true);
-						RentRoom.deleteTempFile("C-31",1);
+						RentRoom.deleteTempFile("C-31",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_22.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_30.add(mntmCancelarReservacin_22);
+		
+		mntmCancelarReservacin_22 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_22.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel30 = true;
+						panel_31.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_31.getComponentCount();i++) {
+							panel_31.getComponent(i).setVisible(false);
+						}
+						label31.setVisible(true);
+						lblC_30.setVisible(true);
+						RentRoom.deleteTempFile("C-31",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_22.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_30.add(mntmCancelarReservacin_22);
 		
 		menuItem_29 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -3379,12 +4056,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label32.setVisible(true);
 						lblC_31.setVisible(true);
-						RentRoom.deleteTempFile("C-32",1);
+						RentRoom.deleteTempFile("C-32",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_23.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_31.add(mntmCancelarReservacin_23);
+		
+		mntmCancelarReservacin_23 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_23.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel31 = true;
+						panel_32.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_32.getComponentCount();i++) {
+							panel_32.getComponent(i).setVisible(false);
+						}
+						label32.setVisible(true);
+						lblC_31.setVisible(true);
+						RentRoom.deleteTempFile("C-32",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_23.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_31.add(mntmCancelarReservacin_23);
 		
 		menuItem_30 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -3470,12 +4169,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label33.setVisible(true);
 						lblC_32.setVisible(true);
-						RentRoom.deleteTempFile("C-33",1);
+						RentRoom.deleteTempFile("C-33",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_24.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_32.add(mntmCancelarReservacin_24);
+		
+		mntmCancelarReservacin_24 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_24.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel32 = true;
+						panel_33.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_33.getComponentCount();i++) {
+							panel_33.getComponent(i).setVisible(false);
+						}
+						label33.setVisible(true);
+						lblC_32.setVisible(true);
+						RentRoom.deleteTempFile("C-33",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_24.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_32.add(mntmCancelarReservacin_24);
 		
 		menuItem_31 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -3562,12 +4283,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label34.setVisible(true);
 						lblC_33.setVisible(true);
-						RentRoom.deleteTempFile("C-34",1);
+						RentRoom.deleteTempFile("C-34",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_25.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_33.add(mntmCancelarReservacin_25);
+		
+		mntmCancelarReservacin_25 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_25.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel33 = true;
+						panel_34.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_34.getComponentCount();i++) {
+							panel_34.getComponent(i).setVisible(false);
+						}
+						label34.setVisible(true);
+						lblC_33.setVisible(true);
+						RentRoom.deleteTempFile("C-34",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_25.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_33.add(mntmCancelarReservacin_25);
 		
 		menuItem_32 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -3653,12 +4396,34 @@ public class VisualMain extends JFrame implements Runnable{
 						}
 						label35.setVisible(true);
 						lblC_34.setVisible(true);
-						RentRoom.deleteTempFile("C-35",1);
+						RentRoom.deleteTempFile("C-35",1,0);
 					}
 				}
 			}
 		});
 		mntmCancelarReservacin_26.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/cancelar_opt.png")));
+		popupMenu_34.add(mntmCancelarReservacin_26);
+		
+		mntmCancelarReservacin_26 = new JMenuItem("Guardar número de orden");
+		mntmCancelarReservacin_26.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					int resp = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea cancelar la reserva y guardar el número de orden?", "Cancelar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null);
+					if (resp == JOptionPane.YES_OPTION) {
+						cancel34 = true;
+						panel_35.setBackground(new Color(240,240,240));
+						for (int i =0;i<panel_35.getComponentCount();i++) {
+							panel_35.getComponent(i).setVisible(false);
+						}
+						label35.setVisible(true);
+						lblC_34.setVisible(true);
+						RentRoom.deleteTempFile("C-35",1,1);
+					}
+				}
+			}
+		});
+		mntmCancelarReservacin_26.setIcon(new ImageIcon(VisualMain.class.getResource("/icons/nuevo_opt.png")));
 		popupMenu_34.add(mntmCancelarReservacin_26);
 		
 		menuItem_33 = new JMenuItem("Ver Habitaci\u00F3n");
@@ -4135,23 +4900,23 @@ public class VisualMain extends JFrame implements Runnable{
 		}
 	}
 	private void refreshReservationsState() {
-		Date date = new Date();
-		long time = date.getTime();
+//		Date date = new Date();
+//		long time = date.getTime();
 		for (Habitacion i: Cabaña809.getInstance().getMisHabs()) {
 			if (i.isOnUse()) {
-				if (time > i.getFinalDate()) {
-					Calendar calendar = new GregorianCalendar();
-					calendar.setTimeInMillis(i.getFinalDate());
-					Date date1 = calendar.getTime();
-					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd/MM/yy");
-					String aux = formatter.format(date1);
-					String[] separator = aux.split(" ");
-					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+RentRoom.getRoomName(i.getRoomName())+" ha finalizado a las "+separator[0]+" el "+separator[1]);
-					RentRoom.deleteTempFile(RentRoom.getRoomName(i.getRoomName()), 2);
-					i.setOnUse(false);
-					i.setTipo(null);
-					i.setFinalDate(0);
-				}
+//				if (time > i.getFinalDate()) {
+//					Calendar calendar = new GregorianCalendar();
+//					calendar.setTimeInMillis(i.getFinalDate());
+//					Date date1 = calendar.getTime();
+//					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd/MM/yy");
+//					String aux = formatter.format(date1);
+//					String[] separator = aux.split(" ");
+//					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+RentRoom.getRoomName(i.getRoomName())+" ha finalizado a las "+separator[0]+" el "+separator[1]);
+//					RentRoom.deleteTempFile(RentRoom.getRoomName(i.getRoomName()), 2);
+//					i.setOnUse(false);
+//					i.setTipo(null);
+//					i.setFinalDate(0);
+//				}
 			}
 		}
 	}
