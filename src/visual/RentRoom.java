@@ -1529,27 +1529,27 @@ public class RentRoom extends JDialog implements Runnable {
 		
 		if (this.option != 2) {
 			if (roomType.equals("fastRoom"))               {
-				writer.write("1.00 HABITACION PASO        "+String.format("%.2f", Cabaña809.simpleFastRoomPrice)+"\n");
+				writer.write("1.00 HABITACION PASO        "+String.format("%.2f", Cabaña809.simpleFastRoomPrice+(Cabaña809.getInstance().discount < 0 ? Cabaña809.getInstance().discount*-1 : 0))+"\n");
 				hab.setNombre("HABITACION PASO");
-				hab.setPrecio(Cabaña809.simpleFastRoomPrice);
+				hab.setPrecio(Cabaña809.simpleFastRoomPrice+(Cabaña809.getInstance().discount < 0 ? Cabaña809.getInstance().discount*-1 : 0));
 				hab.setCantidad(1);
 			}
 			else if (roomType.equals("fastEjecutive"))     {
-				writer.write("1.00 EJECUTIVA PASO        "+String.format("%.2f", Cabaña809.ejecutiveFastRoomPrice)+"\n");
+				writer.write("1.00 EJECUTIVA PASO        "+String.format("%.2f", Cabaña809.ejecutiveFastRoomPrice+(Cabaña809.getInstance().discount < 0 ? Cabaña809.getInstance().discount*-1 : 0))+"\n");
 				hab.setNombre("EJECUTIVA PASO");
-				hab.setPrecio(Cabaña809.ejecutiveFastRoomPrice);
+				hab.setPrecio(Cabaña809.ejecutiveFastRoomPrice+(Cabaña809.getInstance().discount < 0 ? Cabaña809.getInstance().discount*-1 : 0));
 				hab.setCantidad(1);
 			}
 			else if (roomType.equals("simpleComplete"))    {
-				writer.write("1.00 SIMPLE AMANECIDA       "+String.format("%.2f", Cabaña809.simpleCompleteRoomPrice)+"\n");
+				writer.write("1.00 SIMPLE AMANECIDA       "+String.format("%.2f", Cabaña809.simpleCompleteRoomPrice+(Cabaña809.getInstance().discount < 0 ? Cabaña809.getInstance().discount*-1 : 0))+"\n");
 				hab.setNombre("SIMPLE AMANECIDA");
-				hab.setPrecio(Cabaña809.simpleCompleteRoomPrice);
+				hab.setPrecio(Cabaña809.simpleCompleteRoomPrice+(Cabaña809.getInstance().discount < 0 ? Cabaña809.getInstance().discount*-1 : 0));
 				hab.setCantidad(1);
 			}
 			else if (roomType.equals("ejecutiveComplete")) {
-				writer.write("1.00 EJECUTIVA COMPLETA    "+String.format("%.2f", Cabaña809.ejecutiveCompleteRoomPrice)+"\n");
+				writer.write("1.00 EJECUTIVA COMPLETA    "+String.format("%.2f", Cabaña809.ejecutiveCompleteRoomPrice+(Cabaña809.getInstance().discount < 0 ? Cabaña809.getInstance().discount*-1 : 0))+"\n");
 				hab.setNombre("EJECUTIVA COMPLETA");
-				hab.setPrecio(Cabaña809.ejecutiveCompleteRoomPrice);
+				hab.setPrecio(Cabaña809.ejecutiveCompleteRoomPrice+(Cabaña809.getInstance().discount < 0 ? Cabaña809.getInstance().discount*-1 : 0));
 				hab.setCantidad(1);
 			}
 		}
@@ -1564,26 +1564,26 @@ public class RentRoom extends JDialog implements Runnable {
 			writer.write(aux1+aux+"\n");
 		}
 		writer.write("----------------------------------\n");
-		aux = String.format("%.2f", setTotalAmount());
+		aux = String.format("%.2f", setTotalAmount()- Cabaña809.getInstance().discount);
 		value = aux.length();
 		for (int i=0;i<(26-value);i++)
 			aux = " "+aux;
 		writer.write("IMPORTE:"+aux+"\n");
-		writer.write("DESCUENTO:                  "+String.format("%.2f", Cabaña809.getInstance().discount)+"\n");
+		writer.write("DESCUENTO:                  "+String.format("%.2f", Cabaña809.getInstance().discount < 0 ? 0 : Cabaña809.getInstance().discount)+"\n");
 		writer.write("                       -----------\n");
-		aux = String.format("%.2f", setTotalAmount()-Cabaña809.getInstance().discount);
+		aux = String.format("%.2f", (setTotalAmount()- Cabaña809.getInstance().discount)*0.8475);
 		value = aux.length();
 		for (int i =0;i<(24-value);i++)
 			aux = " "+aux;
 		writer.write("SUB TOTAL:"+aux+"\n");
 		writer.write("10 % LEGAL:                   0.00\n");
-		aux = String.format("%.2f", (setTotalAmount()-Cabaña809.getInstance().discount)*0.1525);
+		aux = String.format("%.2f", (setTotalAmount()- Cabaña809.getInstance().discount)*0.1525);
 		value = aux.length();
 		for (int i =0;i<(28-value);i++)
 			aux = " "+aux;
 		writer.write("ITBIS:"+aux+"\n");
 		writer.write("                       -----------\n");
-		aux = String.format("%.2f", setTotalAmount()-Cabaña809.getInstance().discount);
+		aux = String.format("%.2f", setTotalAmount()- Cabaña809.getInstance().discount);
 		value = aux.length();
 		for (int i =0;i<(28-value);i++)
 			aux = " "+aux;
