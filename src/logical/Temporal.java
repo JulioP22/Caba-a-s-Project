@@ -11,13 +11,17 @@ public class Temporal implements Serializable{
 	private ArrayList<Producto> productos;
 	private String roomType;
 	private int orderNumber;
+	private String entryDate;
+	private String finalDate;
 	
 		
-	public Temporal(ArrayList<Producto> productos, String roomType, int orderNumber) {
+	public Temporal(ArrayList<Producto> productos, String roomType, int orderNumber, String entryDate, String finalDate) {
 		super();
 		this.productos = productos;
 		this.roomType = roomType;
 		this.orderNumber = orderNumber;
+		this.entryDate = entryDate;
+		this.finalDate = finalDate;
 	}
 	
 	public ArrayList<Producto> getProductos() {
@@ -38,6 +42,23 @@ public class Temporal implements Serializable{
 	public void setOrderNumber(int orderNumber) {
 		this.orderNumber = orderNumber;
 	}
+
+	public String getEntryDate() {
+		return entryDate;
+	}
+
+	public void setEntryDate(String entryDate) {
+		this.entryDate = entryDate;
+	}
+
+	public String getFinalDate() {
+		return finalDate;
+	}
+
+	public void setFinalDate(String finalDate) {
+		this.finalDate = finalDate;
+	}
+	
 	
 	
 

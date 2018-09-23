@@ -91,7 +91,7 @@ public class RentRoom extends JDialog implements Runnable {
 	private static DefaultTableModel tableModel1;
     private static Object[] row1;
     
-	private static ArrayList<Producto> selected;
+	public static ArrayList<Producto> selected;
 	private JScrollPane scrollPane;
 	private JButton addButton;
 	private JButton deleteButton;
@@ -120,6 +120,8 @@ public class RentRoom extends JDialog implements Runnable {
 	private JButton btnProductosAnteriores;
 	private long ownCode;
 	private JTextField finder;
+	private int roomIndex;
+	private JButton btnExtenderTiempo;
 	/**
 	 * Launch the application.
 	 */
@@ -154,6 +156,8 @@ public class RentRoom extends JDialog implements Runnable {
 		setModal(true);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		
+		this.roomIndex = getRoomIndex(this.roomName);
 		
 		t = new Thread(this);
 		
@@ -545,6 +549,17 @@ public class RentRoom extends JDialog implements Runnable {
 						loadSelected();
 					}
 				});
+				
+				btnExtenderTiempo = new JButton("Extender tiempo");
+				btnExtenderTiempo.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						RoomExtension ext = new RoomExtension();
+						ext.setVisible(true);
+					}
+				});
+				btnExtenderTiempo.setVisible(this.option == 2);
+				btnExtenderTiempo.setIcon(new ImageIcon(RentRoom.class.getResource("/icons/add_opt.png")));
+				buttonPane.add(btnExtenderTiempo);
 				buttonPane.add(btnProductosAnteriores);
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -675,6 +690,17 @@ public class RentRoom extends JDialog implements Runnable {
     	newFile.delete();
     }
     
+    private int getRoomIndex(String roomName) {
+    	int index = -1;
+    	for(Habitacion i: Cabaña809.getInstance().getMisHabs()) {
+    		if (i.getRoomName().equalsIgnoreCase(roomName)) {
+    			index = Cabaña809.getInstance().getMisHabs().indexOf(i);
+    			break;
+    		}
+    	}
+    	return index;
+    }
+    
 	@Override
 	public void run() {
 		Date date = new Date();
@@ -740,21 +766,6 @@ public class RentRoom extends JDialog implements Runnable {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				}
-				if ((seconds/1000)<1) {
-//					label1.setVisible(false);
-//					label.setVisible(false);
-//					if (completeNight)
-//						label2.setVisible(false);
-//					
-//					Habitacion room = Cabaña809.getInstance().getMisHabs().get(index);
-//					calendar.setTimeInMillis(room.getFinalDate());
-//					SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd/MM/yyyy");
-//					String aux1 = formatter.format(calendar.getTime());
-//					String[] separator = aux1.split(" ");
-//					JOptionPane.showMessageDialog(null, "La reservación de la habitación "+getRoomName(aux_1)+" ha finalizado a las "+separator[0]+" el "+separator[1], null, JOptionPane.INFORMATION_MESSAGE, null);
-//					deleteTempFile(getRoomName(aux_1),2);
-//					break;
 				}
 				if (aux_1.equals("panel_1")) {
 					if (VisualMain.cancel) {
@@ -1505,6 +1516,17 @@ public class RentRoom extends JDialog implements Runnable {
 		}
 	}
 	
+	private boolean hasExtension() {
+		boolean result = false;
+		for(Producto i: selected) {
+			if (i.getNombre().equals("EXTENSIÓN DE TIEMPO")) {
+				result = true;
+				break;
+			}
+		}
+		return result;
+	}
+	
 	public void writeTicket(String room, String entryDate, String finalDate, String roomType) throws IOException, ClassNotFoundException {
 		Producto hab = new Producto();
 		writer = new FileWriter(new File(System.getProperty("user.home")+File.separator+"Files/ticket.txt"));
@@ -1523,8 +1545,8 @@ public class RentRoom extends JDialog implements Runnable {
 		for (int i=0;i<(34-value);i++)
 			aux = " "+aux;
 		writer.write(aux+"\n");
-		writer.write("ENTRADA: "+entryDate.toUpperCase()+"\n");
-		writer.write("SALIDA: "+finalDate.toUpperCase()+"\n");
+		writer.write("ENTRADA: "+(this.option == 1 ? entryDate.toUpperCase() : temp.getEntryDate())+"\n");
+		writer.write("SALIDA: "+(this.option == 1 ? finalDate.toUpperCase() : temp.getFinalDate())+"\n");
 		writer.write("----------------------------------\n");
 		
 		if (this.option != 2) {
@@ -1593,7 +1615,23 @@ public class RentRoom extends JDialog implements Runnable {
 		writer.write("******GRACIAS POR PREFERIRNOS*****\n");
 		writer.write("**********************************\n");
 		writer.close();
-		createTempFile(room, cod, hab);
+		createTempFile(room, cod, hab, entryDate, finalDate);
+		if (this.option == 2 && hasExtension()) {
+			addExtension();
+		}
+	}
+	
+	private long calculateTime() {
+		long base = 3600000;
+		base *= Integer.parseInt(RoomExtension.time);
+		if (RoomExtension.comboIndex == 2) {
+			base /= 60;
+		}
+		return base;
+	}
+	
+	private void addExtension(){
+		Cabaña809.getInstance().getMisHabs().get(roomIndex).setFinalDate(Cabaña809.getInstance().getMisHabs().get(roomIndex).getFinalDate()+calculateTime());
 	}
 	
 	private void createTemp(Temporal temp, String roomName) throws FileNotFoundException, IOException {
@@ -1605,12 +1643,12 @@ public class RentRoom extends JDialog implements Runnable {
 		objWriter.close();
 	}
 	
-	private void createTempFile(String roomName, int orderNumber, Producto prod) throws IOException, ClassNotFoundException {
+	private void createTempFile(String roomName, int orderNumber, Producto prod, String entryDate, String finalDate) throws IOException, ClassNotFoundException {
 		String path1 = System.getProperty("user.home")+File.separator+"Files/Temporal/"+roomName+".dat";
 		File fil = new File(path1);
 		if (!fil.exists()) {
 			selected.add(prod);
-			Temporal temp = new Temporal(selected, roomName, orderNumber);
+			Temporal temp = new Temporal(selected, roomName, orderNumber, entryDate, finalDate);
 			createTemp(temp, roomName);
 		}
 		else {
