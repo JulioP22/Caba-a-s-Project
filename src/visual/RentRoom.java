@@ -433,7 +433,7 @@ public class RentRoom extends JDialog implements Runnable {
 									for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
 										VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
 									}
-									label = new JLabel(ownCode +" - En uso");
+									label = new JLabel(getRoomName(roomName) +" En uso");
 									label.setName("enUso");
 									label.setHorizontalAlignment(SwingConstants.CENTER);
 									label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
@@ -483,7 +483,7 @@ public class RentRoom extends JDialog implements Runnable {
 									for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
 										VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
 									}
-									label = new JLabel(ownCode+" - En uso");
+									label = new JLabel(getRoomName(roomName)+" En uso");
 									label.setName("enUso");
 									label.setHorizontalAlignment(SwingConstants.CENTER);
 									label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
@@ -1937,7 +1937,7 @@ public class RentRoom extends JDialog implements Runnable {
 		for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
 			VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
 		}
-		label = new JLabel(room.getNumeroOrden()+" - En uso");
+		label = new JLabel(getRoomName(roomName)+" En uso");
 		label.setName("enUso");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));
@@ -1957,7 +1957,7 @@ public class RentRoom extends JDialog implements Runnable {
 		for (int i =0;i<VisualMain.getPanel(roomName).getComponentCount();i++) {
 			VisualMain.getPanel(roomName).getComponent(i).setVisible(false);
 		}
-		label = new JLabel(room.getNumeroOrden()+" - En uso");
+		label = new JLabel(getRoomName(roomName)+" En uso");
 		label.setName("enUso");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Century Schoolbook", Font.ITALIC, 16));

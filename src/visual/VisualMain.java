@@ -532,7 +532,7 @@ public class VisualMain extends JFrame implements Runnable{
 			}
 		});
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(10, 23, 97, 82);
+		panel_1.setBounds(10, 23, 110, 82);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -646,7 +646,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_2.setLayout(null);
-		panel_2.setBounds(117, 23, 97, 82);
+		panel_2.setBounds(117, 23, 110, 82);
 		panel.add(panel_2);
 		
 		popupMenu_1 = new JPopupMenu();
@@ -759,7 +759,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_3.setLayout(null);
-		panel_3.setBounds(224, 23, 97, 82);
+		panel_3.setBounds(224, 23, 110, 82);
 		panel.add(panel_3);
 		
 		popupMenu_2 = new JPopupMenu();
@@ -872,7 +872,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_4.setLayout(null);
-		panel_4.setBounds(331, 23, 97, 82);
+		panel_4.setBounds(331, 23, 110, 82);
 		panel.add(panel_4);
 		
 		popupMenu_3 = new JPopupMenu();
@@ -985,7 +985,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_5.setLayout(null);
-		panel_5.setBounds(438, 23, 97, 82);
+		panel_5.setBounds(438, 23, 110, 82);
 		panel.add(panel_5);
 		
 		popupMenu_4 = new JPopupMenu();
@@ -1098,7 +1098,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_6.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_6.setLayout(null);
-		panel_6.setBounds(545, 23, 97, 82);
+		panel_6.setBounds(545, 23, 110, 82);
 		panel.add(panel_6);
 		
 		popupMenu_5 = new JPopupMenu();
@@ -1211,7 +1211,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_7.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_7.setLayout(null);
-		panel_7.setBounds(652, 23, 97, 82);
+		panel_7.setBounds(652, 23, 110, 82);
 		panel.add(panel_7);
 		
 		popupMenu_6 = new JPopupMenu();
@@ -1324,7 +1324,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_8.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_8.setLayout(null);
-		panel_8.setBounds(761, 23, 97, 82);
+		panel_8.setBounds(761, 23, 110, 82);
 		panel.add(panel_8);
 		
 		popupMenu_7 = new JPopupMenu();
@@ -1437,7 +1437,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_9.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_9.setLayout(null);
-		panel_9.setBounds(870, 23, 97, 82);
+		panel_9.setBounds(870, 23, 110, 82);
 		panel.add(panel_9);
 		
 		popupMenu_8 = new JPopupMenu();
@@ -1550,7 +1550,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_10.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_10.setLayout(null);
-		panel_10.setBounds(10, 118, 97, 82);
+		panel_10.setBounds(10, 118, 110, 82);
 		panel.add(panel_10);
 		
 		popupMenu_9 = new JPopupMenu();
@@ -1663,7 +1663,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_11.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_11.setLayout(null);
-		panel_11.setBounds(117, 118, 97, 82);
+		panel_11.setBounds(117, 118, 110, 82);
 		panel.add(panel_11);
 		
 		popupMenu_10 = new JPopupMenu();
@@ -1776,7 +1776,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_12.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_12.setLayout(null);
-		panel_12.setBounds(224, 118, 97, 82);
+		panel_12.setBounds(224, 118, 110, 82);
 		panel.add(panel_12);
 		
 		popupMenu_11 = new JPopupMenu();
@@ -1889,7 +1889,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_13.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_13.setLayout(null);
-		panel_13.setBounds(331, 118, 97, 82);
+		panel_13.setBounds(331, 118, 110, 82);
 		panel.add(panel_13);
 		
 		popupMenu_12 = new JPopupMenu();
@@ -2002,7 +2002,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_14.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_14.setLayout(null);
-		panel_14.setBounds(438, 118, 97, 82);
+		panel_14.setBounds(438, 118, 110, 82);
 		panel.add(panel_14);
 		
 		popupMenu_13 = new JPopupMenu();
@@ -2115,7 +2115,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_15.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_15.setLayout(null);
-		panel_15.setBounds(545, 118, 97, 82);
+		panel_15.setBounds(545, 118, 110, 82);
 		panel.add(panel_15);
 		
 		popupMenu_14 = new JPopupMenu();
@@ -2228,7 +2228,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_16.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_16.setLayout(null);
-		panel_16.setBounds(652, 118, 97, 82);
+		panel_16.setBounds(652, 118, 110, 82);
 		panel.add(panel_16);
 		
 		popupMenu_15 = new JPopupMenu();
@@ -2341,7 +2341,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_17.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_17.setLayout(null);
-		panel_17.setBounds(761, 118, 97, 82);
+		panel_17.setBounds(761, 118, 110, 82);
 		panel.add(panel_17);
 		
 		popupMenu_16 = new JPopupMenu();
@@ -2454,7 +2454,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_18.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_18.setLayout(null);
-		panel_18.setBounds(870, 118, 97, 82);
+		panel_18.setBounds(870, 118, 110, 82);
 		panel.add(panel_18);
 		
 		popupMenu_17 = new JPopupMenu();
@@ -2567,7 +2567,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_19.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_19.setLayout(null);
-		panel_19.setBounds(10, 209, 97, 82);
+		panel_19.setBounds(10, 209, 110, 82);
 		panel.add(panel_19);
 		
 		popupMenu_18 = new JPopupMenu();
@@ -2680,7 +2680,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_20.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_20.setLayout(null);
-		panel_20.setBounds(117, 209, 97, 82);
+		panel_20.setBounds(117, 209, 110, 82);
 		panel.add(panel_20);
 		
 		popupMenu_19 = new JPopupMenu();
@@ -2793,7 +2793,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_21.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_21.setLayout(null);
-		panel_21.setBounds(224, 209, 97, 82);
+		panel_21.setBounds(224, 209, 110, 82);
 		panel.add(panel_21);
 		
 		popupMenu_20 = new JPopupMenu();
@@ -2906,7 +2906,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_22.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_22.setLayout(null);
-		panel_22.setBounds(331, 209, 97, 82);
+		panel_22.setBounds(331, 209, 110, 82);
 		panel.add(panel_22);
 		
 		popupMenu_21 = new JPopupMenu();
@@ -3019,7 +3019,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_23.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_23.setLayout(null);
-		panel_23.setBounds(438, 209, 97, 82);
+		panel_23.setBounds(438, 209, 110, 82);
 		panel.add(panel_23);
 		
 		popupMenu_22 = new JPopupMenu();
@@ -3132,7 +3132,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_24.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_24.setLayout(null);
-		panel_24.setBounds(545, 209, 97, 82);
+		panel_24.setBounds(545, 209, 110, 82);
 		panel.add(panel_24);
 		
 		popupMenu_23 = new JPopupMenu();
@@ -3245,7 +3245,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_25.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_25.setLayout(null);
-		panel_25.setBounds(652, 209, 97, 82);
+		panel_25.setBounds(652, 209, 110, 82);
 		panel.add(panel_25);
 		
 		popupMenu_24 = new JPopupMenu();
@@ -3358,7 +3358,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_26.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_26.setLayout(null);
-		panel_26.setBounds(761, 209, 97, 82);
+		panel_26.setBounds(761, 209, 110, 82);
 		panel.add(panel_26);
 		
 		popupMenu_25 = new JPopupMenu();
@@ -3471,7 +3471,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_27.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_27.setLayout(null);
-		panel_27.setBounds(870, 209, 97, 82);
+		panel_27.setBounds(870, 209, 110, 82);
 		panel.add(panel_27);
 		
 		popupMenu_26 = new JPopupMenu();
@@ -3584,7 +3584,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_28.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_28.setLayout(null);
-		panel_28.setBounds(10, 304, 97, 82);
+		panel_28.setBounds(10, 304, 110, 82);
 		panel.add(panel_28);
 		
 		popupMenu_27 = new JPopupMenu();
@@ -3697,7 +3697,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_29.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_29.setLayout(null);
-		panel_29.setBounds(117, 304, 97, 82);
+		panel_29.setBounds(117, 304, 110, 82);
 		panel.add(panel_29);
 		
 		popupMenu_28 = new JPopupMenu();
@@ -3810,7 +3810,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_30.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_30.setLayout(null);
-		panel_30.setBounds(224, 304, 97, 82);
+		panel_30.setBounds(224, 304, 110, 82);
 		panel.add(panel_30);
 		
 		popupMenu_29 = new JPopupMenu();
@@ -3923,7 +3923,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_31.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_31.setLayout(null);
-		panel_31.setBounds(331, 304, 97, 82);
+		panel_31.setBounds(331, 304, 110, 82);
 		panel.add(panel_31);
 		
 		popupMenu_30 = new JPopupMenu();
@@ -4036,7 +4036,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_32.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_32.setLayout(null);
-		panel_32.setBounds(438, 304, 97, 82);
+		panel_32.setBounds(438, 304, 110, 82);
 		panel.add(panel_32);
 		
 		popupMenu_31 = new JPopupMenu();
@@ -4149,7 +4149,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_33.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_33.setLayout(null);
-		panel_33.setBounds(545, 304, 97, 82);
+		panel_33.setBounds(545, 304, 110, 82);
 		panel.add(panel_33);
 		
 		popupMenu_32 = new JPopupMenu();
@@ -4263,7 +4263,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_34.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_34.setLayout(null);
-		panel_34.setBounds(652, 304, 97, 82);
+		panel_34.setBounds(652, 304, 110, 82);
 		panel.add(panel_34);
 		
 		popupMenu_33 = new JPopupMenu();
@@ -4376,7 +4376,7 @@ public class VisualMain extends JFrame implements Runnable{
 		});
 		panel_35.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_35.setLayout(null);
-		panel_35.setBounds(759, 304, 97, 82);
+		panel_35.setBounds(759, 304, 110, 82);
 		panel.add(panel_35);
 		
 		popupMenu_34 = new JPopupMenu();
