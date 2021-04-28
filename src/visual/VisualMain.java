@@ -44,6 +44,7 @@ import java.awt.event.WindowEvent;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 
 
 public class VisualMain extends JFrame implements Runnable{
@@ -305,6 +306,8 @@ public class VisualMain extends JFrame implements Runnable{
 	private JMenuItem menuItem_31;
 	private JMenuItem menuItem_32;
 	private JMenuItem menuItem_33;
+	private JLabel numerosOrdenGuardados;
+	private JLabel lblNewLabel;
 	
 	
 	//private Thread t;
@@ -4448,6 +4451,26 @@ public class VisualMain extends JFrame implements Runnable{
 		lblC_34.setBounds(10, 56, 79, 20);
 		panel_35.add(lblC_34);
 		
+		lblNewLabel = new JLabel("N\u00FAmeros de orden guardados");
+		lblNewLabel.setBounds(12, 620, 189, 16);
+		panel.add(lblNewLabel);
+		
+		numerosOrdenGuardados = new JLabel("");
+		numerosOrdenGuardados.setBounds(213, 620, 549, 16);
+		panel.add(numerosOrdenGuardados);
+		
+		JButton btnNewButton = new JButton("Agregar n\u00FAmero de orden");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AgregarNumeroOrden dialog = new AgregarNumeroOrden();
+				dialog.setLocationRelativeTo(null);
+				dialog.setModal(true);
+				dialog.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(761, 616, 206, 25);
+		panel.add(btnNewButton);
+		
 		setOriginalColor();
 		refreshReservationsState();
 		resumeReservations();
@@ -4560,6 +4583,14 @@ public class VisualMain extends JFrame implements Runnable{
 			panel_34.setBackground(new Color (240,240,240));
 		if (c35!=cg && c35!=cr)
 			panel_35.setBackground(new Color (240,240,240));
+		String text = "";
+		int index = 0;
+		for (Integer i: Cabaña809.canceled) {
+			if (index < Cabaña809.canceled.size() - 1) text += i + ", ";
+			else text += i;
+			index++;
+		}
+		numerosOrdenGuardados.setText(text);
 	}
 	public static JLabel getLabel1() {
 		return label1;
