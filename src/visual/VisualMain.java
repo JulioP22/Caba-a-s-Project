@@ -340,6 +340,7 @@ public class VisualMain extends JFrame implements Runnable{
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getStackTrace(), "Error", JOptionPane.ERROR_MESSAGE,null);
 				}
 				
 				Runtime.getRuntime ().addShutdownHook ( 
@@ -457,7 +458,7 @@ public class VisualMain extends JFrame implements Runnable{
 		
 		JMenu mnInformacin = new JMenu("Informaci\u00F3n");
 		mnInformacin.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
-		mnInformacin.setIcon(new ImageIcon(VisualMain.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
+		// mnInformacin.setIcon(new ImageIcon(VisualMain.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
 		menuBar.add(mnInformacin);
 		
 		JMenuItem mntmManual = new JMenuItem("Manual");
